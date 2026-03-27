@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ascent Academy: LAWs Lesson 4</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700;800&family=Oswald:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
+:root{
+  --blue:#2563eb;--blue-soft:#eff6ff;--navy:#1e3a8a;--red:#dc2626;--red-soft:#fef2f2;
+  --green:#047857;--green-soft:#ecfdf5;--gold:#facc15;--purple:#7c3aed;--purple-soft:#f5f3ff;
+  --teal:#0f766e;--slate-50:#f8fafc;--slate-100:#f1f5f9;--slate-200:#e2e8f0;--slate-300:#cbd5e1;
+  --slate-500:#64748b;--slate-700:#334155;--slate-900:#0f172a;
+}
+@page{size:A4;margin:0;}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{background:#eef2f7;color:var(--slate-900);font-family:"Lexend","Segoe UI",Arial,sans-serif;counter-reset:pagenum;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+.control-panel{position:fixed;top:0;left:0;right:0;z-index:9999;background:#1e293b;color:#f8fafc;padding:10px 16px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-family:"Space Mono",monospace;font-size:11px;box-shadow:0 2px 8px rgba(0,0,0,.4);}
+.control-panel button{background:#334155;color:#f8fafc;border:1px solid #475569;border-radius:4px;padding:4px 10px;font-family:"Space Mono",monospace;font-size:10px;cursor:pointer;transition:background .15s;}
+.control-panel button:hover{background:#4a6fa5;}
+.control-panel button.active{background:#2563eb;border-color:#3b82f6;}
+.cp-group{display:flex;gap:4px;align-items:center;}
+.cp-label{color:#94a3b8;margin-right:4px;font-size:9px;text-transform:uppercase;letter-spacing:.05em;}
+.cp-status{background:#0f172a;border:1px solid #334155;border-radius:4px;padding:3px 8px;font-size:9px;color:#94a3b8;margin-left:8px;}
+.cp-divider{width:1px;height:20px;background:#334155;margin:0 4px;}
+.cp-print-btn{background:#064e3b!important;border-color:#065f46!important;}
+.cp-print-btn:hover{background:#047857!important;}
+.page{width:210mm;min-height:297mm;background:#fff;margin:60px auto 24px;padding:16mm 16mm 14mm;position:relative;box-shadow:0 2px 12px rgba(0,0,0,.12);counter-increment:pagenum;display:flex;flex-direction:column;}
+.page-content{flex:1;}
+.header{background:var(--navy);color:#fff;padding:10px 16px;margin:-16mm -16mm 14px;display:flex;align-items:center;justify-content:space-between;font-family:"Oswald",sans-serif;}
+.header-left{display:flex;flex-direction:column;}
+.header-lesson{font-size:10px;opacity:.7;text-transform:uppercase;letter-spacing:.1em;}
+.header-title{font-size:18px;font-weight:600;}
+.header-right{text-align:right;font-size:10px;opacity:.7;}
+.header-pagenum::after{content:counter(pagenum);}
+.ext-header{background:linear-gradient(135deg,var(--purple),#4c1d95);color:#fff;padding:10px 16px;margin:-16mm -16mm 14px;display:flex;align-items:center;justify-content:space-between;font-family:"Oswald",sans-serif;}
+.teacher-header{background:linear-gradient(135deg,#065f46,#047857);color:#fff;padding:10px 16px;margin:-16mm -16mm 14px;display:flex;align-items:center;justify-content:space-between;font-family:"Oswald",sans-serif;}
+.kicker{font-size:9px;text-transform:uppercase;letter-spacing:.12em;opacity:.7;font-family:"Space Mono",monospace;}
+.footer{margin:0 -16mm -14mm;padding:6px 16px;background:var(--slate-100);border-top:2px solid var(--slate-200);display:flex;justify-content:space-between;align-items:center;font-size:8px;color:var(--slate-500);font-family:"Space Mono",monospace;}
+.cover-page{background:linear-gradient(160deg,#1e3a8a 0%,#1e40af 50%,#1d4ed8 100%)!important;color:#fff;}
+.blueprint-bg{background:linear-gradient(160deg,#1e3a8a 0%,#1e40af 50%,#1d4ed8 100%)!important;}
+.logo-frame{border:3px solid rgba(255,255,255,.3);border-radius:8px;padding:6px 14px;font-family:"Oswald",sans-serif;font-size:13px;font-weight:600;display:inline-block;letter-spacing:.05em;}
+.cover-tag{font-size:10px;text-transform:uppercase;letter-spacing:.15em;opacity:.7;font-family:"Space Mono",monospace;margin:16px 0 8px;}
+.cover-title{font-family:"Oswald",sans-serif;font-size:36px;font-weight:700;line-height:1.1;margin:0 0 6px;}
+.cover-sub{font-size:13px;opacity:.8;margin-bottom:20px;}
+.hero-box{background:rgba(255,255,255,.12);border:2px solid rgba(255,255,255,.3);border-radius:8px;padding:14px 18px;margin:16px 0;font-size:12px;font-style:italic;color:#fff;}
+.hero-box .res-label{font-family:"Oswald",sans-serif;font-size:10px;text-transform:uppercase;letter-spacing:.1em;opacity:.7;margin-bottom:6px;}
+.setup-box{background:rgba(255,255,255,.1);border-left:4px solid rgba(255,255,255,.4);padding:10px 14px;margin:8px 0;border-radius:0 6px 6px 0;font-size:11px;}
+.setup-box strong{display:block;margin-bottom:4px;font-family:"Oswald",sans-serif;font-size:12px;}
+.name-row{display:flex;gap:16px;margin-top:16px;}
+.name-field{flex:1;border-bottom:2px solid rgba(255,255,255,.4);padding:4px 0;font-size:12px;color:rgba(255,255,255,.9);}
+.name-label{font-size:9px;text-transform:uppercase;letter-spacing:.08em;opacity:.6;}
+.card{border-radius:8px;padding:12px 14px;margin-bottom:10px;border:1.5px solid var(--slate-200);}
+.response-card{background:#fff;border-left:4px solid var(--blue);}
+.mcq-card{background:var(--blue-soft);border-left:4px solid var(--blue);}
+.evidence-card{background:var(--slate-50);border-left:4px solid var(--teal);}
+.glossary-card{background:#fff;border-left:4px solid var(--purple);}
+.teacher-card{background:linear-gradient(135deg,#ecfdf5,#d1fae5);border-left:4px solid var(--green);}
+.sort-card{background:#fff;border-left:4px solid var(--gold);}
+.pro-card{background:#f0fdf4;border-left:4px solid var(--green);}
+.con-card{background:#fef2f2;border-left:4px solid var(--red);}
+.gold-card{background:#fffbeb;border-left:4px solid var(--gold);}
+.neutral-card{background:var(--slate-50);border-left:4px solid var(--slate-300);}
+.card-title{font-family:"Oswald",sans-serif;font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px;}
+.card-body{font-size:11px;line-height:1.5;}
+.quote-box{background:var(--slate-100);border-left:3px solid var(--teal);padding:8px 12px;margin:8px 0;font-size:10.5px;font-style:italic;border-radius:0 6px 6px 0;}
+.source-line{font-size:9px;text-transform:uppercase;letter-spacing:.05em;color:var(--slate-500);margin-top:4px;font-family:"Space Mono",monospace;}
+.evidence-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;font-size:10px;margin-top:8px;}
+.evidence-label{font-weight:700;color:var(--slate-700);font-size:9px;text-transform:uppercase;letter-spacing:.06em;}
+.mcq-options{list-style:none;padding:0;margin:8px 0 0;}
+.mcq-options li{padding:5px 10px;border-radius:4px;margin-bottom:3px;font-size:11px;border:1px solid var(--slate-200);}
+.mcq-options li.correct{background:#d1fae5;border-color:#6ee7b7;font-weight:600;}
+.lined-textarea{width:100%;border:none;border-bottom:1px solid var(--slate-300);resize:none;font-family:"Lexend",sans-serif;font-size:11px;line-height:1.8;padding:2px 0;background:repeating-linear-gradient(transparent,transparent 28px,#e2e8f0 28px,#e2e8f0 29px);background-attachment:local;outline:none;color:var(--slate-900);}
+.lined-textarea.sm{height:60px;}
+.lined-textarea.md{height:90px;}
+.lined-textarea.lg{height:120px;}
+.lined-textarea.xl{height:160px;}
+.grid{display:grid;gap:10px;}
+.two-col{grid-template-columns:1fr 1fr;}
+.three-col{grid-template-columns:1fr 1fr 1fr;}
+.chip{display:inline-block;padding:2px 8px;border-radius:999px;font-size:9px;font-family:"Space Mono",monospace;font-weight:700;text-transform:uppercase;letter-spacing:.05em;}
+.chip.pro{background:#d1fae5;color:#065f46;}
+.chip.con{background:#fee2e2;color:#991b1b;}
+.chip.both{background:#e0e7ff;color:#3730a3;}
+.chip.gold{background:#fef3c7;color:#92400e;}
+.round-line-card{background:var(--navy);color:#fff;border-radius:8px;padding:10px 14px;margin-bottom:8px;font-size:11.5px;font-style:italic;}
+.round-line-card .rl-label{font-size:9px;text-transform:uppercase;letter-spacing:.1em;opacity:.6;font-family:"Space Mono",monospace;margin-bottom:4px;}
+.pro-line{border-left:4px solid var(--green);}
+.con-line{border-left:4px solid var(--red);}
+.section-heading{font-family:"Oswald",sans-serif;font-size:15px;font-weight:600;color:var(--navy);border-bottom:2px solid var(--blue);padding-bottom:4px;margin-bottom:10px;}
+.prompt-label{font-size:10px;font-weight:600;color:var(--slate-500);text-transform:uppercase;letter-spacing:.08em;font-family:"Space Mono",monospace;margin-bottom:3px;}
+.hint{font-size:9.5px;color:var(--slate-500);font-style:italic;margin-top:3px;}
+.note-strip{background:#fef9c3;border-left:3px solid #eab308;padding:6px 10px;font-size:10px;border-radius:0 4px 4px 0;margin:6px 0;}
+.time-badge{display:inline-block;background:var(--blue);color:#fff;padding:2px 8px;border-radius:4px;font-size:10px;font-family:"Space Mono",monospace;margin-bottom:6px;}
+.lesson-table{width:100%;border-collapse:collapse;font-size:10.5px;}
+.lesson-table th{background:var(--navy);color:#fff;padding:6px 10px;text-align:left;font-family:"Oswald",sans-serif;font-weight:500;}
+.lesson-table td{padding:6px 10px;border-bottom:1px solid var(--slate-200);}
+.lesson-table tr:nth-child(even) td{background:var(--slate-50);}
+.rubric-table{width:100%;border-collapse:collapse;font-size:10px;}
+.rubric-table th{background:var(--purple);color:#fff;padding:5px 8px;text-align:left;font-family:"Oswald",sans-serif;}
+.rubric-table td{padding:5px 8px;border:1px solid var(--slate-200);vertical-align:top;}
+.setup-box.tier-ej,.setup-box.tier-ev{display:none;}
+body[data-tier="ej"] .setup-box.tier-ej{display:block;}
+body[data-tier="ev"] .setup-box.tier-ev{display:block;}
+body[data-role="student"] .teacher-only{display:none!important;}
+body[data-role="teacher"] .student-only{display:none!important;}
+body[data-phase="core"] .phase-ext{display:none!important;}
+body[data-phase="ext"] .phase-core{display:none!important;}
+.answer-field{color:transparent!important;user-select:none;}
+body.answers-visible .answer-field{color:var(--slate-900)!important;user-select:auto;}
+.pairing-lane{background:var(--slate-50);border:1.5px solid var(--slate-200);border-radius:8px;padding:10px 14px;margin-bottom:8px;}
+.pairing-header{font-family:"Oswald",sans-serif;font-size:12px;font-weight:600;color:var(--navy);margin-bottom:6px;}
+.sort-scenario{background:var(--slate-50);border:1.5px solid var(--slate-200);border-radius:6px;padding:10px 12px;margin-bottom:8px;}
+.sort-scenario p{font-size:11px;margin:0 0 8px;}
+.sort-chips{display:flex;gap:8px;align-items:center;flex-wrap:wrap;}
+@media print{
+  .control-panel{display:none!important;}
+  .page{margin:0!important;box-shadow:none!important;page-break-after:always;}
+  body[data-role="student"] .teacher-only{display:none!important;}
+  body[data-role="teacher"] .student-only{display:none!important;}
+  body[data-phase="core"] .phase-ext{display:none!important;}
+  body[data-phase="ext"] .phase-core{display:none!important;}
+  .answer-field{color:transparent!important;}
+  body.answers-visible .answer-field{color:var(--slate-900)!important;}
+}
+</style>
+</head>
+<body data-phase="both" data-role="all" data-tier="ej">
+
+<div class="control-panel" id="controlPanel">
+  <div class="cp-group">
+    <span class="cp-label">Tier:</span>
+    <button class="cp-tier-btn active" data-tier="ej" onclick="setTier('ej')">Elite Junior</button>
+    <button class="cp-tier-btn" data-tier="ev" onclick="setTier('ev')">Elite Varsity</button>
+  </div>
+  <div class="cp-divider"></div>
+  <div class="cp-group">
+    <span class="cp-label">Phase:</span>
+    <button class="cp-phase-btn" data-phase="core" onclick="setPhase('core')">Hrs 1–2: Core</button>
+    <button class="cp-phase-btn" data-phase="ext" onclick="setPhase('ext')">Hrs 3–4: Ext</button>
+    <button class="cp-phase-btn active" data-phase="both" onclick="setPhase('both')">All modules</button>
+  </div>
+  <div class="cp-divider"></div>
+  <div class="cp-group">
+    <span class="cp-label">Role:</span>
+    <button class="cp-role-btn" data-role="student" onclick="setRole('student')">Student only</button>
+    <button class="cp-role-btn" data-role="teacher" onclick="setRole('teacher')">Teacher only</button>
+    <button class="cp-role-btn active" data-role="all" onclick="setRole('all')">All pages</button>
+  </div>
+  <div class="cp-divider"></div>
+  <button id="toggleAnswerBtn" onclick="toggleAnswers()">👁 Show answers</button>
+  <span class="cp-status" id="cpStatus">Loading…</span>
+  <div class="cp-divider"></div>
+  <button class="cp-print-btn" onclick="triggerPrint('student')">🖨 Print student</button>
+  <button class="cp-print-btn" onclick="triggerPrint('teacher')">🖨 Print teacher</button>
+</div>
+
