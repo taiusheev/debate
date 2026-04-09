@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ascent Academy | War Powers — Lesson 4 | Part 1: Foundations</title>
+<style>
+/* ===== RESET & BASE ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; }
+body { font-family: 'Segoe UI', system-ui, -apple-system, Arial, sans-serif; color: #1a1a2e; line-height: 1.6; background: #f8f9fa; }
+
+/* ===== PAGE STRUCTURE ===== */
+.page { width: 210mm; min-height: 297mm; margin: 0 auto 2rem; padding: 28px 36px; background: #fff; box-shadow: 0 2px 12px rgba(0,0,0,0.08); position: relative; page-break-after: always; }
+.page .header { margin-bottom: 18px; border-bottom: 2px solid #e0e0e0; padding-bottom: 10px; }
+.page .header .kicker { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 1.5px; color: #6c757d; margin-bottom: 2px; }
+.page .header h1 { font-size: 1.35rem; font-weight: 700; color: #1a1a2e; line-height: 1.3; }
+.page-content { font-size: 0.92rem; }
+.footer { position: absolute; bottom: 16px; left: 36px; right: 36px; display: flex; justify-content: space-between; font-size: 0.7rem; color: #adb5bd; border-top: 1px solid #e9ecef; padding-top: 6px; }
+.page-number::before { content: counter(page-counter); }
+body { counter-reset: page-counter; }
+.page { counter-increment: page-counter; }
+
+/* ===== COVER ===== */
+.cover-tag { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; color: #6c757d; margin-bottom: 8px; }
+.cover-title { font-size: 2.4rem; font-weight: 800; color: #1a1a2e; line-height: 1.15; margin-bottom: 6px; }
+.cover-title span { font-weight: 400; color: #4361ee; font-size: 1.6rem; }
+.cover-subtitle { font-size: 1rem; color: #495057; margin-bottom: 22px; letter-spacing: 0.5px; }
+.hero-box { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); color: #fff; border-radius: 10px; padding: 20px 24px; margin-bottom: 18px; }
+.hero-box .small-label { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 1.5px; color: #a0c4ff; margin-bottom: 4px; }
+.resolution-text { font-size: 1.05rem; font-weight: 600; line-height: 1.5; }
+
+/* ===== TIER VISIBILITY ===== */
+.tier-ej, .tier-ev { display: none; }
+body.show-ej .tier-ej { display: inline; }
+body.show-ev .tier-ev { display: inline; }
+body.show-ej .tier-ev { display: none !important; }
+body.show-ev .tier-ej { display: none !important; }
+body.show-all .tier-ej, body.show-all .tier-ev { display: inline; }
+.focus-box { border-radius: 8px; padding: 14px 18px; margin-bottom: 10px; font-size: 0.88rem; line-height: 1.5; }
+.focus-box.tier-ej { background: #e8f4f8; border-left: 4px solid #4cc9f0; display: block; }
+.focus-box.tier-ev { background: #f3e8ff; border-left: 4px solid #7b2ff7; display: block; }
+body.show-ej .focus-box.tier-ev { display: none !important; }
+body.show-ev .focus-box.tier-ej { display: none !important; }
+
+/* ===== JUDGE MOVE ===== */
+.judge-move { background: #fff3cd; border-left: 4px solid #ffc107; border-radius: 6px; padding: 10px 14px; margin-bottom: 14px; font-size: 0.85rem; }
+.judge-move strong { color: #856404; }
+
+/* ===== NOTE STRIP ===== */
+.note-strip { background: #e2e3e5; border-radius: 6px; padding: 10px 14px; margin-bottom: 14px; font-size: 0.85rem; }
+
+/* ===== SETUP BOX ===== */
+.setup-box { background: #f1f3f5; border-radius: 6px; padding: 10px 14px; margin-bottom: 14px; font-size: 0.88rem; }
+.setup-box.tier-ej { border-left: 4px solid #4cc9f0; }
+.setup-box.tier-ev { border-left: 4px solid #7b2ff7; }
+
+/* ===== GRID SYSTEM ===== */
+.grid { display: grid; gap: 14px; margin-bottom: 14px; }
+.two-col { grid-template-columns: 1fr 1fr; }
+.equal { align-items: start; }
+
+/* ===== CARDS ===== */
+.card, .mcq-card, .evidence-card, .glossary-card, .response-card, .matrix-card { border-radius: 8px; padding: 14px 16px; margin-bottom: 10px; }
+.pro-card { background: #eaf4fe; border-left: 4px solid #4361ee; }
+.con-card { background: #fef2f0; border-left: 4px solid #e63946; }
+.section-title { font-size: 0.82rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; color: #495057; }
+
+/* ===== EVIDENCE CARDS ===== */
+.evidence-card { padding: 14px 16px; border-radius: 8px; }
+.evidence-head { font-size: 0.88rem; font-weight: 700; margin-bottom: 8px; }
+.quote-box { background: rgba(0,0,0,0.04); border-left: 3px solid #6c757d; padding: 8px 12px; margin-bottom: 10px; font-style: italic; font-size: 0.88rem; }
+.mini-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 1.2px; color: #6c757d; margin-bottom: 2px; margin-top: 8px; font-weight: 600; }
+
+/* ===== PROOF GRID ===== */
+.proof-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+.proof-box { border-radius: 8px; padding: 14px 16px; }
+.proof-box.pro { background: #eaf4fe; border-left: 4px solid #4361ee; }
+.proof-box.con { background: #fef2f0; border-left: 4px solid #e63946; }
+.proof-title { font-size: 0.82rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+.micro-proof { font-size: 0.85rem; }
+.micro-item { margin-bottom: 6px; }
+
+/* ===== GLOSSARY ===== */
+.glossary-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px; }
+.glossary-card { background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 8px; padding: 12px 14px; }
+.glossary-card .term { font-size: 1rem; font-weight: 700; color: #4361ee; margin-bottom: 4px; }
+
+/* ===== MCQ ===== */
+.mcq-card { background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 8px; padding: 14px 16px; }
+.option-list { list-style: none; padding: 0; }
+.option-list li { margin-bottom: 4px; font-size: 0.88rem; }
+.opt-letter { font-weight: 700; color: #4361ee; margin-right: 6px; }
+
+/* ===== PROMPT / TEXTAREA ===== */
+.prompt-block { margin-bottom: 14px; }
+.prompt-title { font-size: 0.85rem; font-weight: 700; margin-bottom: 4px; color: #1a1a2e; }
+.hint { font-size: 0.8rem; color: #6c757d; margin-bottom: 6px; font-style: italic; }
+.lined-textarea { width: 100%; border: 1px solid #ced4da; border-radius: 6px; padding: 8px 10px; font-family: inherit; font-size: 0.85rem; resize: vertical; background: #fff; }
+.lined-textarea.xs { min-height: 48px; }
+.lined-textarea.sm { min-height: 64px; }
+.lined-textarea.md { min-height: 88px; }
+.lined-textarea.lg { min-height: 120px; }
+
+/* ===== TABLES ===== */
+.lesson-table, .mini-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; margin-bottom: 10px; }
+.lesson-table th, .mini-table th { background: #1a1a2e; color: #fff; padding: 8px 10px; text-align: left; font-weight: 600; }
+.lesson-table td, .mini-table td { padding: 8px 10px; border-bottom: 1px solid #dee2e6; vertical-align: top; }
+.lesson-table tr:nth-child(even), .mini-table tr:nth-child(even) { background: #f8f9fa; }
+.matrix-card { background: #fff; border: 1px solid #dee2e6; border-radius: 8px; padding: 10px; overflow-x: auto; }
+
+/* ===== ROUND LINE CARD ===== */
+.round-line-card { background: rgba(0,0,0,0.03); border-radius: 6px; padding: 10px 14px; margin-bottom: 10px; }
+.round-claim { font-size: 0.88rem; font-weight: 500; }
+
+/* ===== SKILL OBJECTIVE ===== */
+.skill-objective { background: linear-gradient(90deg, #4361ee11, #4361ee05); border: 1px solid #4361ee33; border-radius: 6px; padding: 10px 14px; margin-bottom: 14px; font-size: 0.85rem; }
+.skill-objective strong { color: #4361ee; }
+
+/* ===== NAME ROW ===== */
+.name-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 16px; }
+.name-card { background: #f8f9fa; border-radius: 6px; padding: 10px 14px; }
+.inline-input { border: none; border-bottom: 1px solid #adb5bd; background: transparent; width: 100%; font-size: 0.92rem; padding: 4px 0; outline: none; }
+
+/* ===== TIER TOGGLE (UI) ===== */
+.tier-toggle { position: fixed; top: 12px; right: 12px; z-index: 1000; display: flex; gap: 6px; }
+.tier-toggle button { padding: 6px 14px; border: 1px solid #dee2e6; border-radius: 20px; font-size: 0.75rem; cursor: pointer; background: #fff; transition: all 0.2s; }
+.tier-toggle button.active { background: #4361ee; color: #fff; border-color: #4361ee; }
+
+/* ===== PRINT ===== */
+@media print {
+  body { background: #fff; }
+  .page { box-shadow: none; margin: 0; page-break-after: always; }
+  .tier-toggle { display: none; }
+  .lined-textarea { border: 1px solid #ccc; }
+}
+
+/* ===== TIGHT LIST ===== */
+.tight-list { list-style: disc; padding-left: 18px; font-size: 0.88rem; }
+.tight-list li { margin-bottom: 4px; }
+.body-copy { font-size: 0.88rem; margin-bottom: 6px; }
+
+/* ===== VARSITY METRIC ===== */
+.varsity-metric { background: #f3e8ff; border-left: 3px solid #7b2ff7; padding: 8px 12px; border-radius: 4px; font-size: 0.82rem; color: #5a189a; margin-top: 8px; }
+</style>
+</head>
+<body class="show-all">
+
+<!-- ===== TIER TOGGLE UI ===== -->
+<div class="tier-toggle">
+  <button onclick="setTier('show-ej')" id="btn-ej">Junior</button>
+  <button onclick="setTier('show-ev')" id="btn-ev">Varsity</button>
+  <button onclick="setTier('show-all')" id="btn-all" class="active">Both</button>
+</div>
+<script>
+function setTier(cls) {
+  document.body.className = cls;
+  document.querySelectorAll('.tier-toggle button').forEach(b => b.classList.remove('active'));
+  document.getElementById(cls === 'show-ej' ? 'btn-ej' : cls === 'show-ev' ? 'btn-ev' : 'btn-all').classList.add('active');
+}
+</script>
+
+<!-- ================================================================== -->
+<!-- COVER PAGE                                                          -->
+
+
+<!-- PART NAVIGATION -->
+<style>
+.part-nav { background:#1a1a2e; color:#fff; padding:8px 20px; text-align:center; font-size:0.8rem; letter-spacing:1px; margin-bottom:0; }
+.part-nav a { color:#90caf9; text-decoration:underline; margin:0 4px; padding:2px 4px; border-radius:3px; }
+.part-nav a:hover { background:#2d3a6e; color:#fff; }
+.part-nav a:focus { outline:2px solid #90caf9; outline-offset:2px; color:#fff; }
+.part-nav a:active { color:#e0e0e0; }
+.part-nav .nav-label { color:#a0c4ff; }
+.part-nav strong { color:#fff; padding:2px 4px; background:#2d3a6e; border-radius:3px; }
+</style>
+<div class="part-nav">
+  <span class="nav-label" style="margin-right:12px;">WAR POWERS LESSON 4</span>
+  <strong>Part 1</strong>  &nbsp;|&nbsp;  <a href="lesson4-war-powers-part2.html">Part 2</a>  &nbsp;|&nbsp;  <a href="lesson4-war-powers-part3.html">Part 3</a>  &nbsp;|&nbsp;  <a href="lesson4-war-powers-part4.html">Part 4</a>  &nbsp;|&nbsp;  <a href="lesson4-war-powers-part5.html">Part 5</a>
+  <span class="nav-label" style="margin-left:12px;">Part 1: Foundations</span>
+</div>
+<!-- ================================================================== -->
+<!-- COVER PAGE                                                          -->
+<!-- ================================================================== -->
+<div class="page cover-page">
+  <div class="cover-tag">Ascent Academy | Elite Masterclass</div>
+  <div class="cover-title">War Powers<br/><span>Lesson 4</span></div>
+  <div class="cover-subtitle">Mechanism Clash · Institutional Capture · Two Steps Ahead</div>
+
+  <div class="hero-box">
+    <div class="small-label">Official Resolution</div>
+    <div class="resolution-text">Resolved: The United States should eliminate the President's authority to deploy military forces abroad without Congressional approval.</div>
+  </div>
+
+  <div class="focus-box tier-ej">
+    <strong>Junior focus:</strong> This packet is about who really controls war, what the current system already does, and what happens when lobbyists or insiders capture a branch of government. Every hard word is defined before you use it, and every page asks for short lines you can actually say out loud in a round.
+  </div>
+  <div class="focus-box tier-ev">
+    <strong>Varsity focus:</strong> Lesson 4 shifts from generic war-powers theory to mechanism-level clash: status-quo congressional influence, plan design tradeoffs, institutional capture dynamics, democratic legitimacy modeling, and empirical weighing with live case comparisons. Each activity isolates a specific mechanism pairing and forces structured interaction.
+  </div>
+
+  <div style="background:#f1f3f5;border-radius:8px;padding:14px 18px;margin-bottom:14px;">
+    <strong>Core tensions this lesson develops:</strong>
+    <ul class="tight-list" style="margin-top:6px;">
+      <li><strong>Security vs. Democracy</strong> — Does requiring Congressional approval weaken national security or strengthen democratic accountability?</li>
+      <li><strong>Speed vs. Accountability</strong> — Is fast executive action worth the cost of unchecked power?</li>
+      <li><strong>Permeability vs. Harm-Conversion</strong> — Is the branch easier to lobby the same as the branch that does more damage once captured?</li>
+      <li><strong>Threshold Control vs. Downstream Leverage</strong> — Is it better to block the first strike or manage the war afterward?</li>
+    </ul>
+  </div>
+
+  <div class="name-row">
+    <div class="name-card">
+      <div class="small-label">Name</div>
+      <input class="inline-input" type="text"/>
+    </div>
+    <div class="name-card">
+      <div class="small-label">Date</div>
+      <input class="inline-input" type="text"/>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>Page <span class="page-number"></span></span>
+    <span>Ascent Academy | War Powers — Lesson 4</span>
+  </div>
+</div>
+
+<!-- ================================================================== -->
+<!-- MODULE 00 — LESSON 3 REVIEW & ARGUMENT RESET                       -->
+<!-- ================================================================== -->
+<div class="page student-only phase-core v6-dense">
+  <div class="header">
+    <div class="kicker">Module 00 | Phase 1: Review &amp; Reset</div>
+    <h1>Lesson 3 Review and Argument Reset</h1>
+  </div>
+  <div class="page-content">
+
+    <div class="skill-objective">
+      <strong>Skill objective:</strong>
+      <span class="tier-ej">Separate two ideas that sound similar: "easier to pressure" vs. "more dangerous after capture." Say each one clearly in your own words.</span>
+      <span class="tier-ev">Analytically isolate comparative permeability from comparative harm-conversion. Produce distinct warrant chains for each without conflation.</span>
+    </div>
+
+    <div class="judge-move">
+      <strong><span class="tier-ej">Hidden judge move: </span><span class="tier-ev">Hidden judge move: </span></strong>
+      <span class="tier-ej">Do not mix up these two ideas: "easier to lobby" is not the same as "more dangerous after capture lands." The team that keeps them separate sounds smarter.</span>
+      <span class="tier-ev">Separate permeability from harm-conversion. The branch that is easier to target is not automatically the branch that produces the worst downstream harm once capture succeeds. Judges reward the team that forces this distinction.</span>
+    </div>
+
+    <div class="note-strip">
+      <strong><span class="tier-ej">Reset frame: </span><span class="tier-ev">Reset frame: </span></strong>
+      <span class="tier-ej">Status quo = how the system works now. Capture = when lobbyists or insiders start steering a government office. Today's rule: keep "easy to pressure" separate from "worse after capture."</span>
+      <span class="tier-ev">Status quo = the current allocation of war powers between branches. Capture = when contractors, lobbyists, or revolving-door officials begin steering an institution's decisions. The analytical discipline for Lesson 4: keep "comparatively more permeable" separate from "comparatively more dangerous once captured."</span>
+    </div>
+
+    <div class="setup-box tier-ej">Say the big fight in plain words first. Pro wants Congress to vote before force starts. Con says Congress already shapes war now and a new rule may not add what Pro claims.</div>
+    <div class="setup-box tier-ev">Compress Lesson 3's conclusions into today's operating framework: first-move control, the real force of status-quo congressional influence, and the analytical difference between capture exposure and capture output.</div>
+
+    <div class="grid two-col equal">
+      <div class="card pro-card">
+        <div class="section-title">Pro Review from Lesson 3</div>
+        <ul class="tight-list">
+          <li><strong><span class="tier-ej">Main story: </span><span class="tier-ev">Main story: </span></strong>
+            <span class="tier-ej">Congress should vote before bombs or troops move — not just complain later.</span>
+            <span class="tier-ev">Congress should control the threshold decision to use force, not merely react once hostilities begin.</span></li>
+          <li><strong><span class="tier-ej">Mechanism: </span><span class="tier-ev">Mechanism: </span></strong>
+            <span class="tier-ej">Pressure and money fights later are weaker than a real first vote.</span>
+            <span class="tier-ev">Informal shaping and ex post appropriations are weaker than a binding ex ante authorization requirement.</span></li>
+          <li><strong><span class="tier-ej">Capture angle: </span><span class="tier-ev">Capture angle: </span></strong>
+            <span class="tier-ej">Even if Congress is messy, one captured President can move force faster with fewer stops.</span>
+            <span class="tier-ev">Even if Congress is permeable, concentrated executive authority converts capture into force deployment faster and with fewer veto points.</span></li>
+          <li><strong><span class="tier-ej">Best weighing: </span><span class="tier-ev">Best weighing: </span></strong>
+            <span class="tier-ej">What starts first, what is harder to undo, and what keeps happening again.</span>
+            <span class="tier-ev">Probability (first moves recur), reversibility (later politics cannot fully rewind initiation effects), and magnitude (the first strike sets the strategic baseline).</span></li>
+        </ul>
+      </div>
+      <div class="card con-card">
+        <div class="section-title">Con Review from Lesson 3</div>
+        <ul class="tight-list">
+          <li><strong><span class="tier-ej">Main story: </span><span class="tier-ev">Main story: </span></strong>
+            <span class="tier-ej">Congress already shapes war through money, limits, and political pressure. The status quo is not empty.</span>
+            <span class="tier-ev">The status quo is not a blank check; Congress already shapes war through budgets, restrictions, political signals, and downstream votes.</span></li>
+          <li><strong><span class="tier-ej">Mechanism: </span><span class="tier-ev">Mechanism: </span></strong>
+            <span class="tier-ej">A new rule can be redundant, symbolic, or dangerous if it is too blunt.</span>
+            <span class="tier-ev">A formal approval rule can overstate unique solvency, duplicate existing checks, or backfire through rigidity and loophole rebuilding.</span></li>
+          <li><strong><span class="tier-ej">Capture angle: </span><span class="tier-ev">Capture angle: </span></strong>
+            <span class="tier-ej">Congress is where lobbyists crowd most — so "more Congress" is not automatically cleaner.</span>
+            <span class="tier-ev">Congress is the branch most saturated by district incentives and organized lobbying. Routing more war authority there is not automatically anti-MIC.</span></li>
+          <li><strong><span class="tier-ej">Best weighing: </span><span class="tier-ev">Best weighing: </span></strong>
+            <span class="tier-ej">Does the plan really add control, or does it just add friction and delay?</span>
+            <span class="tier-ev">Magnitude and comparative solvency: does the plan add genuine threshold control, or mostly procedural drag with limited marginal safety?</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- TRAP QUIZZES -->
+    <div class="grid two-col">
+      <div class="mcq-card">
+        <div class="section-title"><span class="tier-ej">Trap Quiz 1</span><span class="tier-ev">Trap Quiz 1</span></div>
+        <p class="body-copy">
+          <span class="tier-ej">Which line keeps "easy to pressure" separate from "worse once captured"?</span>
+          <span class="tier-ev">Which line cleanly separates comparative permeability from comparative harm-conversion?</span>
+        </p>
+        <ol class="option-list">
+          <li><span class="opt-letter">A.</span>
+            <span class="tier-ej">Congress is easier to lobby, so Congress is always the bigger danger.</span>
+            <span class="tier-ev">Congress is more permeable, therefore it is automatically more dangerous.</span></li>
+          <li><span class="opt-letter">B.</span>
+            <span class="tier-ej">One branch can be easier to lobby, but the other can still do more damage once the lobby wins.</span>
+            <span class="tier-ev">One institution can be easier to influence while a different institution is more dangerous once influence is converted into policy.</span></li>
+          <li><span class="opt-letter">C.</span>
+            <span class="tier-ej">The two ideas mean the same thing.</span>
+            <span class="tier-ev">Permeability and harm-conversion are analytically identical.</span></li>
+        </ol>
+      </div>
+
+      <div class="mcq-card">
+        <div class="section-title"><span class="tier-ej">Trap Quiz 2</span><span class="tier-ev">Trap Quiz 2</span></div>
+        <p class="body-copy">
+          <span class="tier-ej">Why is status-quo pressure NOT the same as first-vote control?</span>
+          <span class="tier-ev">What is the structural difference between status-quo influence and threshold approval?</span>
+        </p>
+        <ol class="option-list">
+          <li><span class="opt-letter">A.</span>
+            <span class="tier-ej">Pressure can matter and still not force a stop before the first strike.</span>
+            <span class="tier-ev">Informal influence can shape expectations without recreating binding threshold control before hostilities begin.</span></li>
+          <li><span class="opt-letter">B.</span>
+            <span class="tier-ej">Courts decide every war first.</span>
+            <span class="tier-ev">Courts, not Congress, are the decisive first-move check.</span></li>
+          <li><span class="opt-letter">C.</span>
+            <span class="tier-ej">Money later is the same as a vote now.</span>
+            <span class="tier-ev">Ex post funding leverage is functionally equivalent to ex ante authorization.</span></li>
+        </ol>
+      </div>
+
+      <div class="mcq-card">
+        <div class="section-title"><span class="tier-ej">Trap Quiz 3</span><span class="tier-ev">Trap Quiz 3</span></div>
+        <p class="body-copy">
+          <span class="tier-ej">What is Con's sharpest trap on Pro?</span>
+          <span class="tier-ev">Which line states Con's double-bind trap against the affirmative?</span>
+        </p>
+        <ol class="option-list">
+          <li><span class="opt-letter">A.</span>
+            <span class="tier-ej">Congress never does anything about war.</span>
+            <span class="tier-ev">Congress never constrains war in the status quo.</span></li>
+          <li><span class="opt-letter">B.</span>
+            <span class="tier-ej">If Congress cares, it already has tools. If it doesn't care, a new rule still won't bite.</span>
+            <span class="tier-ev">If Congress has political will, existing tools already constrain. If Congress lacks will, stronger paper rules may still go unenforced.</span></li>
+          <li><span class="opt-letter">C.</span>
+            <span class="tier-ej">The President cannot start wars at all.</span>
+            <span class="tier-ev">The executive never initiates force without Congress.</span></li>
+        </ol>
+      </div>
+
+      <div class="mcq-card">
+        <div class="section-title"><span class="tier-ej">Trap Quiz 4</span><span class="tier-ev">Trap Quiz 4</span></div>
+        <p class="body-copy">
+          <span class="tier-ej">What is Pro's cleanest answer to that trap?</span>
+          <span class="tier-ev">Which line is Pro's cleanest answer to the double-bind?</span>
+        </p>
+        <ol class="option-list">
+          <li><span class="opt-letter">A.</span>
+            <span class="tier-ej">The double-bind proves courts matter most.</span>
+            <span class="tier-ev">The double-bind only demonstrates courts matter.</span></li>
+          <li><span class="opt-letter">B.</span>
+            <span class="tier-ej">Pushing back sometimes is not the same as having to vote before bombs fall. The plan changes the default from "President acts first" to "Congress decides first."
+          <span class="tier-ev">Occasional status-quo resistance is not equivalent to a mandatory pre-strike vote that shifts the structural default. The plan changes the burden: force requires affirmative approval, not just the absence of opposition.</span></li>
+          <li><span class="opt-letter">C.</span>
+            <span class="tier-ej">Status-quo success means the plan is bad.</span>
+            <span class="tier-ev">Existing constraint proves the affirmative is unnecessary.</span></li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="prompt-block">
+      <div class="prompt-title"><span class="tier-ej">Turn a quiz answer into a crossfire trap</span><span class="tier-ev">Convert a review answer into a trapped crossfire question</span></div>
+      <div class="hint"><span class="tier-ej">Pick one correct answer. Write one question that forces the other side to choose between two bad answers.</span><span class="tier-ev">Choose one correct review answer, name the side that uses it, and convert it into a crossfire question that corners the opponent into a dilemma rather than merely restating your tag line.</span></div>
+      <textarea class="lined-textarea md answer-field"
+        data-answer-ej="Con asks: 'If Congress already pushes back when it really cares, what exactly makes your new rule force action before bombs start? Either Congress already stops the big ones — and your plan is redundant — or Congress won't enforce the new rule either.'"
+        data-answer-ev="Con weaponizes the double-bind in crossfire: 'If Congress already has the will to constrain major force, why is a new statutory gate uniquely necessary? And if Congress lacks that will, what structural feature of your plan changes the enforcement incentive?' Pro cannot answer both prongs without conceding marginal solvency is limited.">
+      </textarea>
+    </div>
+
+  </div>
+  <div class="footer">
+    <span>Page <span class="page-number"></span></span>
+    <span>Ascent Academy | War Powers — Lesson 4</span>
+  </div>
+</div>
+
+<!-- ================================================================== -->
+<!-- MODULE 01 — EVIDENCE ANCHORS                                        -->
+<!-- ================================================================== -->
+<div class="page student-only phase-core v6-dense">
+  <div class="header">
+    <div class="kicker">Module 01 | Evidence You Need First</div>
+    <h1>Evidence Anchors: Mechanism, Application, and Interaction</h1>
+  </div>
+  <div class="page-content">
+
+    <div class="skill-objective">
+      <strong>Skill objective:</strong>
+      <span class="tier-ej">Don't just repeat a quote. Say what happened, what it proves, and how it answers the other side's best card.</span>
+      <span class="tier-ev">Evidence control: state the mechanism a card proves, identify the target line it answers, and explain why the warrant survives the opposing evidence.</span>
+    </div>
+
+    <div class="judge-move">
+      <strong><span class="tier-ej">Hidden judge move: </span><span class="tier-ev">Hidden judge move: </span></strong>
+      <span class="tier-ej">Make the cards talk to each other. Don't just repeat a quote — show how one card answers the other card.</span>
+      <span class="tier-ev">Evidence control means interaction. The winning rebuttal doesn't merely paraphrase a quote; it explains how one card structurally front-lines the other.</span>
+    </div>
+
+    <div class="setup-box tier-ej">Don't only memorize the quote. For each card: say what happened, what it proves, and what argument from the other side it answers.</div>
+    <div class="setup-box tier-ev">The goal is evidence control: state the mechanism each card proves, identify the opponent's target line, and explain the best application in one structured answer.</div>
+
+    <!-- THREE EVIDENCE CARDS -->
+    <div class="grid two-col equal">
+      <div class="evidence-card pro-card">
+        <div class="evidence-head">Pro Card 1: Cardin 2017 — Authorizing Force and Setting Limits</div>
+        <div class="quote-box">"We need to both authorize, and to set limits … will rediscover by necessity the value of diplomacy"</div>
+        <div class="mini-label"><span class="tier-ej">What happened</span><span class="tier-ev">Context</span></div>
+        <p class="body-copy">
+          <span class="tier-ej">Senator Cardin argued Congress should not just bless force after the fact. Think of holding the car keys until the driver proves they have a safe route.</span>
+          <span class="tier-ev">Cardin argued Congress should not merely ratify force after the fact. It should authorize early and embed meaningful limits in the authorization itself, creating structural incentives for diplomacy.</span>
+        </p>
+        <div class="mini-label"><span class="tier-ej">What it proves</span><span class="tier-ev">Mechanism</span></div>
+        <p class="body-copy">
+          <span class="tier-ej">Approval + limits changes the path: leaders must explain the mission, narrow it, and keep diplomacy alive.</span>
+          <span class="tier-ev">Pro mechanism claim: approval + limits alters executive incentives by forcing public mission definition and increasing the value of diplomacy relative to unchecked force.</span>
+        </p>
+        <div class="mini-label"><span class="tier-ej">How to say it in round</span><span class="tier-ev">Deploy line</span></div>
+        <p class="body-copy">
+          <span class="tier-ej">"The point is not delay for delay's sake. A vote and limits make force less automatic and diplomacy more valuable."</span>
+          <span class="tier-ev">"Cardin's claim isn't procedural — it's incentive-structural. Formal authorization plus limits changes the executive calculus and preserves diplomatic alternatives that unilateral action forecloses."</span>
+        </p>
+      </div>
+
+      <div class="evidence-card con-card">
+        <div class="evidence-head">Con Card 1: Waxman / Schulman 2020 — Congressional Passivity</div>
+        <div class="quote-box">"luxury of watching, waiting, and criticizing from the bleachers"</div>
+        <div class="mini-label"><span class="tier-ej">What happened</span><span class="tier-ev">Context</span></div>
+        <p class="body-copy">
+          <span class="tier-ej">This quote says Congress often likes sideline politics: let the President act, then cheer or complain later without taking real responsibility.</span>
+          <span class="tier-ev">Waxman (cited in Schulman) captures the core critique: lawmakers often prefer low-risk spectator politics, allowing the executive to move first and reserving the option to criticize afterward without ownership.</span>
+        </p>
+        <div class="mini-label"><span class="tier-ej">What it proves</span><span class="tier-ev">Mechanism</span></div>
+        <p class="body-copy">
+          <span class="tier-ej">Congress is not automatically brave or responsible just because it is involved. The plan might not fix that.</span>
+          <span class="tier-ev">Con responsibility claim: congressional involvement does not automatically generate ownership, political courage, or timely restraint. The plan may formalize a role Congress still refuses to take seriously.</span>
+        </p>
+        <div class="mini-label"><span class="tier-ej">How to say it in round</span><span class="tier-ev">Deploy line</span></div>
+        <p class="body-copy">
+          <span class="tier-ej">"Your plan assumes Congress will step up, but this card says Congress often likes to stay in the cheap seats and blame the President later."</span>
+          <span class="tier-ev">"Your solvency assumes Congress becomes a responsible gatekeeper, but Waxman says legislators prefer the bleachers — commentary without first-order ownership. A paper rule doesn't change that incentive."</span>
+        </p>
+      </div>
+    </div>
+
+    <!-- THIRD EVIDENCE CARD — Kriner 2010 (NEW) -->
+    <div class="evidence-card" style="background:#f0faf0;border-left:4px solid #2d6a4f;border-radius:8px;padding:14px 16px;margin-bottom:14px;">
+      <div class="evidence-head">Swing Card: Kriner 2010 — Congressional Support and War Duration</div>
+      <div class="quote-box">Kriner found that binding congressional support extended the average military operation by <strong>more than half a year</strong>.</div>
+      <div class="mini-label"><span class="tier-ej">What happened</span><span class="tier-ev">Context</span></div>
+      <p class="body-copy">
+        <span class="tier-ej">Political scientist Kriner studied what happens after Congress backs a war. He found that when Congress officially supports a mission, the mission lasts longer — over 6 months longer on average.</span>
+        <span class="tier-ev">Kriner's quantitative analysis showed that formal congressional backing has the largest measurable effect on war duration and downstream costs, extending the average operation significantly.</span>
+      </p>
+      <div class="mini-label"><span class="tier-ej">Who uses it?</span><span class="tier-ev">Dual application</span></div>
+      <p class="body-copy">
+        <span class="tier-ej"><strong>Both sides can use this card.</strong> Con says: "See? Congress already changes wars — later tools matter." Pro says: "That's duration control, not initiation control. My plan stops the first strike; Kriner's data shows what happens after."</span>
+        <span class="tier-ev"><strong>This is a swing card — both sides deploy it differently.</strong> Con reads it as evidence that downstream congressional tools have real, measurable bite. Pro reads it as proving that duration management ≠ threshold control, since Kriner's effect kicks in only after initiation.</span>
+      </p>
+      <div class="mini-label"><span class="tier-ej">How to say it in round</span><span class="tier-ev">Deploy lines</span></div>
+      <p class="body-copy">
+        <span class="tier-ej"><strong>Con:</strong> "Kriner proves later Congress still changes the war in a big way — over half a year of difference."<br/><strong>Pro:</strong> "Kriner proves our point: Congress matters most after the war starts. My plan makes Congress matter before."</span>
+        <span class="tier-ev"><strong>Con:</strong> "Kriner quantifies downstream leverage — binding support extends operations by 6+ months. That's not trivial; that's the magnitude the ballot should weigh."<br/><strong>Pro:</strong> "Kriner's data is about continuation, not initiation. The strongest control point is the threshold — and that's exactly what Kriner doesn't measure."</span>
+      </p>
+    </div>
+
+    <!-- MCQs -->
+    <div class="grid two-col">
+      <div class="mcq-card">
+        <div class="section-title"><span class="tier-ej">Apply Cardin</span><span class="tier-ev">Apply the Cardin card</span></div>
+        <p class="body-copy"><span class="tier-ej">Which line fits Cardin best?</span><span class="tier-ev">Which line most directly captures Cardin's mechanism?</span></p>
+        <ol class="option-list">
+          <li><span class="opt-letter">A.</span> <span class="tier-ej">Congress should both vote on force and write limits that keep diplomacy alive.</span><span class="tier-ev">Congress should authorize force and set limits that preserve diplomacy and narrow the mission scope.</span></li>
+          <li><span class="opt-letter">B.</span> <span class="tier-ej">Congress should never authorize any force.</span><span class="tier-ev">Congress should reject all uses of force categorically.</span></li>
+          <li><span class="opt-letter">C.</span> <span class="tier-ej">Fast Presidents can never use diplomacy.</span><span class="tier-ev">Presidential speed necessarily eliminates diplomacy in every case.</span></li>
+        </ol>
+      </div>
+      <div class="mcq-card">
+        <div class="section-title"><span class="tier-ej">Apply Waxman/Schulman</span><span class="tier-ev">Apply the Waxman/Schulman card</span></div>
+        <p class="body-copy"><span class="tier-ej">Which line fits the bleachers quote best?</span><span class="tier-ev">Which line most directly applies the bleachers quote?</span></p>
+        <ol class="option-list">
+          <li><span class="opt-letter">A.</span> <span class="tier-ej">Congress may wait, watch, and complain instead of taking hard responsibility early.</span><span class="tier-ev">Congress may prefer post hoc criticism to timely responsibility for the initial force decision.</span></li>
+          <li><span class="opt-letter">B.</span> <span class="tier-ej">Congress always opposes war.</span><span class="tier-ev">Congress systematically opposes every use of force.</span></li>
+          <li><span class="opt-letter">C.</span> <span class="tier-ej">"Bleachers" means overseas military bases.</span><span class="tier-ev">"Bleachers" refers to physical basing infrastructure.</span></li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="prompt-block">
+      <div class="prompt-title"><span class="tier-ej">Make the cards fight — structured frontline</span><span class="tier-ev">Structured evidence frontline</span></div>
+      <div class="hint"><span class="tier-ej">Pick one side. Use its card. Then answer the other card in exactly 3 steps: (1) Name the opposing card's claim. (2) State why your card's mechanism survives. (3) Give the judge one reason to prefer your warrant.</span><span class="tier-ev">Write a structured frontline: (1) Identify the opposing card's mechanism claim. (2) Explain how your card's warrant survives or outweighs. (3) Name the weighing metric (probability, reversibility, magnitude, or timeframe) that resolves the clash.</span></div>
+      <textarea class="lined-textarea md answer-field"
+        data-answer-ej="Pro answers the bleachers card: (1) Waxman says Congress likes to watch and blame. (2) But Cardin's plan takes away the cheap seats — Congress has to vote before force starts, so they can't just sit back. (3) The judge should prefer this because a forced vote is more reliable than hoping Congress acts on its own."
+        data-answer-ev="Pro frontlines Waxman/Schulman: (1) The opposing claim is that congressional passivity survives even under formalized rules. (2) However, Cardin's mechanism specifically removes the structural incentive for passivity — mandatory pre-strike authorization eliminates the option of post hoc spectating. (3) Prefer Pro on probability: a mandatory default is more reliable than voluntary engagement, which is precisely what Waxman says fails.">
+      </textarea>
+    </div>
+
+  </div>
+  <div class="footer">
+    <span>Page <span class="page-number"></span></span>
+    <span>Ascent Academy | War Powers — Lesson 4</span>
+  </div>
+</div>
+
+<!-- ================================================================== -->
+<!-- MODULE 02 — WAR POWERS GLOSSARY                                     -->
+<!-- ================================================================== -->
+<div class="page student-only phase-core v6-dense v8-glossary">
+  <div class="header">
+    <div class="kicker">Module 02 | War Powers Word Bank</div>
+    <h1>Glossary with War-Powers Examples and Application</h1>
+  </div>
+  <div class="page-content">
+
+    <div class="skill-objective">
+      <strong>Skill objective:</strong>
+      <span class="tier-ej">Learn the key words so you can use each one correctly in a round without sounding lost.</span>
+      <span class="tier-ev">Treat the glossary as a mechanism map. Each term identifies a specific type of warrant — use the right term to sound causally precise.</span>
+    </div>
+
+    <div class="judge-move">
+      <strong><span class="tier-ej">Hidden judge move: </span><span class="tier-ev">Hidden judge move: </span></strong>
+      <span class="tier-ej">Using the right word at the right time makes the judge trust your analysis. "Blowback" and "mission creep" sound similar but mean different things.</span>
+      <span class="tier-ev">Precise terminology is hidden weighing. The side that names the right mechanism — miscalculation, mission creep, blowback, capture, or definitional evasion — sounds more causally serious and wins credibility.</span>
+    </div>
+
+    <div class="setup-box tier-ej">Read the easy meaning first, then the debate use. Your goal: say each word correctly in round.</div>
+    <div class="setup-box tier-ev">Treat each term as a mechanism identifier, not vocabulary. Each term should tell you what kind of warrant is being made.</div>
+
+    <div class="grid glossary-grid two-col">
+      <div class="glossary-card">
+        <div class="term">Precedent</div>
+        <div class="mini-label"><span class="tier-ej">Easy meaning</span><span class="tier-ev">Meaning</span></div>
+        <p class="body-copy"><span class="tier-ej">A past choice that later leaders copy.</span><span class="tier-ev">A prior decision that later officials treat as a reusable model.</span></p>
+        <div class="mini-label"><span class="tier-ej">War powers use</span><span class="tier-ev">Debate application</span></div>
+        <p class="body-copy"><span class="tier-ej">If one President starts a war without a vote and gets away with it, later Presidents copy that move.</span><span class="tier-ev">Unauthorized first moves become reusable institutional precedent. Each unchallenged deployment lowers the political cost for the next one.</span></p>
+      </div>
+
+      <div class="glossary-card">
+        <div class="term">Miscalculation</div>
+        <div class="mini-label"><span class="tier-ej">Easy meaning</span><span class="tier-ev">Meaning</span></div>
+        <p class="body-copy"><span class="tier-ej">A bad guess about what the other side will do.</span><span class="tier-ev">A mistaken forecast about an opponent's response or escalation threshold.</span></p>
+        <div class="mini-label"><span class="tier-ej">War powers use</span><span class="tier-ev">Debate application</span></div>
+        <p class="body-copy"><span class="tier-ej">Moving too fast means fewer people test the assumptions. Both sides can guess wrong and the fight grows.</span><span class="tier-ev">Compressed executive decision cycles increase miscalculation risk because fewer actors test attribution, intent, and escalation assumptions before force begins.</span></p>
+      </div>
+
+      <div class="glossary-card">
+        <div class="term">Mission Creep</div>
+        <div class="mini-label"><span class="tier-ej">Easy meaning</span><span class="tier-ev">Meaning</span></div>
+        <p class="body-copy"><span class="tier-ej">A small mission slowly turning into a bigger one.</span><span class="tier-ev">Incremental expansion in mission scope, duration, or operational goals beyond the original mandate.</span></p>
+        <div class="mini-label"><span class="tier-ej">War powers use</span><span class="tier-ev">Debate application</span></div>
+        <p class="body-copy"><span class="tier-ej">A "rescue" or "advise" mission can quietly turn into a combat mission with no new vote.</span><span class="tier-ev">Weak ex ante limits allow narrow deployments to drift into broader operational commitments. The original justification erodes while the operation expands.</span></p>
+      </div>
+
+      <div class="glossary-card">
+        <div class="term">Blowback</div>
+        <div class="mini-label"><span class="tier-ej">Easy meaning</span><span class="tier-ev">Meaning</span></div>
+        <p class="body-copy"><span class="tier-ej">Bad results that come later from an earlier military action.</span><span class="tier-ev">Delayed unintended harms produced by an earlier policy or military intervention.</span></p>
+        <div class="mini-label"><span class="tier-ej">War powers use</span><span class="tier-ev">Debate application</span></div>
+        <p class="body-copy"><span class="tier-ej">Libya: the intervention helped remove a leader, but later instability and weapons spillover destabilized the whole region.</span><span class="tier-ev">Blowback arguments matter when short-run tactical wins create later instability, radicalization, or regional weapons diffusion — as in post-2011 Libya.</span></p>
+      </div>
+
+      <div class="glossary-card">
+        <div class="term">Regulatory Capture</div>
+        <div class="mini-label"><span class="tier-ej">Easy meaning</span><span class="tier-ev">Meaning</span></div>
+        <p class="body-copy"><span class="tier-ej">When the people being watched start controlling the watchers.</span><span class="tier-ev">When overseers begin serving the interests of the institution or industry they are supposed to police.</span></p>
+        <div class="mini-label"><span class="tier-ej">War powers use</span><span class="tier-ev">Debate application</span></div>
+        <p class="body-copy"><span class="tier-ej">If war-powers rules are full of loopholes, the branch being checked may start writing the meaning of the check itself.</span><span class="tier-ev">Secret executive-law interpretations (e.g., redefining "hostilities") can hollow out formal oversight and produce de facto capture of the checking system.</span></p>
+      </div>
+
+      <div class="glossary-card">
+        <div class="term">Military-Industrial Complex (MIC)</div>
+        <div class="mini-label"><span class="tier-ej">Easy meaning</span><span class="tier-ev">Meaning</span></div>
+        <p class="body-copy"><span class="tier-ej">The web of weapons makers, officials, and politicians who all benefit from military spending.</span><span class="tier-ev">The network of defense firms, revolving-door officials, and political constituencies that gain from sustained military spending.</span></p>
+        <div class="mini-label"><span class="tier-ej">War powers use</span><span class="tier-ev">Debate application</span></div>
+        <p class="body-copy"><span class="tier-ej">This explains why wars keep getting funded even after the original reason fades — too many people benefit.</span><span class="tier-ev">MIC claims explain persistence: once money, jobs, and careers align around a conflict, restraint becomes politically costly. Both sides debate which branch the MIC captures more effectively.</span></p>
+      </div>
+
+      <!-- NEW TERMS -->
+      <div class="glossary-card" style="border-color:#4361ee;">
+        <div class="term">Threshold Control</div>
+        <div class="mini-label"><span class="tier-ej">Easy meaning</span><span class="tier-ev">Meaning</span></div>
+        <p class="body-copy"><span class="tier-ej">Power over the yes-or-no decision to start using force.</span><span class="tier-ev">Authority over the binary decision of whether force is initiated — the most consequential single control point in war powers.</span></p>
+        <div class="mini-label"><span class="tier-ej">War powers use</span><span class="tier-ev">Debate application</span></div>
+        <p class="body-copy"><span class="tier-ej">Pro's whole case is about threshold control: the vote before the first strike matters more than any tool used after.</span><span class="tier-ev">Pro's core claim: threshold control is structurally superior to downstream management because the initiation decision sets the strategic baseline that all later politics must work against.</span></p>
+      </div>
+
+      <div class="glossary-card" style="border-color:#4361ee;">
+        <div class="term">Definitional Evasion</div>
+        <div class="mini-label"><span class="tier-ej">Easy meaning</span><span class="tier-ev">Meaning</span></div>
+        <p class="body-copy"><span class="tier-ej">Getting around a rule by arguing the rule's words don't apply to your situation.</span><span class="tier-ev">Circumventing a legal constraint by contesting the meaning of the trigger term rather than obeying the substantive requirement.</span></p>
+        <div class="mini-label"><span class="tier-ej">War powers use</span><span class="tier-ev">Debate application</span></div>
+        <p class="body-copy"><span class="tier-ej">Libya 2011: the administration said the bombing campaign didn't count as "hostilities," so the War Powers clock didn't bite.</span><span class="tier-ev">Libya 2011 is the textbook case: the executive narrowed "hostilities" to avoid triggering the WPR clock, demonstrating that any rule dependent on executive self-reporting is vulnerable to definitional evasion.</span></p>
+      </div>
+
+      <div class="glossary-card" style="border-color:#4361ee;">
+        <div class="term">Sunk-Cost Politics</div>
+        <div class="mini-label"><span class="tier-ej">Easy meaning</span><span class="tier-ev">Meaning</span></div>
+        <p class="body-copy"><span class="tier-ej">When leaders keep a war going because they already spent so much on it — pulling out feels like "wasting" the sacrifice.</span><span class="tier-ev">The political dynamic where prior investment (casualties, money, credibility) makes withdrawal politically costlier than continuation, even when continuation is strategically irrational.</span></p>
+        <div class="mini-label"><span class="tier-ej">War powers use</span><span class="tier-ev">Debate application</span></div>
+        <p class="body-copy"><span class="tier-ej">Pro says this is why the first vote matters most: once troops are in and people have died, it's much harder to stop.</span><span class="tier-ev">Sunk-cost politics is Pro's strongest warrant for why ex ante control dominates ex post leverage: once the initiation costs are paid, the political calculus of withdrawal changes dramatically.</span></p>
+      </div>
+    </div>
+
+    <!-- CONFUSION MATRIX -->
+    <div class="matrix-card">
+      <table class="mini-table">
+        <thead>
+          <tr>
+            <th><span class="tier-ej">Confusing pair</span><span class="tier-ev">Analytical distinction</span></th>
+            <th><span class="tier-ej">What's the difference?</span><span class="tier-ev">How to separate them in round</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Mission creep</strong> vs. <strong>blowback</strong></td>
+            <td><span class="tier-ej">Mission creep = the mission gets bigger during the operation. Blowback = the damage comes later, after the action is over.</span><span class="tier-ev">Mission creep = within-mission scope expansion. Blowback = downstream unintended consequences after the intervention. One is operational drift; the other is delayed external harm.</span></td>
+          </tr>
+          <tr>
+            <td><strong>Lobbying</strong> vs. <strong>capture</strong></td>
+            <td><span class="tier-ej">Lobbying = trying to influence. Capture = when that influence starts steering the actual decisions.</span><span class="tier-ev">Lobbying = influence activity directed at officials. Capture = when oversight structures begin serving the regulated actor. Lobbying is the input; capture is the structural outcome.</span></td>
+          </tr>
+          <tr>
+            <td><strong>Threshold control</strong> vs. <strong>downstream leverage</strong></td>
+            <td><span class="tier-ej">Threshold = stopping force before it starts. Downstream = managing or ending force after it starts.</span><span class="tier-ev">Threshold control = authority over the initiation decision. Downstream leverage = tools applied after deployment (funding, caps, sunset clauses). The first prevents; the second manages.</span></td>
+          </tr>
+          <tr>
+            <td><strong>Permeability</strong> vs. <strong>harm-conversion</strong></td>
+            <td><span class="tier-ej">Permeability = how easy it is to pressure a branch. Harm-conversion = how much damage that branch does once pressure wins.</span><span class="tier-ev">Permeability = comparative ease of access and influence. Harm-conversion = the severity of downstream policy output once capture succeeds. The branch with more doors is not necessarily the branch with the bigger weapons.</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="grid two-col equal">
+      <div class="prompt-block">
+        <div class="prompt-title"><span class="tier-ej">Quick check</span><span class="tier-ev">Term selection check</span></div>
+        <div class="hint"><span class="tier-ej">Libya's later chaos spreading to Mali is not mission creep. It is ______.</span><span class="tier-ev">Libya's regional spillover (weapons diffusion, instability in Mali) is better framed as ______.</span></div>
+        <textarea class="lined-textarea xs answer-field"
+          data-answer-ej="Blowback. The damage shows up later after the original action is over."
+          data-answer-ev="Blowback. The later regional destabilization is a downstream unintended consequence, not within-mission scope expansion.">
+        </textarea>
+      </div>
+      <div class="prompt-block">
+        <div class="prompt-title"><span class="tier-ej">Use a vocab word in a debate line</span><span class="tier-ev">Write a deploy line using one term</span></div>
+        <div class="hint"><span class="tier-ej">Write one short sentence a judge can understand and flow.</span><span class="tier-ev">Convert one glossary term into a clean deploy line a judge can flow — include the mechanism, not just the label.</span></div>
+        <textarea class="lined-textarea md answer-field"
+          data-answer-ej="Congress voting before troops move lowers miscalculation because more people test the assumptions before force starts."
+          data-answer-ev="Ex ante authorization reduces miscalculation risk by forcing multiple institutional actors to test attribution and escalation assumptions before hostilities begin — something unilateral executive action structurally cannot replicate.">
+        </textarea>
+      </div>
+    </div>
+
+  </div>
+  <div class="footer">
+    <span>Page <span class="page-number"></span></span>
+    <span>Ascent Academy | War Powers — Lesson 4</span>
+  </div>
+</div>
+
+
+</body>
+</html>

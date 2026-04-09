@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ascent Academy | War Powers — Lesson 4 | Part 4: Activities 5–6 & Capture Deep Dive</title>
+<style>
+/* ===== RESET & BASE ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; }
+body { font-family: 'Segoe UI', system-ui, -apple-system, Arial, sans-serif; color: #1a1a2e; line-height: 1.6; background: #f8f9fa; }
+
+/* ===== PAGE STRUCTURE ===== */
+.page { width: 210mm; min-height: 297mm; margin: 0 auto 2rem; padding: 28px 36px; background: #fff; box-shadow: 0 2px 12px rgba(0,0,0,0.08); position: relative; page-break-after: always; }
+.page .header { margin-bottom: 18px; border-bottom: 2px solid #e0e0e0; padding-bottom: 10px; }
+.page .header .kicker { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 1.5px; color: #6c757d; margin-bottom: 2px; }
+.page .header h1 { font-size: 1.35rem; font-weight: 700; color: #1a1a2e; line-height: 1.3; }
+.page-content { font-size: 0.92rem; }
+.footer { position: absolute; bottom: 16px; left: 36px; right: 36px; display: flex; justify-content: space-between; font-size: 0.7rem; color: #adb5bd; border-top: 1px solid #e9ecef; padding-top: 6px; }
+.page-number::before { content: counter(page-counter); }
+body { counter-reset: page-counter; }
+.page { counter-increment: page-counter; }
+
+/* ===== COVER ===== */
+.cover-tag { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; color: #6c757d; margin-bottom: 8px; }
+.cover-title { font-size: 2.4rem; font-weight: 800; color: #1a1a2e; line-height: 1.15; margin-bottom: 6px; }
+.cover-title span { font-weight: 400; color: #4361ee; font-size: 1.6rem; }
+.cover-subtitle { font-size: 1rem; color: #495057; margin-bottom: 22px; letter-spacing: 0.5px; }
+.hero-box { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); color: #fff; border-radius: 10px; padding: 20px 24px; margin-bottom: 18px; }
+.hero-box .small-label { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 1.5px; color: #a0c4ff; margin-bottom: 4px; }
+.resolution-text { font-size: 1.05rem; font-weight: 600; line-height: 1.5; }
+
+/* ===== TIER VISIBILITY ===== */
+.tier-ej, .tier-ev { display: none; }
+body.show-ej .tier-ej { display: inline; }
+body.show-ev .tier-ev { display: inline; }
+body.show-ej .tier-ev { display: none !important; }
+body.show-ev .tier-ej { display: none !important; }
+body.show-all .tier-ej, body.show-all .tier-ev { display: inline; }
+.focus-box { border-radius: 8px; padding: 14px 18px; margin-bottom: 10px; font-size: 0.88rem; line-height: 1.5; }
+.focus-box.tier-ej { background: #e8f4f8; border-left: 4px solid #4cc9f0; display: block; }
+.focus-box.tier-ev { background: #f3e8ff; border-left: 4px solid #7b2ff7; display: block; }
+body.show-ej .focus-box.tier-ev { display: none !important; }
+body.show-ev .focus-box.tier-ej { display: none !important; }
+
+/* ===== JUDGE MOVE ===== */
+.judge-move { background: #fff3cd; border-left: 4px solid #ffc107; border-radius: 6px; padding: 10px 14px; margin-bottom: 14px; font-size: 0.85rem; }
+.judge-move strong { color: #856404; }
+
+/* ===== NOTE STRIP ===== */
+.note-strip { background: #e2e3e5; border-radius: 6px; padding: 10px 14px; margin-bottom: 14px; font-size: 0.85rem; }
+
+/* ===== SETUP BOX ===== */
+.setup-box { background: #f1f3f5; border-radius: 6px; padding: 10px 14px; margin-bottom: 14px; font-size: 0.88rem; }
+.setup-box.tier-ej { border-left: 4px solid #4cc9f0; }
+.setup-box.tier-ev { border-left: 4px solid #7b2ff7; }
+
+/* ===== GRID SYSTEM ===== */
+.grid { display: grid; gap: 14px; margin-bottom: 14px; }
+.two-col { grid-template-columns: 1fr 1fr; }
+.equal { align-items: start; }
+
+/* ===== CARDS ===== */
+.card, .mcq-card, .evidence-card, .glossary-card, .response-card, .matrix-card { border-radius: 8px; padding: 14px 16px; margin-bottom: 10px; }
+.pro-card { background: #eaf4fe; border-left: 4px solid #4361ee; }
+.con-card { background: #fef2f0; border-left: 4px solid #e63946; }
+.section-title { font-size: 0.82rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; color: #495057; }
+
+/* ===== EVIDENCE CARDS ===== */
+.evidence-card { padding: 14px 16px; border-radius: 8px; }
+.evidence-head { font-size: 0.88rem; font-weight: 700; margin-bottom: 8px; }
+.quote-box { background: rgba(0,0,0,0.04); border-left: 3px solid #6c757d; padding: 8px 12px; margin-bottom: 10px; font-style: italic; font-size: 0.88rem; }
+.mini-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 1.2px; color: #6c757d; margin-bottom: 2px; margin-top: 8px; font-weight: 600; }
+
+/* ===== PROOF GRID ===== */
+.proof-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+.proof-box { border-radius: 8px; padding: 14px 16px; }
+.proof-box.pro { background: #eaf4fe; border-left: 4px solid #4361ee; }
+.proof-box.con { background: #fef2f0; border-left: 4px solid #e63946; }
+.proof-title { font-size: 0.82rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+.micro-proof { font-size: 0.85rem; }
+.micro-item { margin-bottom: 6px; }
+
+/* ===== GLOSSARY ===== */
+.glossary-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px; }
+.glossary-card { background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 8px; padding: 12px 14px; }
+.glossary-card .term { font-size: 1rem; font-weight: 700; color: #4361ee; margin-bottom: 4px; }
+
+/* ===== MCQ ===== */
+.mcq-card { background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 8px; padding: 14px 16px; }
+.option-list { list-style: none; padding: 0; }
+.option-list li { margin-bottom: 4px; font-size: 0.88rem; }
+.opt-letter { font-weight: 700; color: #4361ee; margin-right: 6px; }
+
+/* ===== PROMPT / TEXTAREA ===== */
+.prompt-block { margin-bottom: 14px; }
+.prompt-title { font-size: 0.85rem; font-weight: 700; margin-bottom: 4px; color: #1a1a2e; }
+.hint { font-size: 0.8rem; color: #6c757d; margin-bottom: 6px; font-style: italic; }
+.lined-textarea { width: 100%; border: 1px solid #ced4da; border-radius: 6px; padding: 8px 10px; font-family: inherit; font-size: 0.85rem; resize: vertical; background: #fff; }
+.lined-textarea.xs { min-height: 48px; }
+.lined-textarea.sm { min-height: 64px; }
+.lined-textarea.md { min-height: 88px; }
+.lined-textarea.lg { min-height: 120px; }
+
+/* ===== TABLES ===== */
+.lesson-table, .mini-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; margin-bottom: 10px; }
+.lesson-table th, .mini-table th { background: #1a1a2e; color: #fff; padding: 8px 10px; text-align: left; font-weight: 600; }
+.lesson-table td, .mini-table td { padding: 8px 10px; border-bottom: 1px solid #dee2e6; vertical-align: top; }
+.lesson-table tr:nth-child(even), .mini-table tr:nth-child(even) { background: #f8f9fa; }
+.matrix-card { background: #fff; border: 1px solid #dee2e6; border-radius: 8px; padding: 10px; overflow-x: auto; }
+
+/* ===== ROUND LINE CARD ===== */
+.round-line-card { background: rgba(0,0,0,0.03); border-radius: 6px; padding: 10px 14px; margin-bottom: 10px; }
+.round-claim { font-size: 0.88rem; font-weight: 500; }
+
+/* ===== SKILL OBJECTIVE ===== */
+.skill-objective { background: linear-gradient(90deg, #4361ee11, #4361ee05); border: 1px solid #4361ee33; border-radius: 6px; padding: 10px 14px; margin-bottom: 14px; font-size: 0.85rem; }
+.skill-objective strong { color: #4361ee; }
+
+/* ===== NAME ROW ===== */
+.name-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 16px; }
+.name-card { background: #f8f9fa; border-radius: 6px; padding: 10px 14px; }
+.inline-input { border: none; border-bottom: 1px solid #adb5bd; background: transparent; width: 100%; font-size: 0.92rem; padding: 4px 0; outline: none; }
+
+/* ===== TIER TOGGLE (UI) ===== */
+.tier-toggle { position: fixed; top: 12px; right: 12px; z-index: 1000; display: flex; gap: 6px; }
+.tier-toggle button { padding: 6px 14px; border: 1px solid #dee2e6; border-radius: 20px; font-size: 0.75rem; cursor: pointer; background: #fff; transition: all 0.2s; }
+.tier-toggle button.active { background: #4361ee; color: #fff; border-color: #4361ee; }
+
+/* ===== PRINT ===== */
+@media print {
+  body { background: #fff; }
+  .page { box-shadow: none; margin: 0; page-break-after: always; }
+  .tier-toggle { display: none; }
+  .lined-textarea { border: 1px solid #ccc; }
+}
+
+/* ===== TIGHT LIST ===== */
+.tight-list { list-style: disc; padding-left: 18px; font-size: 0.88rem; }
+.tight-list li { margin-bottom: 4px; }
+.body-copy { font-size: 0.88rem; margin-bottom: 6px; }
+
+/* ===== VARSITY METRIC ===== */
+.varsity-metric { background: #f3e8ff; border-left: 3px solid #7b2ff7; padding: 8px 12px; border-radius: 4px; font-size: 0.82rem; color: #5a189a; margin-top: 8px; }
+</style>
+</head>
+<body class="show-all">
+
+<!-- ===== TIER TOGGLE UI ===== -->
+<div class="tier-toggle">
+  <button onclick="setTier('show-ej')" id="btn-ej">Junior</button>
+  <button onclick="setTier('show-ev')" id="btn-ev">Varsity</button>
+  <button onclick="setTier('show-all')" id="btn-all" class="active">Both</button>
+</div>
+<script>
+function setTier(cls) {
+  document.body.className = cls;
+  document.querySelectorAll('.tier-toggle button').forEach(b => b.classList.remove('active'));
+  document.getElementById(cls === 'show-ej' ? 'btn-ej' : cls === 'show-ev' ? 'btn-ev' : 'btn-all').classList.add('active');
+}
+</script>
+
+<!-- ================================================================== -->
+<!-- COVER PAGE                                                          -->
+
+
+<!-- PART NAVIGATION -->
+<style>
+.part-nav { background:#1a1a2e; color:#fff; padding:8px 20px; text-align:center; font-size:0.8rem; letter-spacing:1px; margin-bottom:0; }
+.part-nav a { color:#90caf9; text-decoration:underline; margin:0 4px; padding:2px 4px; border-radius:3px; }
+.part-nav a:hover { background:#2d3a6e; color:#fff; }
+.part-nav a:focus { outline:2px solid #90caf9; outline-offset:2px; color:#fff; }
+.part-nav a:active { color:#e0e0e0; }
+.part-nav .nav-label { color:#a0c4ff; }
+.part-nav strong { color:#fff; padding:2px 4px; background:#2d3a6e; border-radius:3px; }
+</style>
+<div class="part-nav">
+  <span class="nav-label" style="margin-right:12px;">WAR POWERS LESSON 4</span>
+  <a href="lesson4-war-powers-part1.html">Part 1</a>  &nbsp;|&nbsp;  <a href="lesson4-war-powers-part2.html">Part 2</a>  &nbsp;|&nbsp;  <a href="lesson4-war-powers-part3.html">Part 3</a>  &nbsp;|&nbsp;  <strong>Part 4</strong>  &nbsp;|&nbsp;  <a href="lesson4-war-powers-part5.html">Part 5</a>
+  <span class="nav-label" style="margin-left:12px;">Part 4: Activities 5–6 & Capture Deep Dive</span>
+</div>
+<!-- ================================================================== -->
+<!-- MODULE 08 — ACTIVITY 5: AUTOMATIC CUTOFF                          -->
+<!-- ================================================================== -->
+<div class="page student-only phase-core v6-dense">
+  <div class="header">
+    <div class="kicker">Module 08 | Activity 5</div>
+    <h1>Automatic Cutoff vs. Cliff-Edge Hostage Politics</h1>
+  </div>
+  <div class="page-content">
+
+    <div class="skill-objective">
+      <strong>Skill objective:</strong>
+      <span class="tier-ej">Evaluate whether automatic funding cutoffs provide genuine war-ending leverage or create hostage bargaining dynamics that Congress cannot politically resolve without blaming someone for a bad outcome.</span>
+      <span class="tier-ev">Apply Fisher's constitutional framework to automatic cutoff mechanisms. Distinguish contingent effectiveness (cutoffs work when political will exists) from structural effectiveness (cutoffs change the constitutional default regardless of will). Understand how Yoo's speed argument applies to the front-end gate debate — creating a second cliff-edge at entry, not just exit.</span>
+    </div>
+
+    <div class="judge-move">
+      <strong>Hidden judge move: </strong>
+      <span class="tier-ej">Con will argue cutoffs create hostage crises. Pro must argue that teeth are what prevent drift — a soft deadline is no deadline. But Pro also needs to explain why Somalia proves Fisher's structural claim, not just proves cutoffs work when will exists.</span>
+      <span class="tier-ev">Somalia is a swing case. Pro reads it as contingent alignment (works when will exists) that proves Fisher's deeper structural point (wars without authorization normalize executive primacy regardless of individual cutoff successes). Con reads it as proof downstream tools work when will exists — and adds Yoo's speed argument to attack the front-end gate. The weighing metric is reversibility: can downstream cutoffs recover from the strategic baseline set by unauthorized initiation?</span>
+    </div>
+
+    <div class="setup-box tier-ej">Somalia 1993 — Congress set a deadline for withdrawal. It worked. But what happens when troops are in danger and a cutoff deadline forces a rushed exit? Is the threat of a cutoff real pressure, or just a bargaining chip that creates hostage politics where the President can blame Congress for whatever goes wrong?</div>
+    <div class="setup-box tier-ev">Fisher's constitutional framework: automatic cutoffs are the strongest existing downstream mechanism — they impose real operational pressure when political will exists. But cliff-edge dynamics can force withdrawal at operationally dangerous moments, creating a hostage scenario where the President blames Congress for bad exit outcomes. Both effects are real. The debate turns on whether Somalia proves the mechanism works structurally or only contingently — and whether Yoo's speed argument applies more powerfully to cutoffs (back end) or front-end gates (entry).</div>
+
+    <div class="proof-grid">
+      <div class="proof-box pro">
+        <div class="proof-title">&#9650; Pro — Fisher 2004: Constitutional Symptom vs. Disease</div>
+        <div class="micro-proof">
+          <div class="micro-item"><strong>Claim:</strong> Automatic cutoff mechanisms prove Congress CAN impose real teeth on war powers — but they also demonstrate that downstream cutoffs cannot recreate the constitutional authorization requirement that Fisher argues is mandatory from the start of any use of force.</div>
+          <div class="quote-box">"Presidential war-making without congressional consent violates the constitutional framework and creates dangerous precedents. Downstream cutoffs manage the symptom, not the structural violation." — Fisher, Louis, 2004, "Presidential War Power"</div>
+          <div class="micro-item"><strong>Statistic:</strong> Somalia 1993 — Congress imposed a deadline; the administration withdrew by the deadline. But the initial deployment happened without authorization, proving the cutoff fixed the symptom (duration) while leaving the structural problem (executive primacy precedent) intact.</div>
+          <div class="micro-item"><strong>Warrant:</strong> Fisher's argument is structural: every war fought without authorization creates a precedent of executive primacy that cutoffs cannot erase. Somalia's deadline worked because political will happened to align — but alignment is contingent on circumstances, while mandatory pre-authorization is categorical and changes the default regardless of will.</div>
+          <div class="mini-label">Deploy line (Junior)</div>
+          <div class="micro-item">"Somalia worked because Congress and the President happened to agree on the deadline. Fisher says the problem isn't individual cases — it's the precedent of 'President moves first and Congress manages later.' The gate changes that precedent; the cutoff only manages it."</div>
+          <div class="mini-label">Deploy line (Varsity)</div>
+          <div class="micro-item">"Fisher's constitutional argument: wars fought without authorization create a precedent of executive primacy no downstream cutoff can structurally erase. Somalia's cutoff demonstrates contingent alignment. Pro's gate changes the default — it's categorical, not contingent on political will that may or may not exist in any given case."</div>
+        </div>
+      </div>
+
+      <div class="proof-box con">
+        <div class="proof-title">&#9660; Con — Somalia + Yoo 2005: Cutoffs Work; Front-End Gates Create New Risk</div>
+        <div class="micro-proof">
+          <div class="micro-item"><strong>Claim:</strong> Automatic cutoffs demonstrate Congress already possesses effective war-ending leverage — and mandatory pre-authorization creates new cliff-edge risks at the front end that outweigh marginal threshold gains.</div>
+          <div class="quote-box">"The Somalia 1993 withdrawal: Congress used a statutory deadline to force the executive to commit to withdrawal — demonstrating that automatic cutoffs create real operational pressure that changes presidential decision-making." — Congressional Research Service, "The War Powers Resolution: After Thirty Years," 2004; Daalder &amp; Destler, "In the Shadow of the Oval Office," 2009</div>
+          <div class="quote-box">"The President needs flexible authority to respond to fast-moving threats; congressional deliberation creates dangerous delay in time-sensitive situations." — Yoo, John, 2005, "The Powers of War and Peace"</div>
+          <div class="micro-item"><strong>Statistic:</strong> Somalia operation concluded by March 1994 as required. Yoo's concern: a genuine 48-72 hour emergency where authorization vote failure forecloses response.</div>
+          <div class="micro-item"><strong>Warrant:</strong> Somalia proves cutoffs work when political will exists. Yoo adds the second concern: mandatory pre-authorization creates a new cliff-edge at the front — a failed authorization vote doesn't just delay response, it politically forecloses action even when operational speed is genuinely existential.</div>
+          <div class="mini-label">Deploy line (Junior)</div>
+          <div class="micro-item">"Somalia proves cutoffs work — the deadline was imposed, the President complied. And Yoo says the bigger danger is putting a gate at the front — what if we need to act in 72 hours and Congress can't organize a vote in time?"</div>
+          <div class="mini-label">Deploy line (Varsity)</div>
+          <div class="micro-item">"Somalia proves contingent will produces real outcomes. Yoo's structural concern is at the front end: mandatory pre-authorization creates a cliff at entry. In a genuine 48-72 hour emergency, a failed authorization vote doesn't just delay — it politically forecloses response even when operational speed is existential to the mission."</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="note-strip">
+      <strong>Somalia is a swing case — read it carefully:</strong>
+      <span class="tier-ej">Pro reads Somalia as proof that cutoffs manage symptoms but don't change the structural default — the initial unauthorized deployment set the precedent. Con reads it as proof that downstream tools work when will exists — and Yoo adds that front-end gates create speed risks that may be more dangerous than the structural precedent problem Pro describes.</span>
+      <span class="tier-ev">The Somalia case runs in both directions. Pro's reading: contingent alignment proves the mechanism is unreliable as a structural rule; Fisher's precedent claim goes deeper than any individual cutoff success. Con's reading: will + tools produce results; Yoo's speed argument shows front-end gates create their own cliff-edge problem at entry. Resolution: weigh reversibility (Pro) against probability (Con) — how often does contingent cutoff alignment fail vs. how often does a genuine front-end speed emergency arise where the gate's 72-hour carveout is insufficient?</span>
+    </div>
+
+    <div class="grid two-col equal">
+      <div class="card pro-card">
+        <div class="section-title">&#9650; Pro Response Cards</div>
+        <p class="body-copy"><strong>Con says Somalia proves cutoffs work</strong></p>
+        <ul class="tight-list">
+          <li><strong>Rebuttal:</strong> Cutoffs require political will to align with the deadline — Fisher shows the constitutional precedent problem is structural and survives any individual cutoff success.</li>
+          <li><strong>Crossfire trap:</strong> "How many automatic cutoffs has Congress actually imposed since Somalia? If the answer is very few, is this really a reliable mechanism or a rare exception?"</li>
+          <li><strong>Weighing:</strong> Reversibility — cutoffs manage wars that should never have started; the gate changes the default before the executive-primacy precedent is set by the unauthorized deployment.</li>
+        </ul>
+      </div>
+      <div class="card con-card">
+        <div class="section-title">&#9660; Con Response Cards</div>
+        <p class="body-copy"><strong>Pro says cutoffs prove symptom management</strong></p>
+        <ul class="tight-list">
+          <li><strong>Rebuttal:</strong> Somalia shows will + tools produce empirical results; Fisher's structural claim is theoretical while Somalia's outcome is observable.</li>
+          <li><strong>Crossfire trap:</strong> "If pre-authorization is the solution, does your plan include a 72-hour emergency carveout? And doesn't that carveout recreate the executive discretion you're trying to eliminate — just with a different trigger word?"</li>
+          <li><strong>Weighing:</strong> Probability — genuine front-end speed emergencies are real operational risks; how often does a cutoff mechanism actually fail through political misalignment vs. how often does speed become genuinely existential?</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="prompt-block">
+      <div class="prompt-title"><span class="tier-ej">Write one sentence: does Somalia prove cutoffs are reliable or just lucky? Use Fisher or Yoo in your answer.</span><span class="tier-ev">Write Fisher's structural claim in one sentence — then explain in a second sentence why Somalia is or is not sufficient to answer it. Name the weighing metric that resolves the clash.</span></div>
+      <textarea class="lined-textarea md"></textarea>
+    </div>
+
+  </div>
+  <div class="footer">
+    <span>Page <span class="page-number"></span></span>
+    <span>Ascent Academy | War Powers — Lesson 4</span>
+  </div>
+</div>
+
+<!-- ================================================================== -->
+<!-- MODULE 09 — ACTIVITY 6: CARVEOUT VS. LOOPHOLE REBUILDING          -->
+<!-- ================================================================== -->
+<div class="page student-only phase-core v6-dense">
+  <div class="header">
+    <div class="kicker">Module 09 | Activity 6</div>
+    <h1>Specific Approval + Emergency Carveout vs. Loophole Rebuilding</h1>
+  </div>
+  <div class="page-content">
+
+    <div class="skill-objective">
+      <strong>Skill objective:</strong>
+      <span class="tier-ej">Evaluate whether a narrow emergency carveout preserves genuine flexibility without recreating the blank check problem — and understand the difference between a genuine carveout and definitional creep.</span>
+      <span class="tier-ev">Apply the definitional precision framework to carveout design under adversarial conditions. Understand why Pro must define the carveout narrowly (rescue, imminent attack, 72-hour limit, no expansion) — and why Con must show the same definitional dynamics that eroded "hostilities" in Libya will erode "emergency" in the carveout, making it either too narrow to work or too broad to be meaningful.</span>
+    </div>
+
+    <div class="judge-move">
+      <strong>Hidden judge move: </strong>
+      <span class="tier-ej">Con will argue any carveout rebuilds the loophole. Pro must show a well-defined narrow carveout covers the genuine 4% of emergencies without recreating unlimited executive authority — the Reiss Center data is Pro's empirical anchor.</span>
+      <span class="tier-ev">The carveout debate is about definitional precision under adversarial presidential pressure. Pro needs the carveout to be narrow and enforceable. Con needs to show that the same definitional dynamics that eroded "hostilities" in Libya will erode "emergency" in the carveout — making it either too narrow to cover Kosovo (operationally deficient) or broad enough to cover it (blank check). There is no stable middle ground, Con argues.</span>
+    </div>
+
+    <div class="setup-box tier-ej">Pro's plan says "Congress must approve military force, BUT the President can act alone for 72 hours in a genuine emergency." Con says that 72-hour window becomes the new blank check — every President calls every operation an emergency. Who's right, and what evidence decides it?</div>
+    <div class="setup-box tier-ev">The carveout debate requires definitional precision. Pro must define: rescue of U.S. citizens, defense against imminent attack, 72-hour maximum with no combat expansion beyond the original mission. Con must show the definitional boundary will erode under presidential pressure — just as Libya reinterpreted "hostilities," a President can reinterpret "emergency." The structural dynamic is identical; only the trigger label changes.</div>
+
+    <div class="proof-grid">
+      <div class="proof-box pro">
+        <div class="proof-title">&#9650; Pro — Reiss Center 2019: 4% Genuine Emergency Profile</div>
+        <div class="micro-proof">
+          <div class="micro-item"><strong>Claim:</strong> A narrowly defined emergency carveout — limited to rescue of citizens, defense against imminent attack, 72-hour maximum with no expansion — covers genuine emergencies without recreating a blank check because historical data shows only ~4% of force uses required genuine emergency speed.</div>
+          <div class="quote-box">"Of 105 uses of force reviewed, only approximately 4 fit the profile of genuine emergency rescue operations requiring unilateral executive speed — the rest involved discretionary force decisions that could have awaited authorization." — Reiss Center on Law and Security, NYU Law (2019)</div>
+          <div class="micro-item"><strong>Statistic:</strong> 4 of 105 uses of force (~4%) fit the genuine rescue/imminent-defense profile requiring emergency speed. 101 (~96%) were discretionary deployments that could have been authorized in advance without operational harm.</div>
+          <div class="micro-item"><strong>Warrant:</strong> If only 4% of historical force uses genuinely required emergency speed, the carveout covers real need without becoming a universal exception. The 96% figure shows mandatory pre-authorization would have applied to the vast majority of historical deployments — exactly where the accountability gap is largest. The carveout is narrow by the data, not just by design.</div>
+          <div class="mini-label">Deploy line (Junior)</div>
+          <div class="micro-item">"Only 4 out of 105 operations actually needed the emergency speed a carveout provides. For the other 101, Congress could have voted first. The carveout is narrow by the historical data — not just by Pro's promise."</div>
+          <div class="mini-label">Deploy line (Varsity)</div>
+          <div class="micro-item">"The Reiss Center data quantifies why the carveout is defensible: 4% of historical force uses required genuine emergency speed unavailable from congressional process. The 96% majority — where presidential war-making operated without authorization — is exactly where the gate adds accountability value. A 72-hour, no-expansion, rescue-only carveout covers the real 4% while closing the 96% gap."</div>
+        </div>
+      </div>
+
+      <div class="proof-box con">
+        <div class="proof-title">&#9660; Con — Yoo 2005 + Kosovo 1999: Carveout Is Either Too Narrow or Too Broad</div>
+        <div class="micro-proof">
+          <div class="micro-item"><strong>Claim:</strong> Any carveout becomes a loophole because Presidents redefine every crisis as an emergency — and even genuine humanitarian emergencies may require more than 72 hours, making the carveout operationally deficient for real crises like Kosovo.</div>
+          <div class="quote-box">"The President needs flexible authority to respond to fast-moving threats; congressional deliberation creates dangerous delay in time-sensitive situations." — Yoo, John, 2005, "The Powers of War and Peace"</div>
+          <div class="quote-box">"Kosovo 1999: The NATO air campaign proceeded without Congressional authorization but achieved its humanitarian objectives — demonstrating that speed and unauthorized action are sometimes both necessary and successful." — Hendrickson, Ryan, "The Clinton Wars: The Constitution, Congress, and War Powers," 2002; Congressional Research Service, "Kosovo and the Law of Armed Conflict," 1999</div>
+          <div class="micro-item"><strong>Statistic:</strong> Kosovo 1999 — 78-day air campaign, no U.S. combat deaths, NATO objectives achieved without congressional authorization. A 72-hour carveout would not have covered this operation.</div>
+          <div class="micro-item"><strong>Warrant:</strong> Kosovo proves unauthorized force can succeed and genuine humanitarian emergencies don't fit 72-hour windows. The carveout is either too narrow to cover Kosovo (operationally deficient) or broad enough to cover it (blank check for 78-day operations). Yoo's structural argument applies: Presidents will always argue their situation fits the exception.</div>
+          <div class="mini-label">Deploy line (Junior)</div>
+          <div class="micro-item">"Kosovo ran 78 days and saved lives with no authorization. That's longer than any 72-hour carveout. Genuine emergencies don't come with a time limit — and the carveout either covers Kosovo or it doesn't cover real crises."</div>
+          <div class="mini-label">Deploy line (Varsity)</div>
+          <div class="micro-item">"Kosovo's 78-day unauthorized campaign achieved NATO's objectives with zero U.S. combat deaths. It proves that real humanitarian emergencies exceed any 72-hour definitional window. Yoo's speed argument applies structurally: a carveout either encompasses Kosovo — blank check — or excludes it — operationally deficient. There is no stable middle ground between these two outcomes."</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="note-strip">
+      <strong>The Kosovo dilemma — rule or exception?</strong>
+      <span class="tier-ej">Pro must show Kosovo-style operations (78 days, humanitarian crisis, no congressional authorization) are unusual enough that the 4% carveout doesn't need to cover them. Con must show Kosovo proves the rule — real crises exceed any 72-hour window, so the carveout must be broad enough to cover them or it fails operationally.</span>
+      <span class="tier-ev">The structural question: is Kosovo the norm or the exception in the universe of genuine emergency operations? Pro needs Kosovo to be a statistical outlier that a well-designed carveout doesn't need to cover. Con needs Kosovo to represent a realistic category of humanitarian crises that Presidents must respond to without waiting for authorization. Neither side has strong frequency data — the clash turns on structural probability arguments and who bears the burden of proof on carveout scope.</span>
+    </div>
+
+    <div class="grid two-col equal">
+      <div class="card pro-card">
+        <div class="section-title">&#9650; Pro Response Cards</div>
+        <p class="body-copy"><strong>Con says carveout rebuilds the loophole (Yoo/Kosovo)</strong></p>
+        <ul class="tight-list">
+          <li><strong>Rebuttal:</strong> 96% of historical forces don't need the carveout — the Reiss Center data proves it's genuinely narrow; Pro can address definitional creep through precise statutory language with judicial review built in.</li>
+          <li><strong>Crossfire trap:</strong> "Does Kosovo fit the definition of an imminent attack on U.S. citizens? If not, Kosovo isn't evidence the carveout is too narrow — it's evidence Kosovo was a categorically different type of operation."</li>
+          <li><strong>Weighing:</strong> Magnitude — close the 96% accountability gap first; the 4% carveout question is secondary to the structural default problem affecting the vast majority of deployments.</li>
+        </ul>
+      </div>
+      <div class="card con-card">
+        <div class="section-title">&#9660; Con Response Cards</div>
+        <p class="body-copy"><strong>Pro says narrow carveout covers only the real 4%</strong></p>
+        <ul class="tight-list">
+          <li><strong>Rebuttal:</strong> Definitional creep is the structural norm — every President redefines the exception; the Reiss Center data describes past behavior but doesn't constrain future presidential interpretation.</li>
+          <li><strong>Crossfire trap:</strong> "If the carveout doesn't cover Kosovo, are you saying Kosovo shouldn't have happened — that the U.S. should have watched atrocities continue while waiting for a congressional authorization vote?"</li>
+          <li><strong>Weighing:</strong> Probability — how reliably will Presidents stay within the 72-hour limit when the political incentive to redefine "emergency" is exactly as strong as the incentive that led to the Libya "hostilities" redefinition?</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="prompt-block">
+      <div class="prompt-title"><span class="tier-ej">Write one sentence: does the 72-hour carveout solve the blank check problem or recreate it? Use either the 4% Reiss Center data or Kosovo as your evidence.</span><span class="tier-ev">Explain why Kosovo either proves the carveout is too narrow to cover real crises (Con) — OR proves Kosovo was a categorically different operation that a well-designed narrow carveout correctly excludes (Pro). Include the structural warrant for your position.</span></div>
+      <textarea class="lined-textarea md"></textarea>
+    </div>
+
+  </div>
+  <div class="footer">
+    <span>Page <span class="page-number"></span></span>
+    <span>Ascent Academy | War Powers — Lesson 4</span>
+  </div>
+</div>
+
+<!-- ================================================================== -->
+<!-- MODULE 10 — INSTITUTIONAL CAPTURE DEEP DIVE                       -->
+<!-- ================================================================== -->
+<div class="page student-only phase-core v6-dense">
+  <div class="header">
+    <div class="kicker">Module 10 | Deep Dive</div>
+    <h1>Institutional Capture: Both Branches Under the Microscope</h1>
+  </div>
+  <div class="page-content">
+
+    <div class="skill-objective">
+      <strong>Skill objective:</strong>
+      <span class="tier-ej">Apply the full capture framework to both branches simultaneously and produce a comparative risk assessment that shows which branch does more damage once captured.</span>
+      <span class="tier-ev">Run the full three-step institutional capture analysis: (1) comparative permeability — which branch is more accessible to organized lobbying; (2) comparative harm-conversion — which branch produces worse outputs once capture succeeds; (3) structural mitigation — does the plan change the capture risk calculus or merely shift it to the more-lobbied branch?</span>
+    </div>
+
+    <div class="judge-move">
+      <strong>Hidden judge move: </strong>
+      <span class="tier-ej">The best capture arguments aren't just "MIC is bad." They explain which branch converts capture into worse harm, how quickly, and with how many checkpoints standing between capture and force deployment.</span>
+      <span class="tier-ev">Mechanism-level capture analysis requires three independent answers. The team that runs all three steps — permeability, harm-conversion, and structural mitigation — wins the capture debate even if it loses on individual data points, because it demonstrates a more complete analytical framework than "more lobbying = more danger."</span>
+    </div>
+
+    <div class="setup-box tier-ej">MIC lobbies both branches. Your job: which branch does more damage once lobbied successfully? Think about how fast each branch acts and how many checkpoints exist between capture and actual force deployment.</div>
+    <div class="setup-box tier-ev">Full institutional capture analysis requires three independent steps: (1) Comparative permeability — which branch is more accessible to organized lobbying? (2) Comparative harm-conversion — which branch produces worse outputs once capture succeeds and at what speed? (3) Structural mitigation — does the plan change the net capture risk calculus or shift it from executive to congressional capture? Run each step independently before drawing a comparative conclusion.</div>
+
+    <div class="proof-grid">
+      <div class="proof-box pro">
+        <div class="proof-title">&#9650; Pro — POGO + Ackerman: Executive Capture Is Uniquely Dangerous</div>
+        <div class="micro-proof">
+          <div class="micro-item"><strong>Claim:</strong> Executive capture is uniquely dangerous — it converts lobbying into force deployment with minimal veto points, and Ackerman shows unchecked presidential war power has created an emergency constitutional precedent that normalizes executive overreach with each new use.</div>
+          <div class="quote-box">"Top defense contractors hired 672 former government officials; approximately 91% later became registered lobbyists." — POGO (Project on Government Oversight), 2018</div>
+          <div class="quote-box">"Unchecked presidential war power creates an 'emergency constitution' that normalizes executive overreach — each new use of unilateral force lowers the political threshold for the next." — Ackerman, Bruce, 2010, "The Decline and Fall of the American Republic"</div>
+          <div class="micro-item"><strong>Statistic:</strong> 672 revolving-door hires; 91% becoming lobbyists. Ackerman: emergency authority invoked with increasing frequency since WWII — a ratchet effect that each administration inherits and expands.</div>
+          <div class="micro-item"><strong>Warrant — two-step:</strong> (1) Revolving door demonstrates structural executive capture through direct policy-industry pipelines. (2) Ackerman shows the result is an accumulating precedent of emergency authority each administration inherits and expands. Mandatory pre-authorization disrupts (2) by requiring public justification before deployment — breaking the precedent ratchet.</div>
+          <div class="mini-label">Deploy line (Junior)</div>
+          <div class="micro-item">"672 contractor revolving-door hires. 91% become lobbyists. And Ackerman says each unchecked deployment makes the next one easier. Pro's plan forces public justification before deployment — breaking the cycle before the precedent ratchet turns again."</div>
+          <div class="mini-label">Deploy line (Varsity)</div>
+          <div class="micro-item">"POGO quantifies structural executive capture: 672 revolving-door hires, 91% becoming lobbyists. Ackerman's constitutional argument explains the downstream effect: each emergency invocation normalizes the next through a precedent ratchet. Mandatory pre-authorization disrupts this by forcing public authorization before the emergency precedent is set."</div>
+        </div>
+      </div>
+
+      <div class="proof-box con">
+        <div class="proof-title">&#9660; Con — Quincy/FARA + Posner/Vermeule: Congress Is the Capture Target</div>
+        <div class="micro-proof">
+          <div class="micro-item"><strong>Claim:</strong> Congressional capture from foreign and defense lobbying is more quantitatively severe than executive capture, and Posner/Vermeule show formal legal rules don't meaningfully constrain war power — making the plan's reform largely ineffective while routing authority through the most-lobbied branch.</div>
+          <div class="quote-box">"More than half of reported foreign-agent political activities targeted Congress, totaling nearly 70,000 contacts with House and Senate offices." — Quincy Institute / FARA data, 2022-23</div>
+          <div class="quote-box">"Legal constraints on executive war power are largely ineffective; real constraints come from political accountability and public opinion — not formal rules." — Posner, Eric &amp; Vermeule, Adrian, 2011, "The Executive Unbound"</div>
+          <div class="micro-item"><strong>Statistic:</strong> 70,000 foreign-agent lobbying contacts targeting Congress in 2022-23 — more than half of all reported foreign-agent political activity. Foreign agents have far fewer direct contacts with White House decision-makers.</div>
+          <div class="micro-item"><strong>Warrant:</strong> The plan routes war authority through Congress — the branch subjected to 70,000+ foreign lobbying contacts. Posner/Vermeule undercut Pro's reform premise: formal authorization requirements don't actually bind executives because real war-power constraints are political, not legal. The plan adds paper rules to the most-lobbied branch without the enforcement mechanism needed to make those rules effective.</div>
+          <div class="mini-label">Deploy line (Junior)</div>
+          <div class="micro-item">"70,000 foreign lobbying contacts targeted Congress in two years. That's the branch Pro wants to run war decisions. Posner and Vermeule say legal rules don't actually bind anyway — real accountability is political. So the plan routes war through the most lobbied institution and adds rules that don't bite."</div>
+          <div class="mini-label">Deploy line (Varsity)</div>
+          <div class="micro-item">"The FARA data quantifies that Congress receives the highest volume of organized foreign lobbying — 70,000+ contacts, more than half of all reported foreign-agent activity. Posner and Vermeule's structural argument undercuts the plan: formal authorization rules are largely ineffective because real war-power constraints operate through political accountability. The plan shifts authority to the more-lobbied branch and relies on legal rules the executive routinely interprets around."</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="matrix-card" style="margin-bottom:12px;">
+      <div class="section-title">Capture Comparison Worksheet — Fill in Each Cell</div>
+      <table class="lesson-table">
+        <thead>
+          <tr>
+            <th>Dimension</th>
+            <th>Executive Branch</th>
+            <th>Congress</th>
+            <th>Who Wins This Step?</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Permeability Score</strong></td>
+            <td>POGO: 672 revolving-door hires (High)</td>
+            <td>FARA: 70,000 contacts (Very High)</td>
+            <td><textarea class="lined-textarea xs"></textarea></td>
+          </tr>
+          <tr>
+            <td><strong>Harm-Conversion Speed</strong></td>
+            <td>Unilateral force within hours; no vote needed</td>
+            <td>Committee → floor → other chamber (days to weeks)</td>
+            <td><textarea class="lined-textarea xs"></textarea></td>
+          </tr>
+          <tr>
+            <td><strong># of Veto Points</strong></td>
+            <td>0-1 (President acts alone)</td>
+            <td>4-6 (committees, floor votes, both chambers, President)</td>
+            <td><textarea class="lined-textarea xs"></textarea></td>
+          </tr>
+          <tr>
+            <td><strong>Key Capture Mechanism</strong></td>
+            <td>Revolving door: direct policy-industry pipeline</td>
+            <td>District incentives + foreign lobbying → captured votes</td>
+            <td><textarea class="lined-textarea xs"></textarea></td>
+          </tr>
+          <tr>
+            <td><strong>Risk Under Status Quo</strong></td>
+            <td>President moves fast with captured advisors; no check</td>
+            <td>Congress authorizes/funds war under lobbying pressure</td>
+            <td><textarea class="lined-textarea xs"></textarea></td>
+          </tr>
+          <tr>
+            <td><strong>Risk Under Plan</strong></td>
+            <td>Authorization still lobbied through executive-allied Congress</td>
+            <td>Most-lobbied branch now holds the authorization gate</td>
+            <td><textarea class="lined-textarea xs"></textarea></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="note-strip">
+      <strong>The core capture trade-off:</strong>
+      <span class="tier-ej">Pro says fewer veto points in the executive make executive capture more dangerous per lobbying dollar — even if Congress gets lobbied more. Con says volume matters — 70,000 contacts beats fewer contacts even at lower conversion rates, because sufficient volume eventually lands. Which matters more: how easy it is to capture, or how much damage capture causes per event?</span>
+      <span class="tier-ev">The resolution requires a weighing argument about which axis — probability of capture (permeability × volume) or severity once captured (harm-conversion rate × veto-point inverse) — is the operative metric for the ballot. Pro wins if magnitude (harm per capture event × veto-point asymmetry) outweighs volume. Con wins if probability (volume × permeability) is determinative because sufficient volume eventually succeeds regardless of veto-point resistance. This is a genuine empirical uncertainty — both sides can make the argument; the winner is the side that frames it as the right metric first.</span>
+    </div>
+
+  </div>
+  <div class="footer">
+    <span>Page <span class="page-number"></span></span>
+    <span>Ascent Academy | War Powers — Lesson 4</span>
+  </div>
+</div>
+
+
+</body>
+</html>

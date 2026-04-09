@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ascent Academy | War Powers — Lesson 4 | Part 3: Activities 2–4</title>
+<style>
+/* ===== RESET & BASE ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; }
+body { font-family: 'Segoe UI', system-ui, -apple-system, Arial, sans-serif; color: #1a1a2e; line-height: 1.6; background: #f8f9fa; }
+
+/* ===== PAGE STRUCTURE ===== */
+.page { width: 210mm; min-height: 297mm; margin: 0 auto 2rem; padding: 28px 36px; background: #fff; box-shadow: 0 2px 12px rgba(0,0,0,0.08); position: relative; page-break-after: always; }
+.page .header { margin-bottom: 18px; border-bottom: 2px solid #e0e0e0; padding-bottom: 10px; }
+.page .header .kicker { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 1.5px; color: #6c757d; margin-bottom: 2px; }
+.page .header h1 { font-size: 1.35rem; font-weight: 700; color: #1a1a2e; line-height: 1.3; }
+.page-content { font-size: 0.92rem; }
+.footer { position: absolute; bottom: 16px; left: 36px; right: 36px; display: flex; justify-content: space-between; font-size: 0.7rem; color: #adb5bd; border-top: 1px solid #e9ecef; padding-top: 6px; }
+.page-number::before { content: counter(page-counter); }
+body { counter-reset: page-counter; }
+.page { counter-increment: page-counter; }
+
+/* ===== COVER ===== */
+.cover-tag { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; color: #6c757d; margin-bottom: 8px; }
+.cover-title { font-size: 2.4rem; font-weight: 800; color: #1a1a2e; line-height: 1.15; margin-bottom: 6px; }
+.cover-title span { font-weight: 400; color: #4361ee; font-size: 1.6rem; }
+.cover-subtitle { font-size: 1rem; color: #495057; margin-bottom: 22px; letter-spacing: 0.5px; }
+.hero-box { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); color: #fff; border-radius: 10px; padding: 20px 24px; margin-bottom: 18px; }
+.hero-box .small-label { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 1.5px; color: #a0c4ff; margin-bottom: 4px; }
+.resolution-text { font-size: 1.05rem; font-weight: 600; line-height: 1.5; }
+
+/* ===== TIER VISIBILITY ===== */
+.tier-ej, .tier-ev { display: none; }
+body.show-ej .tier-ej { display: inline; }
+body.show-ev .tier-ev { display: inline; }
+body.show-ej .tier-ev { display: none !important; }
+body.show-ev .tier-ej { display: none !important; }
+body.show-all .tier-ej, body.show-all .tier-ev { display: inline; }
+.focus-box { border-radius: 8px; padding: 14px 18px; margin-bottom: 10px; font-size: 0.88rem; line-height: 1.5; }
+.focus-box.tier-ej { background: #e8f4f8; border-left: 4px solid #4cc9f0; display: block; }
+.focus-box.tier-ev { background: #f3e8ff; border-left: 4px solid #7b2ff7; display: block; }
+body.show-ej .focus-box.tier-ev { display: none !important; }
+body.show-ev .focus-box.tier-ej { display: none !important; }
+
+/* ===== JUDGE MOVE ===== */
+.judge-move { background: #fff3cd; border-left: 4px solid #ffc107; border-radius: 6px; padding: 10px 14px; margin-bottom: 14px; font-size: 0.85rem; }
+.judge-move strong { color: #856404; }
+
+/* ===== NOTE STRIP ===== */
+.note-strip { background: #e2e3e5; border-radius: 6px; padding: 10px 14px; margin-bottom: 14px; font-size: 0.85rem; }
+
+/* ===== SETUP BOX ===== */
+.setup-box { background: #f1f3f5; border-radius: 6px; padding: 10px 14px; margin-bottom: 14px; font-size: 0.88rem; }
+.setup-box.tier-ej { border-left: 4px solid #4cc9f0; }
+.setup-box.tier-ev { border-left: 4px solid #7b2ff7; }
+
+/* ===== GRID SYSTEM ===== */
+.grid { display: grid; gap: 14px; margin-bottom: 14px; }
+.two-col { grid-template-columns: 1fr 1fr; }
+.equal { align-items: start; }
+
+/* ===== CARDS ===== */
+.card, .mcq-card, .evidence-card, .glossary-card, .response-card, .matrix-card { border-radius: 8px; padding: 14px 16px; margin-bottom: 10px; }
+.pro-card { background: #eaf4fe; border-left: 4px solid #4361ee; }
+.con-card { background: #fef2f0; border-left: 4px solid #e63946; }
+.section-title { font-size: 0.82rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; color: #495057; }
+
+/* ===== EVIDENCE CARDS ===== */
+.evidence-card { padding: 14px 16px; border-radius: 8px; }
+.evidence-head { font-size: 0.88rem; font-weight: 700; margin-bottom: 8px; }
+.quote-box { background: rgba(0,0,0,0.04); border-left: 3px solid #6c757d; padding: 8px 12px; margin-bottom: 10px; font-style: italic; font-size: 0.88rem; }
+.mini-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 1.2px; color: #6c757d; margin-bottom: 2px; margin-top: 8px; font-weight: 600; }
+
+/* ===== PROOF GRID ===== */
+.proof-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+.proof-box { border-radius: 8px; padding: 14px 16px; }
+.proof-box.pro { background: #eaf4fe; border-left: 4px solid #4361ee; }
+.proof-box.con { background: #fef2f0; border-left: 4px solid #e63946; }
+.proof-title { font-size: 0.82rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+.micro-proof { font-size: 0.85rem; }
+.micro-item { margin-bottom: 6px; }
+
+/* ===== GLOSSARY ===== */
+.glossary-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px; }
+.glossary-card { background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 8px; padding: 12px 14px; }
+.glossary-card .term { font-size: 1rem; font-weight: 700; color: #4361ee; margin-bottom: 4px; }
+
+/* ===== MCQ ===== */
+.mcq-card { background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 8px; padding: 14px 16px; }
+.option-list { list-style: none; padding: 0; }
+.option-list li { margin-bottom: 4px; font-size: 0.88rem; }
+.opt-letter { font-weight: 700; color: #4361ee; margin-right: 6px; }
+
+/* ===== PROMPT / TEXTAREA ===== */
+.prompt-block { margin-bottom: 14px; }
+.prompt-title { font-size: 0.85rem; font-weight: 700; margin-bottom: 4px; color: #1a1a2e; }
+.hint { font-size: 0.8rem; color: #6c757d; margin-bottom: 6px; font-style: italic; }
+.lined-textarea { width: 100%; border: 1px solid #ced4da; border-radius: 6px; padding: 8px 10px; font-family: inherit; font-size: 0.85rem; resize: vertical; background: #fff; }
+.lined-textarea.xs { min-height: 48px; }
+.lined-textarea.sm { min-height: 64px; }
+.lined-textarea.md { min-height: 88px; }
+.lined-textarea.lg { min-height: 120px; }
+
+/* ===== TABLES ===== */
+.lesson-table, .mini-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; margin-bottom: 10px; }
+.lesson-table th, .mini-table th { background: #1a1a2e; color: #fff; padding: 8px 10px; text-align: left; font-weight: 600; }
+.lesson-table td, .mini-table td { padding: 8px 10px; border-bottom: 1px solid #dee2e6; vertical-align: top; }
+.lesson-table tr:nth-child(even), .mini-table tr:nth-child(even) { background: #f8f9fa; }
+.matrix-card { background: #fff; border: 1px solid #dee2e6; border-radius: 8px; padding: 10px; overflow-x: auto; }
+
+/* ===== ROUND LINE CARD ===== */
+.round-line-card { background: rgba(0,0,0,0.03); border-radius: 6px; padding: 10px 14px; margin-bottom: 10px; }
+.round-claim { font-size: 0.88rem; font-weight: 500; }
+
+/* ===== SKILL OBJECTIVE ===== */
+.skill-objective { background: linear-gradient(90deg, #4361ee11, #4361ee05); border: 1px solid #4361ee33; border-radius: 6px; padding: 10px 14px; margin-bottom: 14px; font-size: 0.85rem; }
+.skill-objective strong { color: #4361ee; }
+
+/* ===== NAME ROW ===== */
+.name-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 16px; }
+.name-card { background: #f8f9fa; border-radius: 6px; padding: 10px 14px; }
+.inline-input { border: none; border-bottom: 1px solid #adb5bd; background: transparent; width: 100%; font-size: 0.92rem; padding: 4px 0; outline: none; }
+
+/* ===== TIER TOGGLE (UI) ===== */
+.tier-toggle { position: fixed; top: 12px; right: 12px; z-index: 1000; display: flex; gap: 6px; }
+.tier-toggle button { padding: 6px 14px; border: 1px solid #dee2e6; border-radius: 20px; font-size: 0.75rem; cursor: pointer; background: #fff; transition: all 0.2s; }
+.tier-toggle button.active { background: #4361ee; color: #fff; border-color: #4361ee; }
+
+/* ===== PRINT ===== */
+@media print {
+  body { background: #fff; }
+  .page { box-shadow: none; margin: 0; page-break-after: always; }
+  .tier-toggle { display: none; }
+  .lined-textarea { border: 1px solid #ccc; }
+}
+
+/* ===== TIGHT LIST ===== */
+.tight-list { list-style: disc; padding-left: 18px; font-size: 0.88rem; }
+.tight-list li { margin-bottom: 4px; }
+.body-copy { font-size: 0.88rem; margin-bottom: 6px; }
+
+/* ===== VARSITY METRIC ===== */
+.varsity-metric { background: #f3e8ff; border-left: 3px solid #7b2ff7; padding: 8px 12px; border-radius: 4px; font-size: 0.82rem; color: #5a189a; margin-top: 8px; }
+</style>
+</head>
+<body class="show-all">
+
+<!-- ===== TIER TOGGLE UI ===== -->
+<div class="tier-toggle">
+  <button onclick="setTier('show-ej')" id="btn-ej">Junior</button>
+  <button onclick="setTier('show-ev')" id="btn-ev">Varsity</button>
+  <button onclick="setTier('show-all')" id="btn-all" class="active">Both</button>
+</div>
+<script>
+function setTier(cls) {
+  document.body.className = cls;
+  document.querySelectorAll('.tier-toggle button').forEach(b => b.classList.remove('active'));
+  document.getElementById(cls === 'show-ej' ? 'btn-ej' : cls === 'show-ev' ? 'btn-ev' : 'btn-all').classList.add('active');
+}
+</script>
+
+<!-- ================================================================== -->
+<!-- COVER PAGE                                                          -->
+
+
+<!-- PART NAVIGATION -->
+<style>
+.part-nav { background:#1a1a2e; color:#fff; padding:8px 20px; text-align:center; font-size:0.8rem; letter-spacing:1px; margin-bottom:0; }
+.part-nav a { color:#90caf9; text-decoration:underline; margin:0 4px; padding:2px 4px; border-radius:3px; }
+.part-nav a:hover { background:#2d3a6e; color:#fff; }
+.part-nav a:focus { outline:2px solid #90caf9; outline-offset:2px; color:#fff; }
+.part-nav a:active { color:#e0e0e0; }
+.part-nav .nav-label { color:#a0c4ff; }
+.part-nav strong { color:#fff; padding:2px 4px; background:#2d3a6e; border-radius:3px; }
+</style>
+<div class="part-nav">
+  <span class="nav-label" style="margin-right:12px;">WAR POWERS LESSON 4</span>
+  <a href="lesson4-war-powers-part1.html">Part 1</a>  &nbsp;|&nbsp;  <a href="lesson4-war-powers-part2.html">Part 2</a>  &nbsp;|&nbsp;  <strong>Part 3</strong>  &nbsp;|&nbsp;  <a href="lesson4-war-powers-part4.html">Part 4</a>  &nbsp;|&nbsp;  <a href="lesson4-war-powers-part5.html">Part 5</a>
+  <span class="nav-label" style="margin-left:12px;">Part 3: Activities 2–4</span>
+</div>
+<!-- ================================================================== -->
+<!-- MODULE 05 — ACTIVITY 2: POWER OF THE PURSE                        -->
+<!-- ================================================================== -->
+<div class="page student-only phase-core v6-dense">
+  <div class="header">
+    <div class="kicker">Module 05 | Activity 2</div>
+    <h1>Power of the Purse vs. Lost First Decision</h1>
+  </div>
+  <div class="page-content">
+
+    <div class="skill-objective">
+      <strong>Skill objective:</strong>
+      <span class="tier-ej">Evaluate whether downstream funding leverage constitutes real war control or only manages conflicts already set in motion by the executive's first move.</span>
+      <span class="tier-ev">Apply the threshold-control vs. downstream-leverage distinction to the power-of-the-purse mechanism. Kriner 2010 is the operative swing card — understand how each side reads it differently and what weighing framework resolves the clash between duration management and initiation control.</span>
+    </div>
+
+    <div class="judge-move">
+      <strong>Hidden judge move: </strong>
+      <span class="tier-ej">Con will cite Kriner to prove downstream leverage matters. Pro must prove that duration management is not the same as threshold control — later money can't rewind the first strike or the facts on the ground it creates.</span>
+      <span class="tier-ev">Kriner is a swing card. Con reads it to show downstream leverage has real, quantifiable magnitude (6+ months duration effect). Pro reads it to show Kriner measures duration — not initiation — proving the control points are analytically distinct and that the threshold remains unaddressed by the purse. The clash resolves on which control point matters most: start or continuation.</span>
+    </div>
+
+    <div class="setup-box tier-ej">Congress can cut off money. But if troops are already fighting, can cutting off money really fix what started wrong? Or does it just create a crisis — forcing troops to withdraw in dangerous conditions with no good exit?</div>
+    <div class="setup-box tier-ev">Kriner proves downstream leverage has measurable bite (6+ months of war duration effect). But Pro argues the relevant control point is the initiation decision — the baseline all later politics must work against. Sunk-cost politics and force-commitment dynamics mean the first move is the hardest to reverse, making the threshold uniquely important as the point where all subsequent strategic options are set.</div>
+
+    <div class="proof-grid">
+      <div class="proof-box pro">
+        <div class="proof-title">&#9650; Pro — Fisher 2004: Sunk-Cost Baseline Problem</div>
+        <div class="micro-proof">
+          <div class="micro-item"><strong>Claim:</strong> The power of the purse operates after the first strike — it cannot rewind the initiation decision that sets the strategic baseline, establishes facts on the ground, and triggers sunk-cost politics that make withdrawal politically costly.</div>
+          <div class="quote-box">"Once military force is initiated, political and institutional pressures systematically work against withdrawal — the argument that 'we can't abandon those already committed' reshapes the entire political calculus." — Fisher, Louis, 2004, "Presidential War Power"</div>
+          <div class="micro-item"><strong>Statistic:</strong> In Syria 2013, the planned U.S. strike was halted before launch — the only case where pre-strike resistance fully succeeded, and it succeeded precisely because force had NOT yet begun and no sunk costs existed.</div>
+          <div class="micro-item"><strong>Warrant:</strong> Syria 2013 shows that pre-commitment influence is uniquely powerful. Once force starts, sunk-cost dynamics and allied commitments change the calculus. The purse power works against a different baseline — one already shaped by the first strike — not the original clean-slate decision environment.</div>
+          <div class="mini-label">Deploy line (Junior)</div>
+          <div class="micro-item">"Cutting money after troops are in doesn't rewind the first bomb. Syria proves pre-strike influence is the only control point that actually stops the war from starting — because there's no sunk-cost politics to fight yet."</div>
+          <div class="mini-label">Deploy line (Varsity)</div>
+          <div class="micro-item">"Fisher's structural claim: sunk-cost politics systematically resists withdrawal after initiation. Syria 2013 proves the counterfactual — the only time restraint fully succeeded was before force was committed. Purse power works downstream, but downstream means after the threshold decision has already structured all subsequent politics."</div>
+        </div>
+      </div>
+
+      <div class="proof-box con">
+        <div class="proof-title">&#9660; Con — Kriner 2010: Quantified Downstream Leverage</div>
+        <div class="micro-proof">
+          <div class="micro-item"><strong>Claim:</strong> Congressional funding leverage has real, measurable impact on war outcomes — not just symbolic weight, but quantifiable effects on duration that prove the status quo is not a blank check for the executive.</div>
+          <div class="quote-box">"Binding congressional support extended the average military operation by more than half a year — demonstrating that downstream legislative tools have substantive, not merely rhetorical, bite." — Kriner, Douglas, 2010, "After the Rubicon"</div>
+          <div class="micro-item"><strong>Statistic:</strong> Congressional support extends average military operations by 6+ months; congressional opposition shortens them — proving the effect is directional and not merely correlational.</div>
+          <div class="micro-item"><strong>Warrant:</strong> If downstream leverage already changes war duration by more than six months, the status quo is not a blank check. Pro must prove the plan adds control beyond this quantified existing constraint — not just that threshold control is theoretically upstream or constitutionally preferable.</div>
+          <div class="mini-label">Deploy line (Junior)</div>
+          <div class="micro-item">"Kriner found 6+ months of real difference in war duration. That's not symbolic. Congress already changes wars after they start — your plan doesn't uniquely fix what Kriner proves already has measurable bite."</div>
+          <div class="mini-label">Deploy line (Varsity)</div>
+          <div class="micro-item">"Kriner quantifies downstream leverage at 6+ months of duration effect. Pro's threshold-control argument must clear this bar: show that pre-authorization adds meaningful constraint BEYOND Kriner's quantified downstream effects — not just that it's theoretically upstream."</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="note-strip">
+      <strong>Swing card alert — Kriner 2010:</strong>
+      <span class="tier-ej">Pro flips Kriner to show it measures duration, not initiation. Con reads it to show downstream leverage has real magnitude. The clash is about which control point matters most — start or continuation. You need to explain which one is more important and why — and why your answer is right even when the opponent's reading of Kriner is also accurate.</span>
+      <span class="tier-ev">Kriner is the round's most contested evidence. The analytical pivot: duration effects (Con's reading) are real but operate against a baseline set by the initiation decision (Pro's structural claim). The weighing metric is reversibility — can downstream duration management recover from the strategic commitments, facts on the ground, and sunk-cost politics created at initiation? Pro says no structural recovery is possible; Con says the 6-month effect proves the recovery is meaningful and quantifiable.</span>
+    </div>
+
+    <div class="grid two-col equal">
+      <div class="card pro-card">
+        <div class="section-title">&#9650; Pro Response Cards</div>
+        <p class="body-copy"><strong>Con cites Kriner for downstream leverage</strong></p>
+        <ul class="tight-list">
+          <li><strong>Rebuttal:</strong> Duration does not equal initiation. Kriner proves Congress acts after deployment — not before. Pro's plan fills exactly the gap Kriner's data doesn't touch.</li>
+          <li><strong>Crossfire trap:</strong> "If Kriner proves downstream works, why did the Iraq War last 8+ years despite congressional authorization and later opposition? What's Kriner's explanation for that?"</li>
+          <li><strong>Weighing:</strong> Reversibility — first strikes create facts on the ground (casualties, commitments, escalation pathways) that purse power cannot undo once sunk-cost politics set in.</li>
+        </ul>
+      </div>
+      <div class="card con-card">
+        <div class="section-title">&#9660; Con Response Cards</div>
+        <p class="body-copy"><strong>Pro says purse can't rewind the first strike</strong></p>
+        <ul class="tight-list">
+          <li><strong>Rebuttal:</strong> The plan doesn't eliminate sunk-cost politics either — once Congress authorizes, the same sunk-cost dynamics apply to the authorizing Congress, which now owns the decision.</li>
+          <li><strong>Crossfire trap:</strong> "If threshold control is so important, how does your plan prevent a President from sending a small advisory force that slowly escalates into a larger commitment through mission creep?"</li>
+          <li><strong>Weighing:</strong> Magnitude — Kriner's 6+ months is quantified and empirically proven; Pro's first-strike irreversibility claim is structural but unquantified in magnitude.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="prompt-block">
+      <div class="prompt-title"><span class="tier-ej">In one sentence, explain why Kriner helps your side more than the other. Be specific about what Kriner measures.</span><span class="tier-ev">Write Pro's and Con's Kriner application in one sentence each — then explain in a third sentence which reading wins the weighing and why that weighing metric is the right one for this round.</span></div>
+      <textarea class="lined-textarea md"></textarea>
+    </div>
+
+  </div>
+  <div class="footer">
+    <span>Page <span class="page-number"></span></span>
+    <span>Ascent Academy | War Powers — Lesson 4</span>
+  </div>
+</div>
+
+<!-- ================================================================== -->
+<!-- MODULE 06 — ACTIVITY 3: USE-RESTRICTIONS & CAPS                   -->
+<!-- ================================================================== -->
+<div class="page student-only phase-core v6-dense">
+  <div class="header">
+    <div class="kicker">Module 06 | Activity 3</div>
+    <h1>Use-Restrictions &amp; Caps vs. the Yes-or-No Gate</h1>
+  </div>
+  <div class="page-content">
+
+    <div class="skill-objective">
+      <strong>Skill objective:</strong>
+      <span class="tier-ej">Evaluate whether tailored statutory restrictions (Boland-style) are superior to universal pre-authorization gates — and understand what each approach assumes about who already has first-move authority.</span>
+      <span class="tier-ev">Distinguish between precision restrictions (calibrated to specific operations) and universal threshold gates (apply to all uses of force). Identify why Pro argues precision tools still assume prior executive authority, and why Con argues universal gates are blunt and operationally risky compared to surgical calibration.</span>
+    </div>
+
+    <div class="judge-move">
+      <strong>Hidden judge move: </strong>
+      <span class="tier-ej">Con will argue precision beats bluntness. Pro must argue that patches and caps still assume force is already authorized — they don't prevent the deployment in the first place, they only manage its scope or duration.</span>
+      <span class="tier-ev">The precision vs. universalism tension is the core of this activity. Con's surgical argument is powerful: Boland-style restrictions can be calibrated to the specific operation, sparing legitimate missions while limiting dangerous ones. Pro's counter: any restriction assumes the President already has first-move authority; the gate prevents the question from arising. Resolution: which structural flaw — missing precision or missing threshold control — produces worse expected outcomes?</span>
+    </div>
+
+    <div class="setup-box tier-ej">Boland Amendment — Congress said "no money for Contras." Lebanon 1983 — Congress said "18 months then out." These restrictions came AFTER the President already moved. Does Pro's gate do something fundamentally different, or is it just a different kind of restriction applied at a different point in time?</div>
+    <div class="setup-box tier-ev">Con's strongest form: tailored restrictions are surgically superior to a universal gate because they can be calibrated to the specific operation — protecting legitimate missions while constraining dangerous ones. Pro's structural answer: any restriction assumes force has already been authorized; the gate prevents the question from arising — it doesn't manage the answer to a question the executive already decided. The precedent normalization claim (Fisher) is the structural argument; Boland/Lebanon are the empirical cases.</div>
+
+    <div class="proof-grid">
+      <div class="proof-box pro">
+        <div class="proof-title">&#9650; Pro — Fisher 2004: Precedent Normalization</div>
+        <div class="micro-proof">
+          <div class="micro-item"><strong>Claim:</strong> Tailored restrictions operate after the force decision — they manage operations but cannot prevent the initial deployment that sets the political and strategic baseline, and they normalize executive first-move authority by accepting the deployment as a given.</div>
+          <div class="quote-box">"The constitutional framework requires prior authorization, not post-deployment limits. Each restriction accepted without authorization normalizes the underlying precedent of executive first-move authority." — Fisher, Louis, 2004, "Presidential War Power"</div>
+          <div class="micro-item"><strong>Statistic:</strong> Since 1973, the U.S. has used military force abroad over 100 times with fewer than 10 formal authorizations — proving that decades of restrictions have not substituted for prior approval or reversed the structural default.</div>
+          <div class="micro-item"><strong>Warrant:</strong> Restrictions and caps implicitly accept that the President has already deployed force. By accepting that premise, they normalize executive first-move authority and fail to recreate threshold control. The gate eliminates the question; caps only manage the answer to a question the executive already decided.</div>
+          <div class="mini-label">Deploy line (Junior)</div>
+          <div class="micro-item">"A cap says 'stop after 18 months.' A gate says 'don't go without a vote.' The gate is different because it stops the war from starting — not just from going too long after the executive already committed forces."</div>
+          <div class="mini-label">Deploy line (Varsity)</div>
+          <div class="micro-item">"Fisher's constitutional claim is structural: every restriction accepted without prior authorization implicitly validates the underlying unilateral first move. Pro's gate doesn't manage the war — it relocates the decision authority before the threshold is crossed, eliminating the premise all restrictions accept."</div>
+        </div>
+      </div>
+
+      <div class="proof-box con">
+        <div class="proof-title">&#9660; Con — Boland Amendment + Lebanon 1983: Precision Works</div>
+        <div class="micro-proof">
+          <div class="micro-item"><strong>Claim:</strong> Tailored statutory restrictions and time-caps have demonstrated real, measurable effectiveness — proving Congress can constrain specific operations without a blunt universal pre-authorization gate that treats every operation identically.</div>
+          <div class="quote-box">"The Boland Amendment (1982-84) directly cut off CIA and Defense Department support for the Contras in Nicaragua — a precise, targeted restriction that worked within the existing constitutional framework without requiring pre-authorization for every operation." — Boland Amendment, Pub. L. 98-473 (1984); Congressional Research Service, "Congressional Restrictions on U.S. Military Operations," 2006</div>
+          <div class="quote-box">"Congress used the Multinational Force in Lebanon Resolution (1983) to authorize an 18-month deployment cap — demonstrating the ability to impose real time limits calibrated to the specific operation." — Multinational Force in Lebanon Resolution, Pub. L. 98-119 (1983)</div>
+          <div class="micro-item"><strong>Statistic:</strong> Lebanon resolution: 18-month hard cap enforced. Boland Amendment: specifically prohibited lethal aid — both achieved operational constraints without a universal gate that would have applied the same rule to rescue missions and full invasions alike.</div>
+          <div class="micro-item"><strong>Warrant:</strong> If Congress can use specific restrictions and time limits to constrain specific operations, precision beats universalism. A yes-or-no gate applies the same rule to a 72-hour rescue and a decade-long occupation — tailored limits are constitutionally available and operationally smarter.</div>
+          <div class="mini-label">Deploy line (Junior)</div>
+          <div class="micro-item">"Boland Amendment cut off Contra support. Lebanon put an 18-month cap on Beirut. These worked within the status quo. Why replace precision tools with a blunt gate that treats every operation the same regardless of scope or duration?"</div>
+          <div class="mini-label">Deploy line (Varsity)</div>
+          <div class="micro-item">"Boland and Lebanon prove Congress can produce operationally precise restrictions within the status quo. Pro's universal gate applies the same yes-or-no threshold to a 72-hour rescue and a decade-long occupation — Con's precision tools are constitutionally available and operationally smarter for distinguishing legitimate missions from dangerous ones."</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="note-strip">
+      <strong>The real clash — specificity vs. structural default:</strong>
+      <span class="tier-ej">Con prefers surgical tools calibrated to each operation. Pro argues that surgical tools still assume the President already has first-move authority — they patch symptoms, not the structural problem. Ask: which problem is worse — imprecision in the gate, or missing threshold control entirely?</span>
+      <span class="tier-ev">The clash is about structural default vs. operational precision. Con prefers surgical calibration. Pro argues that any calibration applied post-deployment normalizes the executive first-move default — each restriction accepted without prior authorization creates a precedent of executive primacy. The structural claim (Fisher) runs deeper than the operational claim (Boland/Lebanon), but Fisher's claim is theoretical while Boland/Lebanon are empirical. The weighing turns on which flaw produces worse expected outcomes: structural precedent normalization or operational precision loss.</span>
+    </div>
+
+    <div class="grid two-col equal">
+      <div class="card pro-card">
+        <div class="section-title">&#9650; Pro Response Cards</div>
+        <p class="body-copy"><strong>Con says tailored restrictions work (Boland, Lebanon)</strong></p>
+        <ul class="tight-list">
+          <li><strong>Rebuttal:</strong> Restrictions assume prior authorization exists — they patch deployments that already happened without a gate, implicitly validating the underlying first-move authority.</li>
+          <li><strong>Crossfire trap:</strong> "If Boland worked, why did the Iran-Contra affair happen anyway — using private funds to circumvent the restriction? Doesn't that prove restrictions are only as good as compliance?"</li>
+          <li><strong>Weighing:</strong> Threshold vs. downstream — restrictions manage wars already started; the gate prevents them from starting without a public vote.</li>
+        </ul>
+      </div>
+      <div class="card con-card">
+        <div class="section-title">&#9660; Con Response Cards</div>
+        <p class="body-copy"><strong>Pro says the gate prevents the deployment</strong></p>
+        <ul class="tight-list">
+          <li><strong>Rebuttal:</strong> Gate creates cliff-edge politics and may block legitimate emergency responses that genuinely need to begin before a congressional vote is logistically possible.</li>
+          <li><strong>Crossfire trap:</strong> "How does your universal gate prevent mission creep after authorization is granted? Doesn't authorization unlock a new scope of executive discretion that restrictions can target more precisely?"</li>
+          <li><strong>Weighing:</strong> Precision — blunt gates cannot distinguish rescue from invasion; Boland-style precision tools can be calibrated to the specific operation's risk profile.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="prompt-block">
+      <div class="prompt-title"><span class="tier-ej">Pick a side. Write one sentence explaining why the gate or the cap is the better tool — and name what each assumes about who already has authority.</span><span class="tier-ev">Write the structural warrant for why the gate eliminates the question rather than managing the answer — or write the precision warrant for why Boland-style tools are constitutionally superior to universal gates. Include Fisher's or Boland's specific claim.</span></div>
+      <textarea class="lined-textarea md"></textarea>
+    </div>
+
+  </div>
+  <div class="footer">
+    <span>Page <span class="page-number"></span></span>
+    <span>Ascent Academy | War Powers — Lesson 4</span>
+  </div>
+</div>
+
+<!-- ================================================================== -->
+<!-- MODULE 07 — ACTIVITY 4: 48-HOUR REPORT + 60/90 CLOCK              -->
+<!-- ================================================================== -->
+<div class="page student-only phase-core v6-dense">
+  <div class="header">
+    <div class="kicker">Module 07 | Activity 4</div>
+    <h1>The 48-Hour Report &amp; 60/90 Clock vs. the Definitional Loophole</h1>
+  </div>
+  <div class="page-content">
+
+    <div class="skill-objective">
+      <strong>Skill objective:</strong>
+      <span class="tier-ej">Evaluate whether the War Powers Resolution's reporting and clock mechanisms create meaningful constraint or a definitional escape hatch — and understand why executive self-reporting creates the loophole.</span>
+      <span class="tier-ev">Apply the definitional evasion framework to the WPR clock mechanism. Understand why executive self-reporting + self-triggering creates structural vulnerability (the executive decides when the clock applies). Understand why reporting still creates some accountability even when the clock doesn't bite — and whether that accountability is enough.</span>
+    </div>
+
+    <div class="judge-move">
+      <strong>Hidden judge move: </strong>
+      <span class="tier-ej">Con will argue reporting creates downstream pressure. Pro must prove the clock is fake if the President controls whether it starts — a clock with a presidential on/off switch is not a real constitutional check.</span>
+      <span class="tier-ev">The WPR debate turns on mechanism reliability. Pro argues a defective clock creates false assurance — it looks like a constraint but functions as a presidential option. Con argues imperfect reporting still creates real political accountability through the 168-report public record. Both can be partially true; the question is whether the plan's pre-authorization gate adds enough net constraint to justify the operational costs of the new rule.</span>
+    </div>
+
+    <div class="setup-box tier-ej">The War Powers Resolution says the President must report within 48 hours and Congress can force withdrawal after 60-90 days. But in Libya, the administration said the bombing wasn't "hostilities" — so the clock never started. Does a clock matter if the President holds the start button?</div>
+    <div class="setup-box tier-ev">The WPR creates a reporting mechanism and a clock, but the executive controls definitional interpretation of the trigger term "hostilities." Libya 2011 is the proof case. Reiss Center data shows the clock was triggered in only ~38 of ~168 reports (23%). The structural flaw: self-reporting + self-triggering creates definitional evasion space that mandatory pre-authorization eliminates by requiring affirmative approval before force can begin — removing the executive's ability to retroactively define the trigger away.</span></div>
+
+    <div class="proof-grid">
+      <div class="proof-box pro">
+        <div class="proof-title">&#9650; Pro — Libya 2011 + Reiss Center: Clock Activation Gap</div>
+        <div class="micro-proof">
+          <div class="micro-item"><strong>Claim:</strong> The War Powers Resolution's 60/90-day clock is structurally defective because the executive controls the definitional trigger — allowing indefinite operations without triggering the withdrawal requirement, as Libya 2011 proves.</div>
+          <div class="quote-box">"Approximately 168 reports have been filed since 1973, but only approximately 38 triggered the 60-day clock — meaning the executive self-selected when the clock applies in 77% of force uses." — War Powers Resolution reporting data, Reiss Center on Law and Security, NYU Law</div>
+          <div class="micro-item"><strong>Statistic:</strong> Only 38 of 168 WPR reports (~23%) triggered the 60-day clock. Libya's 7-month campaign generated a report but never triggered the clock because the administration defined the airstrikes as not constituting "hostilities."</div>
+          <div class="micro-item"><strong>Warrant:</strong> Libya 2011 proves the structural defect: the executive invented the "not hostilities" interpretation to avoid the trigger — running a 7-month air campaign with no legal clock. Mandatory pre-authorization eliminates this escape because force cannot begin without prior affirmative approval; there is no trigger to retroactively define away.</div>
+          <div class="mini-label">Deploy line (Junior)</div>
+          <div class="micro-item">"Only 23% of WPR reports ever triggered the 60-day clock. Libya ran 7 months without it starting. The clock is fake if the President holds the start button — and this data proves the President usually keeps it in his pocket."</div>
+          <div class="mini-label">Deploy line (Varsity)</div>
+          <div class="micro-item">"The Reiss Center data shows the WPR clock has a 23% activation rate — in 77% of force uses, the executive unilaterally decided the clock didn't apply. Mandatory pre-authorization eliminates this because force requires affirmative approval before it starts — not a retroactive definitional ruling after the operation is already underway."</div>
+        </div>
+      </div>
+
+      <div class="proof-box con">
+        <div class="proof-title">&#9660; Con — WPR Reporting Creates Real Political Pressure</div>
+        <div class="micro-proof">
+          <div class="micro-item"><strong>Claim:</strong> The reporting requirement creates real downstream political pressure even when the 60-day clock is not triggered — visibility and accountability are meaningful constraints that the 168-report record proves are operative.</div>
+          <div class="quote-box">"The reporting mechanism 'forces the executive to defend its legal interpretations publicly and creates a political record that opponents can use to build opposition.'" — Waxman (cited in Schulman, 2020)</div>
+          <div class="micro-item"><strong>Statistic:</strong> 168 WPR reports filed since 1973 — every report creates a public record enabling congressional oversight, media scrutiny, judicial review opportunities, and political opposition building.</div>
+          <div class="micro-item"><strong>Warrant:</strong> Even if only 38 reports triggered the clock, every report forces public justification. The Libya "not hostilities" argument created enormous political controversy precisely because reporting made the legal interpretation public — and that controversy was itself a constraint on future administrations. Reporting creates accountability infrastructure even when the clock doesn't bite.</div>
+          <div class="mini-label">Deploy line (Junior)</div>
+          <div class="micro-item">"168 reports since 1973. Every single one made the President explain the mission publicly. That's accountability even when the clock doesn't bite — because public justification creates political costs and a record opponents can use."</div>
+          <div class="mini-label">Deploy line (Varsity)</div>
+          <div class="micro-item">"The WPR reporting mechanism creates a 168-record political accountability trail that Congress, courts, and press can scrutinize. Even Libya's definitional evasion was publicly challenged because reporting forced transparency. Pre-authorization may be structurally cleaner, but don't concede that reporting creates zero constraint on executive behavior."</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="note-strip">
+      <strong>Mechanism reliability vs. incremental accountability:</strong>
+      <span class="tier-ej">Pro says a defective clock is worse than no clock if it creates false assurance. Con says even imperfect reporting creates real pressure. Both can be true — the question is whether the plan's pre-authorization gate adds enough to justify the cost of the new rule and its carveout complications.</span>
+      <span class="tier-ev">The structural debate: false assurance (Pro) vs. incremental accountability (Con). A mechanism that looks binding but isn't may be worse than no mechanism because it allows political actors to point to a formal constraint while it fails in operation. Con's counter: incremental accountability still adds information and political costs even if imperfect. The weighing turns on whether the plan's gate eliminates the false assurance problem or creates new ones through carveout design that can itself be exploited.</span>
+    </div>
+
+    <div class="grid two-col equal">
+      <div class="card pro-card">
+        <div class="section-title">&#9650; Pro Response Cards</div>
+        <p class="body-copy"><strong>Con says reporting creates accountability</strong></p>
+        <ul class="tight-list">
+          <li><strong>Rebuttal:</strong> Visibility without enforcement is a press release, not a check. Libya ran 7 months with full public controversy — and zero operational change. The controversy didn't stop the bombing.</li>
+          <li><strong>Crossfire trap:</strong> "Name one time the WPR reporting requirement actually stopped a war mid-deployment — not just created controversy, but caused an operational halt."</li>
+          <li><strong>Weighing:</strong> Threshold vs. downstream — reporting can create accountability records but cannot rewind force already in progress or recreate the threshold decision already made.</li>
+        </ul>
+      </div>
+      <div class="card con-card">
+        <div class="section-title">&#9660; Con Response Cards</div>
+        <p class="body-copy"><strong>Pro says definitional evasion proves the clock is fake</strong></p>
+        <ul class="tight-list">
+          <li><strong>Rebuttal:</strong> Libya's evasion was publicly challenged and politically costly — the "not hostilities" argument became a political liability that constrained future administrations' interpretive flexibility.</li>
+          <li><strong>Crossfire trap:</strong> "How does mandatory pre-authorization prevent a President from defining the emergency carveout broadly — just as Libya redefined 'hostilities'? The definitional evasion problem doesn't disappear with a new trigger word."</li>
+          <li><strong>Weighing:</strong> Probability — most WPR reports do create real political scrutiny; don't let Pro treat Libya as if it represents the 77% of non-clock-triggered cases rather than one data point.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="prompt-block">
+      <div class="prompt-title"><span class="tier-ej">Write the best argument for why the WPR clock works or why it doesn't. Use the 23% activation figure or the Libya case specifically.</span><span class="tier-ev">Explain in two sentences why the 23% activation rate proves the clock is structurally defective — OR why the 168-report record proves it creates real accountability despite the clock-activation gap. Then write one sentence explaining which side's reading is more persuasive and why.</span></div>
+      <textarea class="lined-textarea md"></textarea>
+    </div>
+
+  </div>
+  <div class="footer">
+    <span>Page <span class="page-number"></span></span>
+    <span>Ascent Academy | War Powers — Lesson 4</span>
+  </div>
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ascent Academy | War Powers — Lesson 4 | Part 5: Case Workshop & Final Weighing</title>
+<style>
+/* ===== RESET & BASE ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; }
+body { font-family: 'Segoe UI', system-ui, -apple-system, Arial, sans-serif; color: #1a1a2e; line-height: 1.6; background: #f8f9fa; }
+
+/* ===== PAGE STRUCTURE ===== */
+.page { width: 210mm; min-height: 297mm; margin: 0 auto 2rem; padding: 28px 36px; background: #fff; box-shadow: 0 2px 12px rgba(0,0,0,0.08); position: relative; page-break-after: always; }
+.page .header { margin-bottom: 18px; border-bottom: 2px solid #e0e0e0; padding-bottom: 10px; }
+.page .header .kicker { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 1.5px; color: #6c757d; margin-bottom: 2px; }
+.page .header h1 { font-size: 1.35rem; font-weight: 700; color: #1a1a2e; line-height: 1.3; }
+.page-content { font-size: 0.92rem; }
+.footer { position: absolute; bottom: 16px; left: 36px; right: 36px; display: flex; justify-content: space-between; font-size: 0.7rem; color: #adb5bd; border-top: 1px solid #e9ecef; padding-top: 6px; }
+.page-number::before { content: counter(page-counter); }
+body { counter-reset: page-counter; }
+.page { counter-increment: page-counter; }
+
+/* ===== COVER ===== */
+.cover-tag { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; color: #6c757d; margin-bottom: 8px; }
+.cover-title { font-size: 2.4rem; font-weight: 800; color: #1a1a2e; line-height: 1.15; margin-bottom: 6px; }
+.cover-title span { font-weight: 400; color: #4361ee; font-size: 1.6rem; }
+.cover-subtitle { font-size: 1rem; color: #495057; margin-bottom: 22px; letter-spacing: 0.5px; }
+.hero-box { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); color: #fff; border-radius: 10px; padding: 20px 24px; margin-bottom: 18px; }
+.hero-box .small-label { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 1.5px; color: #a0c4ff; margin-bottom: 4px; }
+.resolution-text { font-size: 1.05rem; font-weight: 600; line-height: 1.5; }
+
+/* ===== TIER VISIBILITY ===== */
+.tier-ej, .tier-ev { display: none; }
+body.show-ej .tier-ej { display: inline; }
+body.show-ev .tier-ev { display: inline; }
+body.show-ej .tier-ev { display: none !important; }
+body.show-ev .tier-ej { display: none !important; }
+body.show-all .tier-ej, body.show-all .tier-ev { display: inline; }
+.focus-box { border-radius: 8px; padding: 14px 18px; margin-bottom: 10px; font-size: 0.88rem; line-height: 1.5; }
+.focus-box.tier-ej { background: #e8f4f8; border-left: 4px solid #4cc9f0; display: block; }
+.focus-box.tier-ev { background: #f3e8ff; border-left: 4px solid #7b2ff7; display: block; }
+body.show-ej .focus-box.tier-ev { display: none !important; }
+body.show-ev .focus-box.tier-ej { display: none !important; }
+
+/* ===== JUDGE MOVE ===== */
+.judge-move { background: #fff3cd; border-left: 4px solid #ffc107; border-radius: 6px; padding: 10px 14px; margin-bottom: 14px; font-size: 0.85rem; }
+.judge-move strong { color: #856404; }
+
+/* ===== NOTE STRIP ===== */
+.note-strip { background: #e2e3e5; border-radius: 6px; padding: 10px 14px; margin-bottom: 14px; font-size: 0.85rem; }
+
+/* ===== SETUP BOX ===== */
+.setup-box { background: #f1f3f5; border-radius: 6px; padding: 10px 14px; margin-bottom: 14px; font-size: 0.88rem; }
+.setup-box.tier-ej { border-left: 4px solid #4cc9f0; }
+.setup-box.tier-ev { border-left: 4px solid #7b2ff7; }
+
+/* ===== GRID SYSTEM ===== */
+.grid { display: grid; gap: 14px; margin-bottom: 14px; }
+.two-col { grid-template-columns: 1fr 1fr; }
+.equal { align-items: start; }
+
+/* ===== CARDS ===== */
+.card, .mcq-card, .evidence-card, .glossary-card, .response-card, .matrix-card { border-radius: 8px; padding: 14px 16px; margin-bottom: 10px; }
+.pro-card { background: #eaf4fe; border-left: 4px solid #4361ee; }
+.con-card { background: #fef2f0; border-left: 4px solid #e63946; }
+.section-title { font-size: 0.82rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; color: #495057; }
+
+/* ===== EVIDENCE CARDS ===== */
+.evidence-card { padding: 14px 16px; border-radius: 8px; }
+.evidence-head { font-size: 0.88rem; font-weight: 700; margin-bottom: 8px; }
+.quote-box { background: rgba(0,0,0,0.04); border-left: 3px solid #6c757d; padding: 8px 12px; margin-bottom: 10px; font-style: italic; font-size: 0.88rem; }
+.mini-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 1.2px; color: #6c757d; margin-bottom: 2px; margin-top: 8px; font-weight: 600; }
+
+/* ===== PROOF GRID ===== */
+.proof-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+.proof-box { border-radius: 8px; padding: 14px 16px; }
+.proof-box.pro { background: #eaf4fe; border-left: 4px solid #4361ee; }
+.proof-box.con { background: #fef2f0; border-left: 4px solid #e63946; }
+.proof-title { font-size: 0.82rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+.micro-proof { font-size: 0.85rem; }
+.micro-item { margin-bottom: 6px; }
+
+/* ===== GLOSSARY ===== */
+.glossary-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px; }
+.glossary-card { background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 8px; padding: 12px 14px; }
+.glossary-card .term { font-size: 1rem; font-weight: 700; color: #4361ee; margin-bottom: 4px; }
+
+/* ===== MCQ ===== */
+.mcq-card { background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 8px; padding: 14px 16px; }
+.option-list { list-style: none; padding: 0; }
+.option-list li { margin-bottom: 4px; font-size: 0.88rem; }
+.opt-letter { font-weight: 700; color: #4361ee; margin-right: 6px; }
+
+/* ===== PROMPT / TEXTAREA ===== */
+.prompt-block { margin-bottom: 14px; }
+.prompt-title { font-size: 0.85rem; font-weight: 700; margin-bottom: 4px; color: #1a1a2e; }
+.hint { font-size: 0.8rem; color: #6c757d; margin-bottom: 6px; font-style: italic; }
+.lined-textarea { width: 100%; border: 1px solid #ced4da; border-radius: 6px; padding: 8px 10px; font-family: inherit; font-size: 0.85rem; resize: vertical; background: #fff; }
+.lined-textarea.xs { min-height: 48px; }
+.lined-textarea.sm { min-height: 64px; }
+.lined-textarea.md { min-height: 88px; }
+.lined-textarea.lg { min-height: 120px; }
+
+/* ===== TABLES ===== */
+.lesson-table, .mini-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; margin-bottom: 10px; }
+.lesson-table th, .mini-table th { background: #1a1a2e; color: #fff; padding: 8px 10px; text-align: left; font-weight: 600; }
+.lesson-table td, .mini-table td { padding: 8px 10px; border-bottom: 1px solid #dee2e6; vertical-align: top; }
+.lesson-table tr:nth-child(even), .mini-table tr:nth-child(even) { background: #f8f9fa; }
+.matrix-card { background: #fff; border: 1px solid #dee2e6; border-radius: 8px; padding: 10px; overflow-x: auto; }
+
+/* ===== ROUND LINE CARD ===== */
+.round-line-card { background: rgba(0,0,0,0.03); border-radius: 6px; padding: 10px 14px; margin-bottom: 10px; }
+.round-claim { font-size: 0.88rem; font-weight: 500; }
+
+/* ===== SKILL OBJECTIVE ===== */
+.skill-objective { background: linear-gradient(90deg, #4361ee11, #4361ee05); border: 1px solid #4361ee33; border-radius: 6px; padding: 10px 14px; margin-bottom: 14px; font-size: 0.85rem; }
+.skill-objective strong { color: #4361ee; }
+
+/* ===== NAME ROW ===== */
+.name-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 16px; }
+.name-card { background: #f8f9fa; border-radius: 6px; padding: 10px 14px; }
+.inline-input { border: none; border-bottom: 1px solid #adb5bd; background: transparent; width: 100%; font-size: 0.92rem; padding: 4px 0; outline: none; }
+
+/* ===== TIER TOGGLE (UI) ===== */
+.tier-toggle { position: fixed; top: 12px; right: 12px; z-index: 1000; display: flex; gap: 6px; }
+.tier-toggle button { padding: 6px 14px; border: 1px solid #dee2e6; border-radius: 20px; font-size: 0.75rem; cursor: pointer; background: #fff; transition: all 0.2s; }
+.tier-toggle button.active { background: #4361ee; color: #fff; border-color: #4361ee; }
+
+/* ===== PRINT ===== */
+@media print {
+  body { background: #fff; }
+  .page { box-shadow: none; margin: 0; page-break-after: always; }
+  .tier-toggle { display: none; }
+  .lined-textarea { border: 1px solid #ccc; }
+}
+
+/* ===== TIGHT LIST ===== */
+.tight-list { list-style: disc; padding-left: 18px; font-size: 0.88rem; }
+.tight-list li { margin-bottom: 4px; }
+.body-copy { font-size: 0.88rem; margin-bottom: 6px; }
+
+/* ===== VARSITY METRIC ===== */
+.varsity-metric { background: #f3e8ff; border-left: 3px solid #7b2ff7; padding: 8px 12px; border-radius: 4px; font-size: 0.82rem; color: #5a189a; margin-top: 8px; }
+</style>
+</head>
+<body class="show-all">
+
+<!-- ===== TIER TOGGLE UI ===== -->
+<div class="tier-toggle">
+  <button onclick="setTier('show-ej')" id="btn-ej">Junior</button>
+  <button onclick="setTier('show-ev')" id="btn-ev">Varsity</button>
+  <button onclick="setTier('show-all')" id="btn-all" class="active">Both</button>
+</div>
+<script>
+function setTier(cls) {
+  document.body.className = cls;
+  document.querySelectorAll('.tier-toggle button').forEach(b => b.classList.remove('active'));
+  document.getElementById(cls === 'show-ej' ? 'btn-ej' : cls === 'show-ev' ? 'btn-ev' : 'btn-all').classList.add('active');
+}
+</script>
+
+<!-- ================================================================== -->
+<!-- COVER PAGE                                                          -->
+
+
+<!-- PART NAVIGATION -->
+<style>
+.part-nav { background:#1a1a2e; color:#fff; padding:8px 20px; text-align:center; font-size:0.8rem; letter-spacing:1px; margin-bottom:0; }
+.part-nav a { color:#90caf9; text-decoration:underline; margin:0 4px; padding:2px 4px; border-radius:3px; }
+.part-nav a:hover { background:#2d3a6e; color:#fff; }
+.part-nav a:focus { outline:2px solid #90caf9; outline-offset:2px; color:#fff; }
+.part-nav a:active { color:#e0e0e0; }
+.part-nav .nav-label { color:#a0c4ff; }
+.part-nav strong { color:#fff; padding:2px 4px; background:#2d3a6e; border-radius:3px; }
+</style>
+<div class="part-nav">
+  <span class="nav-label" style="margin-right:12px;">WAR POWERS LESSON 4</span>
+  <a href="lesson4-war-powers-part1.html">Part 1</a>  &nbsp;|&nbsp;  <a href="lesson4-war-powers-part2.html">Part 2</a>  &nbsp;|&nbsp;  <a href="lesson4-war-powers-part3.html">Part 3</a>  &nbsp;|&nbsp;  <a href="lesson4-war-powers-part4.html">Part 4</a>  &nbsp;|&nbsp;  <strong>Part 5</strong>
+  <span class="nav-label" style="margin-left:12px;">Part 5: Case Workshop & Final Weighing</span>
+</div>
+<!-- ================================================================== -->
+<!-- MODULE 11 — CASE COMPARISON WORKSHOP                              -->
+<!-- ================================================================== -->
+<div class="page student-only phase-core v6-dense">
+  <div class="header">
+    <div class="kicker">Module 11 | Workshop</div>
+    <h1>Case Comparison: Which Mechanism Does Each Case Prove?</h1>
+  </div>
+  <div class="page-content">
+
+    <div class="skill-objective">
+      <strong>Skill objective:</strong>
+      <span class="tier-ej">Analyze 5 historical cases, identify which mechanism each case activates, and determine which side benefits — using "mechanism first, story second."</span>
+      <span class="tier-ev">Move from narrative to mechanism-level analysis. Each case study should produce a mechanism identification, a side assignment, and a comparative deploy line — not just a historical story. The team that correctly names what structural gap a case proves wins the evidentiary comparison even when the opponent has more cases.</span>
+    </div>
+
+    <div class="judge-move">
+      <strong>Hidden judge move: </strong>
+      <span class="tier-ej">Don't just tell a story — identify the mechanism the story proves. "Libya happened" is not a debate argument. "Libya proves definitional evasion defeats the WPR clock, meaning the 60-day withdrawal requirement is structurally unenforceable" is an argument a judge can flow and weigh.</span>
+      <span class="tier-ev">Case comparison is analytically empty without mechanism identification. The team that names what structural gap a case proves — and explains why the other side's mechanism fails to close that gap — wins the evidentiary comparison even if the opponent deploys more individual cases. Mechanism + gap + response to opponent's reading = complete case application.</span>
+    </div>
+
+    <div class="grid two-col equal">
+      <div class="card pro-card" style="margin-bottom:10px;">
+        <div class="section-title">Case 1: Libya 2011 — Strong Pro Evidence</div>
+        <p class="body-copy"><strong>Factsheet:</strong> Obama administration launched air operations against Libya in March 2011. The House voted 123-295 against authorizing the operation. The administration argued airstrikes didn't constitute "hostilities" under the WPR, so the 60-day clock never triggered. Operations continued for 7+ months.</p>
+        <p class="body-copy"><strong>Mechanism:</strong> Definitional evasion / WPR clock failure / First-move loophole (executive controls trigger)</p>
+        <p class="body-copy"><strong>Pro deploy:</strong> "Libya proves the WPR clock is fake — 123-295 Congress voted no, and the operation continued because the executive held the definitional key to 'hostilities.' Without mandatory pre-authorization, that key stays in presidential hands."</p>
+        <p class="body-copy"><strong>Con deploy:</strong> "Libya concluded without ground troops and achieved limited objectives. The 'not hostilities' controversy created real political costs and constrained future administrations' interpretive flexibility. Reporting still worked — it just didn't trigger the clock."</p>
+        <div class="mini-label">Your mechanism identification and analysis</div>
+        <textarea class="lined-textarea sm"></textarea>
+      </div>
+
+      <div class="card" style="background:#f5f5f5;border-left:4px solid #6c757d;border-radius:8px;padding:14px 16px;margin-bottom:10px;">
+        <div class="section-title">Case 2: Syria 2013 — Ambiguous (Both Sides)</div>
+        <p class="body-copy"><strong>Factsheet:</strong> Obama administration planned strikes on Syria following confirmed chemical weapons use. Congressional opposition mounted rapidly. The administration delayed and ultimately did not conduct the strike, pursuing a diplomatic solution. No formal vote was held; no new law required the restraint.</p>
+        <p class="body-copy"><strong>Mechanism:</strong> Informal shaping / Status quo congressional influence without formal authorization requirement</p>
+        <p class="body-copy"><strong>Pro deploy:</strong> "Syria worked informally — this time, with this President. Libya shows informal resistance fails when the executive decides to move anyway. You can't build a constitutional system on luck — and the same administration used definitional evasion in Libya one year before.</p>
+        <p class="body-copy"><strong>Con deploy:</strong> "Syria 2013 proves informal congressional resistance stopped a major military strike with no new authorization rule. The status quo produced the outcome Pro claims only its plan can achieve — without the procedural friction or carveout complications."</p>
+        <div class="mini-label">Your mechanism identification and analysis</div>
+        <textarea class="lined-textarea sm"></textarea>
+      </div>
+
+      <div class="card con-card" style="margin-bottom:10px;">
+        <div class="section-title">Case 3: Kosovo 1999 — Strong Con Evidence</div>
+        <p class="body-copy"><strong>Factsheet:</strong> Clinton administration launched 78 days of NATO airstrikes against Yugoslavia over Kosovo without congressional authorization. The House voted against authorizing the operation. Operations achieved NATO's humanitarian objectives — preventing ethnic cleansing — with zero U.S. combat deaths.</p>
+        <p class="body-copy"><strong>Mechanism:</strong> Emergency speed / Humanitarian operations / Carveout scope challenge (78 days exceeds any 72-hour window)</p>
+        <p class="body-copy"><strong>Pro deploy:</strong> "Kosovo succeeded — but that does not prove unauthorized force is structurally sound. It demonstrates a favorable outlier. When unauthorized force fails — Iraq 2003, Libya 2011 — the costs are catastrophic. Constitutional policy cannot be built on outlier success cases rather than systematic institutional design."</p>
+        <p class="body-copy"><strong>Con deploy:</strong> "Kosovo ran 78 days, achieved humanitarian objectives, and produced zero U.S. combat deaths — all without authorization. A mandatory pre-authorization gate might have blocked or delayed this operation long enough to allow the atrocities it prevented."</p>
+        <div class="mini-label">Your mechanism identification and analysis</div>
+        <textarea class="lined-textarea sm"></textarea>
+      </div>
+
+      <div class="card" style="background:#f5f5f5;border-left:4px solid #6c757d;border-radius:8px;padding:14px 16px;margin-bottom:10px;">
+        <div class="section-title">Case 4: Iraq 2003 — Ambiguous (Authorization as Accountability)</div>
+        <p class="body-copy"><strong>Factsheet:</strong> Congress authorized the use of force against Iraq in October 2002, based on intelligence assessments about weapons of mass destruction. The intelligence proved flawed. The war lasted 8+ years and cost 4,500 American lives and over $2 trillion.</p>
+        <p class="body-copy"><strong>Mechanism:</strong> Authorization as accountability trail — even imperfect authorization creates a public record of stated justifications and a political record of votes that can be scrutinized</p>
+        <p class="body-copy"><strong>Pro deploy:</strong> "Iraq proves even imperfect authorization creates an accountability trail — the intelligence claims are on record, the authorization vote is on record. Senators faced political consequences for their votes. Without authorization, there's no record and no political accountability."</p>
+        <p class="body-copy"><strong>Con deploy:</strong> "Iraq was authorized — and it was still a catastrophe. Congressional approval didn't prevent the war, didn't stop the intelligence failure, and didn't produce good strategy. Authorization is not a quality filter for war decisions."</p>
+        <div class="mini-label">Your mechanism identification and analysis</div>
+        <textarea class="lined-textarea sm"></textarea>
+      </div>
+    </div>
+
+    <div class="card" style="background:#f5f5f5;border-left:4px solid #6c757d;border-radius:8px;padding:14px 16px;margin-bottom:14px;">
+      <div class="section-title">Case 5: Somalia 1993 — Swing Case (Automatic Cutoff)</div>
+      <p class="body-copy"><strong>Factsheet:</strong> U.S. forces entered Somalia in 1992-93 for humanitarian operations. After the Black Hawk Down incident in October 1993, congressional pressure intensified. Congress imposed a withdrawal deadline of March 1994. The Clinton administration withdrew by the deadline without exceeding it.</p>
+      <p class="body-copy"><strong>Mechanism:</strong> Automatic cutoff / Downstream leverage effectiveness — demonstrates cutoffs can produce real operational outcomes when political will aligns with the mechanism</p>
+      <div class="grid two-col equal" style="margin-top:8px;">
+        <div><p class="body-copy"><strong>Pro deploy:</strong> "Somalia shows cutoffs work when will exists — but the initial deployment was unauthorized. Fisher's point: the constitutional problem started before the cutoff could fix it. The cutoff managed the symptom; the gate would have prevented the disease before the unauthorized precedent was set."</p></div>
+        <div><p class="body-copy"><strong>Con deploy:</strong> "Somalia proves the status quo works: Congress set a deadline, the executive complied, withdrawal happened on schedule without a constitutional crisis. Downstream leverage produced the right result without requiring pre-authorization for every humanitarian operation."</p></div>
+      </div>
+      <div class="mini-label">Your mechanism identification and analysis</div>
+      <textarea class="lined-textarea sm"></textarea>
+    </div>
+
+    <div class="matrix-card">
+      <div class="section-title">Summary Table — Complete After Analyzing All Five Cases</div>
+      <table class="mini-table">
+        <thead>
+          <tr>
+            <th>Case</th>
+            <th>Mechanism Activated</th>
+            <th>Side Benefits</th>
+            <th>Key Warrant (1 sentence)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Libya 2011</td><td><textarea class="lined-textarea xs"></textarea></td><td>Pro</td><td><textarea class="lined-textarea xs"></textarea></td></tr>
+          <tr><td>Syria 2013</td><td><textarea class="lined-textarea xs"></textarea></td><td>Both</td><td><textarea class="lined-textarea xs"></textarea></td></tr>
+          <tr><td>Kosovo 1999</td><td><textarea class="lined-textarea xs"></textarea></td><td>Con</td><td><textarea class="lined-textarea xs"></textarea></td></tr>
+          <tr><td>Iraq 2003</td><td><textarea class="lined-textarea xs"></textarea></td><td>Both</td><td><textarea class="lined-textarea xs"></textarea></td></tr>
+          <tr><td>Somalia 1993</td><td><textarea class="lined-textarea xs"></textarea></td><td>Both</td><td><textarea class="lined-textarea xs"></textarea></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+  <div class="footer">
+    <span>Page <span class="page-number"></span></span>
+    <span>Ascent Academy | War Powers — Lesson 4</span>
+  </div>
+</div>
+
+<!-- ================================================================== -->
+<!-- MODULE 12 — FINAL WEIGHING & SUMMARY FLOW                         -->
+<!-- ================================================================== -->
+<div class="page student-only phase-core v6-dense">
+  <div class="header">
+    <div class="kicker">Module 12 | Final Weighing</div>
+    <h1>Building Your Final Weighing Framework</h1>
+  </div>
+  <div class="page-content">
+
+    <div class="skill-objective">
+      <strong>Skill objective:</strong>
+      <span class="tier-ej">Write your own comparative weighing argument using probability, magnitude, reversibility, and threshold control as the four metrics. Use at least 2 of the 4 metrics, name which side wins each one, and choose the single most decisive metric.</span>
+      <span class="tier-ev">Construct a structured final weighing framework: name the operative metric and why it's the correct frame, apply it asymmetrically to both sides, resolve which side wins on that metric, and argue why that metric outweighs the others the opponent invokes. The best final speeches give the judge a ballot instruction, not a summary of arguments.</span>
+    </div>
+
+    <div class="judge-move">
+      <strong>Hidden judge move: </strong>
+      <span class="tier-ej">The best final speech doesn't just say "we win." It says: "here's the metric, here's why our side wins that metric, and here's why that metric is the one that matters most in this round."</span>
+      <span class="tier-ev">Final weighing has three required components: (1) metric identification — which standard resolves the clash and why it's the right frame; (2) metric application — which side wins under that standard and why the opponent's evidence doesn't change the result; (3) metric prioritization — why this standard outweighs the other metrics the opponent invokes. Missing any component leaves the judge without a usable ballot instruction.</span>
+    </div>
+
+    <div class="matrix-card" style="margin-bottom:14px;">
+      <div class="section-title">Summary Flow Chart — All Six Mechanisms: Your Final Scoring</div>
+      <table class="lesson-table">
+        <thead>
+          <tr>
+            <th>Mechanism</th>
+            <th>Pro's Best Point</th>
+            <th>Con's Best Point</th>
+            <th>Resolving Metric</th>
+            <th>Your Call</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>1. Informal Shaping</strong></td>
+            <td>Libya: definitional evasion defeats informal signals even when Congress acts formally</td>
+            <td>Syria: informal shaping already stopped a major strike without any new rule</td>
+            <td>Threshold control / Probability</td>
+            <td><textarea class="lined-textarea xs"></textarea></td>
+          </tr>
+          <tr>
+            <td><strong>2. Power of the Purse</strong></td>
+            <td>First strike sets baseline; sunk-cost politics makes purse power work against the wrong starting point</td>
+            <td>Kriner: 6+ months quantified downstream leverage — not trivial or symbolic</td>
+            <td>Reversibility / Magnitude</td>
+            <td><textarea class="lined-textarea xs"></textarea></td>
+          </tr>
+          <tr>
+            <td><strong>3. Restrictions &amp; Caps</strong></td>
+            <td>Caps accept unauthorized first move as premise; normalize executive primacy over 100+ uses of force</td>
+            <td>Boland/Lebanon: precision beats blunt universal gate; surgical calibration is constitutionally available</td>
+            <td>Threshold control / Precision</td>
+            <td><textarea class="lined-textarea xs"></textarea></td>
+          </tr>
+          <tr>
+            <td><strong>4. WPR Clock</strong></td>
+            <td>Clock is fake: 23% activation rate; Libya ran 7 months without the clock ever starting</td>
+            <td>168 reports create an accountability trail; reporting forces public justification of legal interpretations</td>
+            <td>Probability / Mechanism design reliability</td>
+            <td><textarea class="lined-textarea xs"></textarea></td>
+          </tr>
+          <tr>
+            <td><strong>5. Automatic Cutoff</strong></td>
+            <td>Cutoffs manage symptoms; constitutional executive-primacy precedent persists even when individual cutoffs succeed</td>
+            <td>Somalia: will + automatic cutoff produced real, on-schedule withdrawal — empirically proven</td>
+            <td>Reversibility / Precedent normalization</td>
+            <td><textarea class="lined-textarea xs"></textarea></td>
+          </tr>
+          <tr>
+            <td><strong>6. Emergency Carveout</strong></td>
+            <td>96% of uses don't need emergency speed (Reiss Center); carveout is narrow by historical data, not just design</td>
+            <td>Kosovo: 78 days, no authorization, humanitarian success — exceeds any 72-hour window</td>
+            <td>Probability / Magnitude of carveout scope</td>
+            <td><textarea class="lined-textarea xs"></textarea></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="setup-box tier-ej">
+      <strong>Weighing Framework Builder — 4 Steps (Junior):</strong>
+      <ol class="tight-list" style="margin-top:8px;">
+        <li><strong>Name the metric:</strong> "The most important metric in this round is ______ because ______."</li>
+        <li><strong>Apply Pro:</strong> "Pro wins [metric] because ______."</li>
+        <li><strong>Apply Con:</strong> "Con wins [metric] because ______."</li>
+        <li><strong>Resolve:</strong> "The ballot should go to [side] because [metric X] outweighs [metric Y] in this round because ______."</li>
+      </ol>
+    </div>
+
+    <div class="setup-box tier-ev">
+      <strong>Weighing Framework Builder — Varsity Version:</strong>
+      <ol class="tight-list" style="margin-top:8px;">
+        <li><strong>Metric identification:</strong> Name the operative standard and explain why it is the correct frame for this round — not just your preferred frame, but the one that most directly resolves the competing claims both sides have made.</li>
+        <li><strong>Asymmetric application:</strong> Show which side wins decisively on that metric — and concede where the other side wins on secondary metrics to demonstrate analytical honesty and avoid appearing to ignore their evidence.</li>
+        <li><strong>Metric prioritization:</strong> Argue why your metric (e.g., reversibility) outweighs the opponent's metric (e.g., magnitude) given the structural features of the resolution and the evidence presented in this round.</li>
+        <li><strong>Ballot instruction:</strong> Give the judge a single sentence that resolves the round without requiring them to do additional weighing work — "Vote [side] because [metric] is dispositive and [side] wins that metric because [warrant]."</li>
+      </ol>
+    </div>
+
+    <div class="grid two-col equal">
+      <div>
+        <div class="varsity-metric">
+          <strong>The Four Weighing Metrics — Quick Reference:</strong><br/><br/>
+          <strong>Probability:</strong> How often does the harm occur? (Syria informal success vs. Libya definitional evasion — which is the structural norm?)<br/><br/>
+          <strong>Magnitude:</strong> How bad is it when it does? (First strike irreversibility + sunk-cost politics vs. Kriner's 6-month duration effect)<br/><br/>
+          <strong>Reversibility:</strong> Can the harm be undone once it occurs? (Purse power downstream vs. facts on the ground from the first strike)<br/><br/>
+          <strong>Threshold Control:</strong> Does the mechanism prevent harm or manage it? (Gate prevents; cap, clock, and cutoff manage)
+        </div>
+      </div>
+      <div>
+        <div class="note-strip" style="margin-bottom:10px;">
+          <strong>Core tensions — final round summary:</strong>
+          <ul class="tight-list" style="margin-top:6px;">
+            <li><strong>Security vs. Democracy:</strong> Does requiring Congressional approval weaken security or strengthen legitimacy?</li>
+            <li><strong>Speed vs. Accountability:</strong> Is fast executive action worth the cost of unchecked power?</li>
+            <li><strong>Permeability vs. Harm-Conversion:</strong> Is the branch easier to lobby the same as the branch that does more damage once captured?</li>
+            <li><strong>Threshold Control vs. Downstream Leverage:</strong> Is it better to block the first strike or manage the war that results from it?</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="prompt-block">
+      <div class="prompt-title"><span class="tier-ej">Write your 4-sentence final weighing paragraph — one metric, one winner, one reason, one impact on the ballot.</span><span class="tier-ev">Write your complete final weighing framework: (1) metric identification with justification, (2) asymmetric application to both sides, (3) metric prioritization over the opponent's frame, (4) ballot instruction the judge can use directly.</span></div>
+      <div class="hint"><span class="tier-ej">Use at least 2 of the 4 metrics. Name which side wins each one. Choose the single most decisive metric and explain why it outweighs the metric the other side wins.</span><span class="tier-ev">Structure: sentence 1 = operative metric + why it's the right frame for this round; sentence 2 = which side wins that metric + key evidence; sentence 3 = why that metric outweighs the opponent's best metric; sentence 4 = ballot instruction.</span></div>
+      <textarea class="lined-textarea lg"></textarea>
+    </div>
+
+    <div class="judge-move" style="margin-top:10px;">
+      <strong>Final reminder: </strong>
+      <span class="tier-ej">Every round in this topic comes down to some version of the same question: is it better to stop the war before it starts, or to manage it while it's running? Your job is to explain — clearly and specifically — why your answer to that question is right, and why it's more important than the answer the other side gives.</span>
+      <span class="tier-ev">The resolution's core structural tension is about which institutional arrangement — mandatory pre-authorization or status-quo downstream leverage — produces better expected outcomes across the realistic distribution of scenarios. The best final speech names the distribution, applies both mechanisms to it, and explains which mechanism produces better expected value given the evidence presented in this specific round. That is the ballot instruction a judge can actually use to decide the round.</span>
+    </div>
+
+  </div>
+  <div class="footer">
+    <span>Page <span class="page-number"></span></span>
+    <span>Ascent Academy | War Powers — Lesson 4</span>
+  </div>
+</div>
+
+
+</body>
+</html>
