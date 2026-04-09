@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ascent Academy | War Powers — Lesson 4 | Part 2: Mechanism Map & First Activities</title>
+<style>
+/* ===== RESET & BASE ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; }
+body { font-family: 'Segoe UI', system-ui, -apple-system, Arial, sans-serif; color: #1a1a2e; line-height: 1.6; background: #f8f9fa; }
+
+/* ===== PAGE STRUCTURE ===== */
+.page { width: 210mm; min-height: 297mm; margin: 0 auto 2rem; padding: 28px 36px; background: #fff; box-shadow: 0 2px 12px rgba(0,0,0,0.08); position: relative; page-break-after: always; }
+.page .header { margin-bottom: 18px; border-bottom: 2px solid #e0e0e0; padding-bottom: 10px; }
+.page .header .kicker { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 1.5px; color: #6c757d; margin-bottom: 2px; }
+.page .header h1 { font-size: 1.35rem; font-weight: 700; color: #1a1a2e; line-height: 1.3; }
+.page-content { font-size: 0.92rem; }
+.footer { position: absolute; bottom: 16px; left: 36px; right: 36px; display: flex; justify-content: space-between; font-size: 0.7rem; color: #adb5bd; border-top: 1px solid #e9ecef; padding-top: 6px; }
+.page-number::before { content: counter(page-counter); }
+body { counter-reset: page-counter; }
+.page { counter-increment: page-counter; }
+
+/* ===== COVER ===== */
+.cover-tag { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; color: #6c757d; margin-bottom: 8px; }
+.cover-title { font-size: 2.4rem; font-weight: 800; color: #1a1a2e; line-height: 1.15; margin-bottom: 6px; }
+.cover-title span { font-weight: 400; color: #4361ee; font-size: 1.6rem; }
+.cover-subtitle { font-size: 1rem; color: #495057; margin-bottom: 22px; letter-spacing: 0.5px; }
+.hero-box { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); color: #fff; border-radius: 10px; padding: 20px 24px; margin-bottom: 18px; }
+.hero-box .small-label { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 1.5px; color: #a0c4ff; margin-bottom: 4px; }
+.resolution-text { font-size: 1.05rem; font-weight: 600; line-height: 1.5; }
+
+/* ===== TIER VISIBILITY ===== */
+.tier-ej, .tier-ev { display: none; }
+body.show-ej .tier-ej { display: inline; }
+body.show-ev .tier-ev { display: inline; }
+body.show-ej .tier-ev { display: none !important; }
+body.show-ev .tier-ej { display: none !important; }
+body.show-all .tier-ej, body.show-all .tier-ev { display: inline; }
+.focus-box { border-radius: 8px; padding: 14px 18px; margin-bottom: 10px; font-size: 0.88rem; line-height: 1.5; }
+.focus-box.tier-ej { background: #e8f4f8; border-left: 4px solid #4cc9f0; display: block; }
+.focus-box.tier-ev { background: #f3e8ff; border-left: 4px solid #7b2ff7; display: block; }
+body.show-ej .focus-box.tier-ev { display: none !important; }
+body.show-ev .focus-box.tier-ej { display: none !important; }
+
+/* ===== JUDGE MOVE ===== */
+.judge-move { background: #fff3cd; border-left: 4px solid #ffc107; border-radius: 6px; padding: 10px 14px; margin-bottom: 14px; font-size: 0.85rem; }
+.judge-move strong { color: #856404; }
+
+/* ===== NOTE STRIP ===== */
+.note-strip { background: #e2e3e5; border-radius: 6px; padding: 10px 14px; margin-bottom: 14px; font-size: 0.85rem; }
+
+/* ===== SETUP BOX ===== */
+.setup-box { background: #f1f3f5; border-radius: 6px; padding: 10px 14px; margin-bottom: 14px; font-size: 0.88rem; }
+.setup-box.tier-ej { border-left: 4px solid #4cc9f0; }
+.setup-box.tier-ev { border-left: 4px solid #7b2ff7; }
+
+/* ===== GRID SYSTEM ===== */
+.grid { display: grid; gap: 14px; margin-bottom: 14px; }
+.two-col { grid-template-columns: 1fr 1fr; }
+.equal { align-items: start; }
+
+/* ===== CARDS ===== */
+.card, .mcq-card, .evidence-card, .glossary-card, .response-card, .matrix-card { border-radius: 8px; padding: 14px 16px; margin-bottom: 10px; }
+.pro-card { background: #eaf4fe; border-left: 4px solid #4361ee; }
+.con-card { background: #fef2f0; border-left: 4px solid #e63946; }
+.section-title { font-size: 0.82rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; color: #495057; }
+
+/* ===== EVIDENCE CARDS ===== */
+.evidence-card { padding: 14px 16px; border-radius: 8px; }
+.evidence-head { font-size: 0.88rem; font-weight: 700; margin-bottom: 8px; }
+.quote-box { background: rgba(0,0,0,0.04); border-left: 3px solid #6c757d; padding: 8px 12px; margin-bottom: 10px; font-style: italic; font-size: 0.88rem; }
+.mini-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 1.2px; color: #6c757d; margin-bottom: 2px; margin-top: 8px; font-weight: 600; }
+
+/* ===== PROOF GRID ===== */
+.proof-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+.proof-box { border-radius: 8px; padding: 14px 16px; }
+.proof-box.pro { background: #eaf4fe; border-left: 4px solid #4361ee; }
+.proof-box.con { background: #fef2f0; border-left: 4px solid #e63946; }
+.proof-title { font-size: 0.82rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+.micro-proof { font-size: 0.85rem; }
+.micro-item { margin-bottom: 6px; }
+
+/* ===== GLOSSARY ===== */
+.glossary-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px; }
+.glossary-card { background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 8px; padding: 12px 14px; }
+.glossary-card .term { font-size: 1rem; font-weight: 700; color: #4361ee; margin-bottom: 4px; }
+
+/* ===== MCQ ===== */
+.mcq-card { background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 8px; padding: 14px 16px; }
+.option-list { list-style: none; padding: 0; }
+.option-list li { margin-bottom: 4px; font-size: 0.88rem; }
+.opt-letter { font-weight: 700; color: #4361ee; margin-right: 6px; }
+
+/* ===== PROMPT / TEXTAREA ===== */
+.prompt-block { margin-bottom: 14px; }
+.prompt-title { font-size: 0.85rem; font-weight: 700; margin-bottom: 4px; color: #1a1a2e; }
+.hint { font-size: 0.8rem; color: #6c757d; margin-bottom: 6px; font-style: italic; }
+.lined-textarea { width: 100%; border: 1px solid #ced4da; border-radius: 6px; padding: 8px 10px; font-family: inherit; font-size: 0.85rem; resize: vertical; background: #fff; }
+.lined-textarea.xs { min-height: 48px; }
+.lined-textarea.sm { min-height: 64px; }
+.lined-textarea.md { min-height: 88px; }
+.lined-textarea.lg { min-height: 120px; }
+
+/* ===== TABLES ===== */
+.lesson-table, .mini-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; margin-bottom: 10px; }
+.lesson-table th, .mini-table th { background: #1a1a2e; color: #fff; padding: 8px 10px; text-align: left; font-weight: 600; }
+.lesson-table td, .mini-table td { padding: 8px 10px; border-bottom: 1px solid #dee2e6; vertical-align: top; }
+.lesson-table tr:nth-child(even), .mini-table tr:nth-child(even) { background: #f8f9fa; }
+.matrix-card { background: #fff; border: 1px solid #dee2e6; border-radius: 8px; padding: 10px; overflow-x: auto; }
+
+/* ===== ROUND LINE CARD ===== */
+.round-line-card { background: rgba(0,0,0,0.03); border-radius: 6px; padding: 10px 14px; margin-bottom: 10px; }
+.round-claim { font-size: 0.88rem; font-weight: 500; }
+
+/* ===== SKILL OBJECTIVE ===== */
+.skill-objective { background: linear-gradient(90deg, #4361ee11, #4361ee05); border: 1px solid #4361ee33; border-radius: 6px; padding: 10px 14px; margin-bottom: 14px; font-size: 0.85rem; }
+.skill-objective strong { color: #4361ee; }
+
+/* ===== NAME ROW ===== */
+.name-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 16px; }
+.name-card { background: #f8f9fa; border-radius: 6px; padding: 10px 14px; }
+.inline-input { border: none; border-bottom: 1px solid #adb5bd; background: transparent; width: 100%; font-size: 0.92rem; padding: 4px 0; outline: none; }
+
+/* ===== TIER TOGGLE (UI) ===== */
+.tier-toggle { position: fixed; top: 12px; right: 12px; z-index: 1000; display: flex; gap: 6px; }
+.tier-toggle button { padding: 6px 14px; border: 1px solid #dee2e6; border-radius: 20px; font-size: 0.75rem; cursor: pointer; background: #fff; transition: all 0.2s; }
+.tier-toggle button.active { background: #4361ee; color: #fff; border-color: #4361ee; }
+
+/* ===== PRINT ===== */
+@media print {
+  body { background: #fff; }
+  .page { box-shadow: none; margin: 0; page-break-after: always; }
+  .tier-toggle { display: none; }
+  .lined-textarea { border: 1px solid #ccc; }
+}
+
+/* ===== TIGHT LIST ===== */
+.tight-list { list-style: disc; padding-left: 18px; font-size: 0.88rem; }
+.tight-list li { margin-bottom: 4px; }
+.body-copy { font-size: 0.88rem; margin-bottom: 6px; }
+
+/* ===== VARSITY METRIC ===== */
+.varsity-metric { background: #f3e8ff; border-left: 3px solid #7b2ff7; padding: 8px 12px; border-radius: 4px; font-size: 0.82rem; color: #5a189a; margin-top: 8px; }
+</style>
+</head>
+<body class="show-all">
+
+<!-- ===== TIER TOGGLE UI ===== -->
+<div class="tier-toggle">
+  <button onclick="setTier('show-ej')" id="btn-ej">Junior</button>
+  <button onclick="setTier('show-ev')" id="btn-ev">Varsity</button>
+  <button onclick="setTier('show-all')" id="btn-all" class="active">Both</button>
+</div>
+<script>
+function setTier(cls) {
+  document.body.className = cls;
+  document.querySelectorAll('.tier-toggle button').forEach(b => b.classList.remove('active'));
+  document.getElementById(cls === 'show-ej' ? 'btn-ej' : cls === 'show-ev' ? 'btn-ev' : 'btn-all').classList.add('active');
+}
+</script>
+
+<!-- ================================================================== -->
+<!-- COVER PAGE                                                          -->
+
+
+<!-- PART NAVIGATION -->
+<style>
+.part-nav { background:#1a1a2e; color:#fff; padding:8px 20px; text-align:center; font-size:0.8rem; letter-spacing:1px; margin-bottom:0; }
+.part-nav a { color:#90caf9; text-decoration:underline; margin:0 4px; padding:2px 4px; border-radius:3px; }
+.part-nav a:hover { background:#2d3a6e; color:#fff; }
+.part-nav a:focus { outline:2px solid #90caf9; outline-offset:2px; color:#fff; }
+.part-nav a:active { color:#e0e0e0; }
+.part-nav .nav-label { color:#a0c4ff; }
+.part-nav strong { color:#fff; padding:2px 4px; background:#2d3a6e; border-radius:3px; }
+</style>
+<div class="part-nav">
+  <span class="nav-label" style="margin-right:12px;">WAR POWERS LESSON 4</span>
+  <a href="lesson4-war-powers-part1.html">Part 1</a>  &nbsp;|&nbsp;  <strong>Part 2</strong>  &nbsp;|&nbsp;  <a href="lesson4-war-powers-part3.html">Part 3</a>  &nbsp;|&nbsp;  <a href="lesson4-war-powers-part4.html">Part 4</a>  &nbsp;|&nbsp;  <a href="lesson4-war-powers-part5.html">Part 5</a>
+  <span class="nav-label" style="margin-left:12px;">Part 2: Mechanism Map & First Activities</span>
+</div>
+<!-- ================================================================== -->
+<!-- MODULE 02B — MECHANISM OVERVIEW & PAIRING BOARD                    -->
+<!-- ================================================================== -->
+<div class="page student-only phase-core v6-dense">
+  <div class="header">
+    <div class="kicker">Module 02B | Mechanism Map</div>
+    <h1>The Six Mechanisms: Status Quo vs. Reform</h1>
+  </div>
+  <div class="page-content">
+
+    <div class="skill-objective">
+      <strong>Skill objective:</strong>
+      <span class="tier-ej">Identify which mechanism each case study activates and whether it favors Pro or Con.</span>
+      <span class="tier-ev">Map each status-quo congressional tool to its reform counterpart, identify the structural gap each pairing exposes, and assign the loophole risk to the correct side.</span>
+    </div>
+
+    <div class="judge-move">
+      <strong>Hidden judge move: </strong>
+      <span class="tier-ej">Name the mechanism, not just the case. "Libya happened" is not an argument. "Libya proves definitional evasion defeats the WPR clock" is an argument a judge can flow.</span>
+      <span class="tier-ev">Mechanism-level clash beats story-level clash. The team that names what structural gap a case proves — and explains why the other side's mechanism fails to close it — wins credibility with experienced judges even when the opponent has more cases.</span>
+    </div>
+
+    <div class="focus-box tier-ej">
+      <strong>Junior focus:</strong> There are six tools Congress uses right now to influence war. Pro says each one has a gap. Con says each one still works. Your job is to figure out which side is right for each tool — and to name the tool before you name the case.
+    </div>
+    <div class="focus-box tier-ev">
+      <strong>Varsity focus:</strong> Each mechanism pairing exposes a distinct structural tension. The status-quo version relies on presidential cooperation or downstream politics; the Pro (reform) version relocates decision authority before hostilities begin. The loophole risk column is your clash map for every activity that follows.
+    </div>
+
+    <div class="matrix-card" style="margin-bottom:14px;">
+      <table class="lesson-table">
+        <thead>
+          <tr>
+            <th>Mechanism Name</th>
+            <th>Status-Quo Version</th>
+            <th>Pro (Plan) Version</th>
+            <th>Historical Proof Case</th>
+            <th>Loophole Risk</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>1. Informal Shaping</strong></td>
+            <td>Presidential consultation, political signals from Congress</td>
+            <td>N/A — Pro makes this binding pre-authorization</td>
+            <td>Syria 2013 resistance</td>
+            <td><span class="tier-ej"><strong>Con:</strong> shaping works without reform</span><span class="tier-ev"><strong>Con:</strong> political costs already constrain; informal shaping operates without the procedural friction Pro adds</span></td>
+          </tr>
+          <tr>
+            <td><strong>2. Power of the Purse</strong></td>
+            <td>Congress can cut funding after deployment begins</td>
+            <td>Congress uses funding as a pre-condition for deployment</td>
+            <td>Kriner 2010 duration effect</td>
+            <td><span class="tier-ej"><strong>Pro:</strong> later money can't rewind first strike</span><span class="tier-ev"><strong>Pro:</strong> sunk-cost politics and force-commitment dynamics make downstream funding cuts work against a different strategic baseline</span></td>
+          </tr>
+          <tr>
+            <td><strong>3. Use-Restrictions &amp; Caps</strong></td>
+            <td>Congress can restrict use of funds for specific operations</td>
+            <td>Statutory caps + operational limits built into authorization</td>
+            <td>Boland Amendment, Lebanon 1983</td>
+            <td><span class="tier-ej"><strong>Pro:</strong> patches don't prevent the deployment</span><span class="tier-ev"><strong>Pro:</strong> restrictions implicitly accept force is already authorized — they manage but don't prevent the threshold decision</span></td>
+          </tr>
+          <tr>
+            <td><strong>4. 48-Hour Report + 60/90 Clock</strong></td>
+            <td>President reports within 48 hrs; 90-day withdrawal clock begins</td>
+            <td>Mandatory pre-authorization replaces the clock entirely</td>
+            <td>Libya 2011 — "not hostilities" evasion</td>
+            <td><span class="tier-ej"><strong>Pro:</strong> clock is fake if President defines the trigger</span><span class="tier-ev"><strong>Pro:</strong> self-reporting + self-triggering creates definitional evasion space; only 38 of 168 WPR reports triggered the 60-day clock (~23%)</span></td>
+          </tr>
+          <tr>
+            <td><strong>5. Automatic Cutoff</strong></td>
+            <td>Funding expires unless Congress renews it</td>
+            <td>Automatic cutoff tied to authorization renewal cycle</td>
+            <td>Somalia 1993 deadline</td>
+            <td><span class="tier-ej"><strong>Con:</strong> cliff-edge creates hostage politics</span><span class="tier-ev"><strong>Con:</strong> forced exits at operationally dangerous moments; President can blame Congress for any bad outcome from rushed withdrawal</span></td>
+          </tr>
+          <tr>
+            <td><strong>6. Specific Approval + Emergency Carveout</strong></td>
+            <td>AUMF system — broad authorizations covering many scenarios</td>
+            <td>Narrow carveout: 48-72 hr rescue only, no combat expansion</td>
+            <td>Iraq 2003 accountability trail</td>
+            <td><span class="tier-ej"><strong>Con:</strong> any gate creates delay risk</span><span class="tier-ev"><strong>Con:</strong> definitional creep — every President redefines "emergency"; carveout either covers Kosovo (blank check) or excludes it (operationally deficient)</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="grid two-col equal">
+      <div class="focus-box tier-ej" style="display:block;">
+        <strong>Junior prompt:</strong> Pick one row from the table. Write the mechanism name and one sentence explaining which side benefits more from it and why.
+        <textarea class="lined-textarea sm" style="margin-top:8px;"></textarea>
+      </div>
+      <div class="focus-box tier-ev" style="display:block;">
+        <strong>Varsity prompt:</strong> Choose two mechanisms. For each, write: (1) the structural gap it exposes, (2) which side's warrant survives the clash, and (3) the weighing metric that resolves it.
+        <textarea class="lined-textarea sm" style="margin-top:8px;"></textarea>
+      </div>
+    </div>
+
+    <div class="note-strip">
+      <strong>Pairing rule:</strong>
+      <span class="tier-ej">Every status-quo tool has a Pro version that is meant to be stronger. Your job in round: prove your version is better, or prove the other side's version still has the same gap.</span>
+      <span class="tier-ev">Each mechanism pairing structures a specific clash. The team that correctly identifies which pairing is operative in a given case — and applies the right loophole risk analysis — wins mechanism-level credibility that beats generic war-powers claims.</span>
+    </div>
+
+  </div>
+  <div class="footer">
+    <span>Page <span class="page-number"></span></span>
+    <span>Ascent Academy | War Powers — Lesson 4</span>
+  </div>
+</div>
+
+<!-- ================================================================== -->
+<!-- MODULE 03 — HOOK ACTIVITY: INSTITUTIONAL CAPTURE                   -->
+<!-- ================================================================== -->
+<div class="page student-only phase-core v6-dense">
+  <div class="header">
+    <div class="kicker">Module 03 | Hook Activity</div>
+    <h1>Institutional Capture: Permeability vs. Harm-Conversion</h1>
+  </div>
+  <div class="page-content">
+
+    <div class="skill-objective">
+      <strong>Skill objective:</strong>
+      <span class="tier-ej">Distinguish which branch is more permeable to lobbying vs. which branch does more harm once captured.</span>
+      <span class="tier-ev">Run the two-step capture analysis independently: comparative permeability (ease of access) and comparative harm-conversion (severity of output once capture succeeds). Never conflate the two steps — they answer different questions.</span>
+    </div>
+
+    <div class="judge-move">
+      <strong>Hidden judge move: </strong>
+      <span class="tier-ej">Don't concede that "more lobbying" equals "more danger." The branch with more doors isn't automatically the branch with bigger weapons once capture lands.</span>
+      <span class="tier-ev">Force the judge to run both steps independently. Permeability determines likelihood of capture; harm-conversion determines magnitude per capture event. The winning side argues its metric — probability or magnitude — is the operative one for the ballot, rather than simply claiming its branch is lobbied more or less.</span>
+    </div>
+
+    <div class="setup-box tier-ej">Frame the clash: the Military-Industrial Complex lobbies both branches. The question is which branch is more dangerous <em>once capture succeeds</em>. Lobbying volume is only half the story — the other half is what the captured branch does next.</div>
+    <div class="setup-box tier-ev">Permeability (ease of access) vs. harm-conversion (severity of output once capture succeeds). Force each step independently. Pro argues executive harm-conversion is faster with fewer veto points. Con argues congressional permeability is higher volume, making capture more probable. Neither automatically wins — the clash is about which step does more analytical work for the ballot.</div>
+
+    <div class="proof-grid">
+      <div class="proof-box pro">
+        <div class="proof-title">&#9650; Pro Proof Deck — Revolving Door (POGO 2018)</div>
+        <div class="micro-proof">
+          <div class="micro-item"><strong>Claim:</strong> The executive branch converts MIC capture into military force faster and with fewer veto points, making it more dangerous than a captured Congress even if congressional permeability is higher.</div>
+          <div class="quote-box">"Top defense contractors hired 672 former government officials; approximately 91% later became registered lobbyists." — POGO (Project on Government Oversight), 2018</div>
+          <div class="micro-item"><strong>Statistic:</strong> 91% of 672 revolving-door hires became lobbyists — a direct pipeline from executive decision-making centers to contractor influence networks.</div>
+          <div class="micro-item"><strong>Warrant:</strong> A captured President can deploy forces unilaterally within hours. A captured Congress still faces committee procedures, floor votes, and the other chamber — meaning executive capture has faster harm-conversion even if congressional permeability is higher in volume.</div>
+          <div class="mini-label">Deploy line (Junior)</div>
+          <div class="micro-item">"Even if Congress gets lobbied more, one captured President can move troops with no vote. That's faster harm-conversion — and faster means worse."</div>
+          <div class="mini-label">Deploy line (Varsity)</div>
+          <div class="micro-item">"The POGO data proves the revolving door funnels influence into the executive. Ackerman 2010 shows executive capture converts into force with fewer veto points — making executive permeability more dangerous even at lower volume."</div>
+        </div>
+      </div>
+
+      <div class="proof-box con">
+        <div class="proof-title">&#9660; Con Proof Deck — FARA / Quincy Data</div>
+        <div class="micro-proof">
+          <div class="micro-item"><strong>Claim:</strong> Congress is the primary target of foreign and defense lobbying, making congressional war authority more susceptible to capture than presidential authority — higher volume means higher probability of capture landing.</div>
+          <div class="quote-box">"More than half of reported foreign-agent political activities targeted Congress, totaling nearly 70,000 contacts with House and Senate offices." — Quincy Institute / FARA data, 2022-23</div>
+          <div class="micro-item"><strong>Statistic:</strong> 70,000 lobbying contacts with Congress from foreign agents alone in 2022-23 — more than half of all reported foreign-agent political activity.</div>
+          <div class="micro-item"><strong>Warrant:</strong> If the resolution routes final war authority through Congress, it routes that authority through the branch with the highest volume of foreign and defense lobbying — increasing the probability of capture, not reducing it. Volume matters because sufficient volume eventually succeeds even with more veto points.</div>
+          <div class="mini-label">Deploy line (Junior)</div>
+          <div class="micro-item">"Shifting power to Congress means shifting power to the branch lobbyists already target 70,000 times a year. More doors means more chances for capture to land."</div>
+          <div class="mini-label">Deploy line (Varsity)</div>
+          <div class="micro-item">"The FARA data quantifies congressional permeability at 70,000 foreign-agent contacts. Posner and Vermeule argue formal rules don't bind anyway — real constraints are political. The plan routes force authority through the most lobbied institution and adds only paper constraints."</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="note-strip">
+      <strong>Two-step framework reminder:</strong>
+      <span class="tier-ej">These two proof decks fight on different dimensions. Pro says: even if Congress is lobbied more, executive harm-conversion is faster. Con says: lobbying volume matters because it shows which branch is likelier to be captured in the first place. You need to explain which step matters more — probability or magnitude per event.</span>
+      <span class="tier-ev">The two-step capture framework forces each side to compete on a different axis. Pro dominates on harm-conversion speed and veto-point count (magnitude per event). Con dominates on permeability volume (probability of capture). The resolution to the clash requires a weighing argument: is probability of capture (Con's metric) or severity once captured (Pro's metric) the operative standard for the ballot?</span>
+    </div>
+
+    <div class="grid two-col equal">
+      <div class="card pro-card">
+        <div class="section-title">&#9650; Pro Response Cards</div>
+        <p class="body-copy"><strong>Con says "Congress is lobbied most"</strong></p>
+        <ul class="tight-list">
+          <li><strong>Rebuttal:</strong> Lobbying volume does not equal harm-conversion speed. More doors doesn't mean bigger weapons — a 70,000-contact Congress still takes weeks to authorize force.</li>
+          <li><strong>Crossfire trap:</strong> "If Congress is so permeable, why does your plan route all war authority through the branch lobbyists hit 70,000 times a year?"</li>
+          <li><strong>Weighing:</strong> Magnitude — one captured-executive strike vs. a slow lobbied-Congress authorization process with multiple veto points that may prevent the worst outcome.</li>
+        </ul>
+      </div>
+      <div class="card con-card">
+        <div class="section-title">&#9660; Con Response Cards</div>
+        <p class="body-copy"><strong>Pro says "executive converts capture faster"</strong></p>
+        <ul class="tight-list">
+          <li><strong>Rebuttal:</strong> Political accountability still constrains Presidents — elections, public opinion, and media scrutiny all create real costs that slow harm-conversion.</li>
+          <li><strong>Crossfire trap:</strong> "Name one time Congress authorized a war it didn't want under foreign lobbying pressure — give a specific example."</li>
+          <li><strong>Weighing:</strong> Probability — Congress is lobbied at much higher volume, making capture more likely even if each individual capture event converts more slowly.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="prompt-block">
+      <div class="prompt-title"><span class="tier-ej">Write your best capture line for either side — name the branch, the lobbying evidence, and what capture produces.</span><span class="tier-ev">Write a structured two-step capture argument: Step 1 (comparative permeability claim with citation), Step 2 (harm-conversion claim with veto-point count), Step 3 (weighing metric that resolves it).</span></div>
+      <textarea class="lined-textarea md"></textarea>
+    </div>
+
+  </div>
+  <div class="footer">
+    <span>Page <span class="page-number"></span></span>
+    <span>Ascent Academy | War Powers — Lesson 4</span>
+  </div>
+</div>
+
+<!-- ================================================================== -->
+<!-- MODULE 04 — ACTIVITY 1: INFORMAL SHAPING VS. FIRST-MOVE PROBLEM   -->
+<!-- ================================================================== -->
+<div class="page student-only phase-core v6-dense">
+  <div class="header">
+    <div class="kicker">Module 04 | Activity 1</div>
+    <h1>Informal Shaping vs. First-Move Problem</h1>
+  </div>
+  <div class="page-content">
+
+    <div class="skill-objective">
+      <strong>Skill objective:</strong>
+      <span class="tier-ej">Evaluate whether status-quo congressional signals provide binding threshold control or only downstream influence over a decision the executive has already made.</span>
+      <span class="tier-ev">Analytically separate informal shaping (political costs without formal authorization requirement) from threshold control (binding ex ante authorization gate). Identify why the first-move problem renders informal shaping structurally insufficient — the executive can absorb political costs post-hoc when national security interests are at stake.</span>
+    </div>
+
+    <div class="judge-move">
+      <strong>Hidden judge move: </strong>
+      <span class="tier-ej">Con will claim informal shaping "already works." Pro must prove that shaping is not the same as threshold control — because the executive still holds the first move and can redefine the trigger when shaping fails.</span>
+      <span class="tier-ev">Pro's core analytical move: informal shaping creates political costs but does not create binding threshold control. The structural difference is who holds the first move. Con answers with Syria 2013 (informal shaping succeeded). Pro answers with Libya 2011 (formal resistance ignored). The clash resolves on: which is the structural norm and which is the exception — and what structural incentive determines which happens in the modal case?</span>
+    </div>
+
+    <div class="setup-box tier-ej">Syria 2013 — Congress pushed back and Obama didn't strike. Does that prove Pro is unnecessary, or does it prove the system was lucky? Think about what would have happened if the administration had decided to strike despite the opposition — just like in Libya.</div>
+    <div class="setup-box tier-ev">Informal shaping creates real political costs for force but does not recreate a binding ex ante authorization requirement. The first-move problem: the executive can absorb political costs post-hoc when national security interests are at stake. Pro must prove Libya (formal resistance ignored) is the structural norm; Con must prove Syria (informal shaping succeeded) is the norm. Neither side has exhaustive data — the clash is about structural incentives.</div>
+
+    <div class="proof-grid">
+      <div class="proof-box pro">
+        <div class="proof-title">&#9650; Pro — Libya 2011: Definitional Evasion Defeats Formal Resistance</div>
+        <div class="micro-proof">
+          <div class="micro-item"><strong>Claim:</strong> Informal congressional resistance fails to prevent unauthorized force because the executive can redefine the legal trigger to avoid the formal check — a structural escape hatch that informal shaping cannot close.</div>
+          <div class="quote-box">"The House of Representatives rejected authorization for the Libya operation by a vote of 123–295, but the operation continued because the administration argued the airstrikes and drone strikes did not constitute 'hostilities' under the War Powers Resolution." — House vote on Libya authorization, 2011</div>
+          <div class="micro-item"><strong>Statistic:</strong> 123–295 House vote rejecting authorization; zero operational change as a result. The operation continued for 7+ months.</div>
+          <div class="micro-item"><strong>Warrant:</strong> Libya 2011 proves that congressional resistance — even a formal floor vote — cannot stop an executive that controls the definitional trigger. Without mandatory pre-authorization, the President defines when the check applies. The first-move problem is structural, not incidental.</div>
+          <div class="mini-label">Deploy line (Junior)</div>
+          <div class="micro-item">"Congress voted 123-295 against Libya — and the bombs kept falling. That's not informal shaping working; that's definitional evasion making the check meaningless even when Congress acts formally."</div>
+          <div class="mini-label">Deploy line (Varsity)</div>
+          <div class="micro-item">"Libya 2011 proves the first-move problem's structural limit. The administration claimed the WPR clock never started because airstrikes weren't 'hostilities.' Without mandatory pre-authorization, the executive always holds the definitional key — informal or formal congressional resistance cannot reconstruct that key."</div>
+        </div>
+      </div>
+
+      <div class="proof-box con">
+        <div class="proof-title">&#9660; Con — Syria 2013 + Howell &amp; Pevehouse: Shaping Already Works</div>
+        <div class="micro-proof">
+          <div class="micro-item"><strong>Claim:</strong> Congressional signaling already constrains major force decisions without a formal pre-authorization rule — the status quo worked in Syria 2013, and Howell &amp; Pevehouse quantify that congressional composition regularly shapes force decisions.</div>
+          <div class="quote-box">"Congressional composition significantly predicts major uses of force — suggesting that political constraints already operate meaningfully on presidential force decisions." — Howell &amp; Pevehouse, 2007, "While Dangers Gather"</div>
+          <div class="micro-item"><strong>Case:</strong> Syria 2013: Congressional opposition persuaded the Obama administration to pull back from a planned strike before launch. No new law required it — political reality did the work.</div>
+          <div class="micro-item"><strong>Warrant:</strong> If informal shaping already stopped the Syria strike, Pro's plan adds procedural friction without demonstrating unique solvency. Howell &amp; Pevehouse show that congressional composition already influences major force decisions — not just in individual cases but systematically across the data.</div>
+          <div class="mini-label">Deploy line (Junior)</div>
+          <div class="micro-item">"Syria 2013 happened with no new rule. Congress pushed back and the strike was canceled. The status quo already does what Pro claims only its plan can achieve."</div>
+          <div class="mini-label">Deploy line (Varsity)</div>
+          <div class="micro-item">"Howell and Pevehouse quantify that congressional composition already predicts major force decisions. Pro must explain why Libya-style definitional evasion is the structural norm rather than the exception before claiming the plan adds unique threshold value beyond what informal shaping already delivers."</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="note-strip">
+      <strong>Key distinction — Syria vs. Libya:</strong>
+      <span class="tier-ej">Pro must distinguish Libya (formal resistance ignored and definitional escape used) from Syria (informal shaping worked). The key question: is Syria the rule or the exception? If Syria is reproducible, Con wins. If Libya represents the structural incentive when stakes are high, Pro wins.</span>
+      <span class="tier-ev">The clash resolves on comparative probability and structural incentive. Pro needs the Libya pattern to be structural — the executive always has definitional escape available when it chooses to use it. Con needs Syria to be reproducible — political costs reliably deter the executive from using definitional escape in high-stakes situations. The modal-case argument determines which structural incentive dominates.</span>
+    </div>
+
+    <div class="grid two-col equal">
+      <div class="card pro-card">
+        <div class="section-title">&#9650; Pro Response Cards</div>
+        <p class="body-copy"><strong>Con says "Syria proves informal shaping works"</strong></p>
+        <ul class="tight-list">
+          <li><strong>Rebuttal:</strong> Syria was informal and luck-dependent; Libya shows definitional evasion makes formal checks meaningless when the executive decides to move. Same president, same era — different outcome.</li>
+          <li><strong>Crossfire trap:</strong> "If informal shaping works, why did Libya happen with the same administration one year earlier? What made Syria different, and can you guarantee that difference in the next case?"</li>
+          <li><strong>Weighing:</strong> Reversibility — a failed informal signal leaves a war running with no structural remedy. Syria's luck doesn't undo Libya's 7-month unauthorized campaign.</li>
+        </ul>
+      </div>
+      <div class="card con-card">
+        <div class="section-title">&#9660; Con Response Cards</div>
+        <p class="body-copy"><strong>Pro says "Libya proves the plan is needed"</strong></p>
+        <ul class="tight-list">
+          <li><strong>Rebuttal:</strong> Libya was a specific operation with specific evasion tactics — not a structural norm. Syria shows the political system corrects itself when stakes and opposition intensity are high enough.</li>
+          <li><strong>Crossfire trap:</strong> "Does your mandatory pre-authorization plan prevent definitional evasion, or just add a new trigger term — like 'emergency' — that can also be redefined the same way 'hostilities' was?"</li>
+          <li><strong>Weighing:</strong> Probability — Howell &amp; Pevehouse show congressional composition regularly matters. How often does Libya-style evasion occur vs. Syria-style shaping success?</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="prompt-block">
+      <div class="prompt-title"><span class="tier-ej">Is Syria the rule or the exception? Write 2 sentences explaining your answer.</span><span class="tier-ev">Write a structured argument for why Libya or Syria represents the structural norm — include a mechanism warrant (why the structural incentive favors your case) and a weighing claim (why your case outweighs the opponent's).</span></div>
+      <textarea class="lined-textarea md"></textarea>
+    </div>
+
+  </div>
+  <div class="footer">
+    <span>Page <span class="page-number"></span></span>
+    <span>Ascent Academy | War Powers — Lesson 4</span>
+  </div>
+</div>
+
+
+</body>
+</html>
